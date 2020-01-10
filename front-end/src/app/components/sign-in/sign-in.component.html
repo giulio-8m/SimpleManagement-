@@ -1,0 +1,48 @@
+<br>
+<br>
+<br>
+<div class="container">
+
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">Something bad happened error : {{errorMessage}}</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+    <div class="card">
+
+        <header class="card-header">
+                
+                <h4 class="card-title mt-2">Sign In</h4>
+        </header>
+
+        <article class="card-body">
+          
+            <form #signUpForm="ngForm" (ngSubmit)="submit()" novalidate>
+
+            <!--username-->
+                <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" #username="ngModel" class="form-control " [class.is-invalid]="username.invalid && username.touched" placeholder="Username" name="username" [(ngModel)]="user.username" required>
+                        <span class="text-danger" [class.d-none]="username.valid || username.untouched">Username non valido</span>
+                </div> 
+                
+            <!--password-->
+                <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" #password="ngModel" class="form-control" placeholder="******" [class.is-invalid]="password.invalid && password.touched" name="password" [(ngModel)]="user.password" required>
+                        <span class="text-danger" [class.d-none]="password.valid || password.untouched">Password non valida</span>
+                </div>
+            
+            <!--submitButton-->
+                <div class="form-group">
+                    <button [disabled]="signUpForm.form.invalid" type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </div>                                         
+            </form>
+        </article> 
+       
+
+    </div> <!-- card.// -->
+    </div> <!-- col.//-->
+
+</div> <!-- row.//-->
+</div> 
+<!--container end.//-->

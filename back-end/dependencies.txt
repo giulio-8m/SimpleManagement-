@@ -1,0 +1,19 @@
+npm install dotevn --save
+
+npm install mongoose --save
+
+npm install express --save
+
+npm install cors --save
+
+npm install passport --save
+
+npm install passport-jwt --save
+
+npm install passport-local --save
+
+npm install body-parser --save
+
+npm install socket.io --save 
+
+npm install socketio-jwt --save

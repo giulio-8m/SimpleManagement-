@@ -1,0 +1,5 @@
+npm install bootstrap --save
+
+npm i jwt-decode --save
+
+npm i socket.io-client --save
