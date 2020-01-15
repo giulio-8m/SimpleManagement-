@@ -25,27 +25,66 @@ const signUp = (req,res)=>{
 
     user.save().then((registered)=>{
        res.sendStatus(200);
-    }).catch(errorHandler(err));
+    }).catch((err)=>{
+        res.sendStatus(errorHandler(400));
+    });
 
 };
 
 const signIn = (req,res)=>{
-    passport.authenticate('local').then((user)=>{
-        let token=generateJwt(user);
-        res.status(200).json(token);
-    }).catch(errorHandler(err));
+    passport.authenticate('local', (err, user, info) => {
+        let token;
+        if (err) {
+            console.log("errore qui\n");    
+            return res.status(401).json(err);
+        }
+        if (user) {
+            token = generateJwt(user);
+            return res.status(200).json(token);
+        } else {
+            return res.status(401).json(info);
+        }
+    })(req, res);
 }
 
-const getUsers = (req,res)=>[
-    User.find({}).then((users)=>{
-       return res.status(200).json(users);
+const getUsers = (req,res)=>{
+    if(req.query.role){
+        User.find({role:req.query.role}).then((users)=>{
+            return res.status(200).json(users);
+         }).catch((err)=>{
+            return res.sendStatus(errorHandler(400));
+         });
+    }else{
+        User.find({}).then((users)=>{
+        return res.status(200).json(users);
+        }).catch((err)=>{
+        return res.sendStatus(errorHandler(400));
+        });
+    }
+}
+
+const updateUser = (req,res)=>{
+
+    User.findOneAndUpdate({username:req.params.username},{jobs:req.body.jobs},{new:true}).then((user)=>{
+        res.sendStatus(200);
     }).catch((err)=>{
-       return res.status(errorHandler(err));
+        console.log(err);
+        res.sendStatus(errorHandler(400));
+    });
+}
+
+const deleteUser = (req,res)=>{
+    User.deleteOne({username:req.params.username}).then((user)=>{
+        res.sendStatus(200);
+    }).catch((err)=>{
+        res.sendStatus(errorHandler(400));
     })
-]
+}
 
 module.exports={
     signIn,
     signUp,
-    getUsers
+    getUsers,
+    updateUser,
+    deleteUser
 }

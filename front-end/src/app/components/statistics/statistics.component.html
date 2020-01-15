@@ -1,0 +1,32 @@
+<div class="container ">
+    <br>
+    <h1 class="text-center">Statistiche giornaliere</h1>
+    <hr>
+    <div class="row">
+            <div class="col-md-12">
+               
+                <div class="alert alert-danger text-center" *ngIf="errorMessage">Something bad happened error : {{errorMessage}}</div>
+                <div class="row d-flex flex-wrap">
+                    <div class="col-md-6 mx-auto">
+                        <br>
+
+                        <div class="card border-0">
+                            
+                            <article  class="card-body">
+                                <canvas id="statsOrders" width="70vw" height="70vh"></canvas>       
+                            </article>                             
+                        </div> 
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <br>
+                        
+                        <div class="card border-0">
+                            <article  class="card-body">
+                                <canvas id="statsRecipts" width="70vw" height="70vh"></canvas>       
+                            </article>                             
+                        </div> 
+                    </div>
+                </div> 
+            </div>           
+    </div>
+</div>

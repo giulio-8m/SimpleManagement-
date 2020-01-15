@@ -4,11 +4,25 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { TablesComponent } from './components/tables/tables.component';
+import { OrderComponent } from './components/order/order.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { CashDeskComponent } from './components/cash-desk/cash-desk.component';
+import { StaffComponent } from './components/staff/staff.component';
+import { CheckOutComponent } from './components/check-out/check-out.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 
 const routes: Routes = [
   {path:'',component:HomeComponent,canActivate:[AuthGuardService]},
+  {path:'statistics',component:StatisticsComponent,canActivate:[AuthGuardService]},
+  {path:'check-out/:tableCode/:clients',component:CheckOutComponent,canActivate:[AuthGuardService]},
+  {path:'staff',component:StaffComponent,canActivate:[AuthGuardService]},
+  {path:'cash-desk',component:CashDeskComponent,canActivate:[AuthGuardService]},
+  {path:'bar',component:OrdersComponent,canActivate:[AuthGuardService]},
+  {path:'kitchen',component:OrdersComponent,canActivate:[AuthGuardService]},
+  {path:'order/:tableCode/:clients',component:OrderComponent,canActivate:[AuthGuardService]},
+  {path:'tables',component:TablesComponent,canActivate:[AuthGuardService]},
   {path:'sign-in',component:SignInComponent,canActivate:[AuthGuardService]},
   {path:'sign-up',component:SignUpComponent,canActivate:[AuthGuardService]},
   {path:'**',component:HomeComponent,canActivate:[AuthGuardService]},
@@ -21,7 +35,9 @@ const routes: Routes = [
 export class AppRoutingModule { }
 
 export const RoutingComponents=[
-
+  
+  OrderComponent,
+  TablesComponent,
   SignInComponent,
   SignUpComponent,
   HomeComponent,

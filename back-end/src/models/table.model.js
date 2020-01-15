@@ -17,13 +17,6 @@ let tableSchema = new Schema(
             type:Array,
             required:true,
         }
-    },
-    {
-        writeConcern: {
-            w: 'majority',
-            j: true,
-            wtimeout: 1000
-        }
     });
 
     module.exports = mongoose.model('Table',tableSchema);

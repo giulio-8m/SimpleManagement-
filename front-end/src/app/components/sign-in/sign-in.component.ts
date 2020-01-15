@@ -21,7 +21,8 @@ export class SignInComponent implements OnInit {
 
   public submit(){
     this.usersService.signIn(this.user).subscribe(
-      (res) => { console.log("success logged in") },
+      (res) => { localStorage.setItem('user_token',res);
+                this.usersService.parseToken(res) },
       (error) => {
         this.errorMessage=error.statusText;
         console.log(this.errorMessage);

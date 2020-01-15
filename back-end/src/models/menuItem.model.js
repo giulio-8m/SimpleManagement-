@@ -20,13 +20,6 @@ let menuItemSchema = new Schema(
             type:Number,
             required:true
         }
-    },
-    {
-        writeConcern: {
-            w: 'majority',
-            j: true,
-            wtimeout: 1000
-        }
     });
 
     module.exports = mongoose.model('MenuItem',menuItemSchema);

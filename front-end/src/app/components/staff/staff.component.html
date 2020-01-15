@@ -1,0 +1,261 @@
+<div class="container">
+    <br>
+    <h1 class="text-center ">Utenti</h1>
+    <hr>
+    <a href="#waiterS" data-toggle="collapse" class="btn btn-primary btn-block">
+        <br>
+        <i class="fas fa-utensils fa-4x"><h3>Camerieri</h3></i>
+    </a>
+    <div class="table-responsive " id="waiterS" class="collapse">
+            <!--Table-->
+            <table class="table text-center table-bordered">  
+              <!--Table head-->
+              <thead class="head">
+                <tr>
+                  <th class="td-center th-sm" >Username</th>
+                  <th class="td-center th-sm">Stats</th>
+                  <th class="td-center th-sm">Delete</th>
+                </tr>
+              </thead>
+              <!--Table [ngClass]="{'free': free(table.clientsNumber),'busy': free(table.clientsNumber)}" head-->
+              <tbody>           
+                <tr *ngFor="let user of waiters; let i=index">
+                    <td class="td-center text-capitalize font-weight-bold">{{user.username}}</td>
+    
+                    <td class="td-center p-0"><a  type="button" class="btn btn-info btn-lg" data-toggle="modal"(click)="initChart(user.username,user.role,user.jobs)" href="#stats-{{user.username}}"
+                        style="width:100%;"><i class="fas fa-chart-pie fa-2x"><h5 class="mb-0">Stats</h5></i></a>
+                        </td>   
+                    <td class="td-center p-0"><button  type="button" class="btn btn-danger btn-lg" (click)="deleteUser(user.username)"
+                        style="width:100%;"><i class="fas fa-user-slash fa-2x"><h5 class="mb-0">Delete</h5></i></button>
+                    </td> 
+                    
+                    <!-- modal for statistics of user-->
+                    <div class="modal fade" id="stats-{{user.username}}">
+                            <div class="modal-dialog modal-dialog-centered ">
+                              <div class=" modal-content modal-content-size ">
+                                
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                  <h3 class="modal-title">Statistiche Utente</h3>
+                                 
+                                </div>
+                                <!-- Modal body -->
+                                <div class=" modal-body modal-body-size" >
+                                    <article  class="card-body">
+                                            <canvas [id]="user.username" width="70vw" height="70vh"></canvas>      
+                                    </article>
+                                    <h4>Ruolo : {{user.role}}</h4>
+                                    <h4>Username : {{user.username}}</h4>
+                                </div>    
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                                
+                              </div>
+                            </div>
+                    </div>
+                    
+                </tr>
+              </tbody>
+          
+            </table>
+            <!--Table-->
+    </div>
+  
+    <br>
+    <a href="#barmans" data-toggle="collapse" class="btn btn-outline-primary btn-block">
+        <br>
+        <i class="fas fa-cocktail fa-4x"><h3>Baristi</h3></i>
+    </a>
+    <div class="table-responsive " id="barmans" class="collapse">
+        <!--Table-->
+        <table class="table text-center table-bordered">
+      
+          <!--Table head-->
+          <thead class="head">
+            <tr>
+              <th class="td-center th-sm" >Username</th>
+              <th class=" td-center th-sm">Stats</th>
+              <th class="td-center th-sm">Delete</th>
+            </tr>
+          </thead>
+          <!--Table [ngClass]="{'free': free(table.clientsNumber),'busy': free(table.clientsNumber)}" head-->
+          <tbody>           
+            <tr *ngFor="let user of barMans; let i=index">
+                <td class="td-center text-capitalize font-weight-bold">{{user.username}}</td>
+  
+                <td class="td-center p-0"><a  type="button" class="btn btn-info btn-lg" data-toggle="modal"(click)="initChart(user.username,user.role,user.jobs)" href="#stats-{{user.username}}"
+                    style="width:100%;"><i class="fas fa-chart-pie fa-2x"><h5 class="mb-0">Stats</h5></i></a>
+                    </td>   
+                <td class="td-center p-0"><button  type="button" class="btn btn-danger btn-lg" (click)="deleteUser(user.username)"
+                    style="width:100%;"><i class="fas fa-user-slash fa-2x"><h5 class="mb-0">Delete</h5></i></button>
+                </td> 
+                
+                <!-- modal for statistics of user-->
+                <div class="modal fade" id="stats-{{user.username}}">
+                        <div class="modal-dialog modal-dialog-centered ">
+                          <div class=" modal-content modal-content-size ">
+                            
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h3 class="modal-title">Statistiche Utente</h3>
+                             
+                            </div>
+                            <!-- Modal body -->
+                            <div class=" modal-body modal-body-size" >
+                                <article  class="card-body">
+                                        <canvas [id]="user.username" width="70vw" height="70vh"></canvas>      
+                                </article>
+                                <h4>Ruolo : {{user.role}}</h4>
+                                <h4>Username : {{user.username}}</h4>
+                            </div>    
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                            
+                          </div>
+                        </div>
+                </div>
+                
+            </tr>
+          </tbody>
+      
+        </table>
+        <!--Table-->
+  </div>
+    <br>
+    <a href="#chefs" data-toggle="collapse" class="btn btn-primary btn-block">
+        <br>
+        <i class="fas fa-fire fa-4x"><h3>Cuochi</h3></i>
+    </a>
+    <div class="table-responsive " id="chefs" class="collapse">
+        <!--Table-->
+        <table class="table text-center table-bordered">
+      
+          <!--Table head-->
+          <thead class="head">
+            <tr>
+              <th class="td-center th-sm" >Username</th>
+              <th class=" td-center th-sm">Stats</th>
+              <th class="td-center th-sm">Delete</th>
+            </tr>
+          </thead>
+          <!--Table [ngClass]="{'free': free(table.clientsNumber),'busy': free(table.clientsNumber)}" head-->
+          <tbody>           
+            <tr *ngFor="let user of chefs; let i=index">
+                <td class="td-center text-capitalize font-weight-bold">{{user.username}}</td>
+  
+                <td class="td-center p-0"><a  type="button" class="btn btn-info btn-lg" data-toggle="modal" (click)="initChart(user.username,user.role,user.jobs)" href="#stats-{{user.username}}"
+                    style="width:100%;"><i class="fas fa-chart-pie fa-2x"><h5 class="mb-0">Stats</h5></i></a>
+                    </td>   
+                <td class="td-center p-0"><button  type="button" class="btn btn-danger btn-lg" (click)="deleteUser(user.username)"
+                    style="width:100%;"><i class="fas fa-user-slash fa-2x"><h5 class="mb-0">Delete</h5></i></button>
+                </td> 
+                
+                <!-- modal for statistics of user-->
+                <div class="modal fade" id="stats-{{user.username}}">
+                        <div class="modal-dialog modal-dialog-centered ">
+                          <div class=" modal-content modal-content-size ">
+                            
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h3 class="modal-title">Statistiche Utente</h3>
+                             
+                            </div>
+                            <!-- Modal body -->
+                            <div class=" modal-body modal-body-size" >
+                                <article  class="card-body">
+                                        <canvas [id]="user.username" width="70vw" height="70vh"></canvas>      
+                                </article>
+                                <h4>Ruolo : {{user.role}}</h4>
+                                <h4>Username : {{user.username}}</h4>
+                            </div>    
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                            
+                          </div>
+                        </div>
+                </div>
+                
+            </tr>
+          </tbody>
+      
+        </table>
+        <!--Table-->
+  </div>
+    <br>
+    <a href="#desks" data-toggle="collapse" class="btn btn-outline-primary btn-block">
+        <br>
+        <i class="fas fa-cash-register fa-4x"><h3>Cassieri</h3></i>
+    </a>
+    <div class="table-responsive " id="desks" class="collapse">
+        <!--Table-->
+        <table class="table text-center table-bordered">
+      
+          <!--Table head-->
+          <thead class="head">
+            <tr>
+              <th class="td-center th-sm" >Username</th>
+              <th class=" td-center th-sm">Stats</th>
+              <th class="td-center th-sm">Delete</th>
+            </tr>
+          </thead>
+          <!--Table [ngClass]="{'free': free(table.clientsNumber),'busy': free(table.clientsNumber)}" head-->
+          <tbody>           
+            <tr *ngFor="let user of desks; let i=index">
+                <td class="td-center text-capitalize font-weight-bold">{{user.username}}</td>
+  
+                <td class="td-center p-0"><a  type="button" class="btn btn-info btn-lg" data-toggle="modal"(click)="initChart(user.username,user.role,user.jobs)" href="#stats-{{user.username}}"
+                    style="width:100%;"><i class="fas fa-chart-pie fa-2x"><h5 class="mb-0">Stats</h5></i></a>
+                    </td>   
+                <td class="td-center p-0"><button  type="button" class="btn btn-danger btn-lg" (click)="deleteUser(user.username)"
+                    style="width:100%;"><i class="fas fa-user-slash fa-2x"><h5 class="mb-0">Delete</h5></i></button>
+                </td> 
+                
+                <!-- modal for statistics of user-->
+                <div class="modal fade" id="stats-{{user.username}}">
+                        <div class="modal-dialog modal-dialog-centered ">
+                          <div class=" modal-content modal-content-size ">
+                            
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h3 class="modal-title">Statistiche Utente</h3>
+                             
+                            </div>
+                            <!-- Modal body -->
+                            <div class=" modal-body modal-body-size" >
+                                <article  class="card-body">
+                                        <canvas [id]="user.username" width="70vw" height="70vh"></canvas>      
+                                </article>
+                                <h4>Ruolo : {{user.role}}</h4>
+                                <h4>Username : {{user.username}}</h4>
+                            </div>    
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                            
+                          </div>
+                        </div>
+                </div>
+                
+            </tr>
+          </tbody>
+      
+        </table>
+        <!--Table-->
+  </div>
+    <br>
+  
+    <button routerLink="/sign-up" type="button" class="btn btn-primary btn-block">
+      <br>
+      <i class="fas fa-user-plus fa-4x"><h3> Crea Nuovo Utente</h3></i>
+  </button>
+  <br>
+  </div>
+  
+  

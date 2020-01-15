@@ -22,15 +22,21 @@ const server = require('http').Server(app);
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const morgan = require('morgan');
 
 /* routes */
 const usersRoute = require('./routes/users.route');
-
-
+const menuRoute = require('./routes/menu.route');
+const tablesRoute = require('./routes/tables.route');
+const barRoute= require('./routes/bar.route');
+const kitchenRoute = require('./routes/kitchen.route')
+const reciptsRoute = require('./routes/recipts.route');
 
 require('./helpers/passport.helper');
 
     server.listen(process.env.PORT,()=>console.log(`lisening on port ${process.env.PORT}`))
+
+    app.use(morgan('tiny'));
     app.use(cors({
         origin: function(origin, callback){
         return callback(null, true);
@@ -42,6 +48,11 @@ require('./helpers/passport.helper');
     app.use(passport.initialize());
     app.use(bodyParser.json());
     app.use(usersRoute);
+    app.use(menuRoute);
+    app.use(tablesRoute);
+    app.use(barRoute);
+    app.use(kitchenRoute);
+    app.use(reciptsRoute);
 
 
 

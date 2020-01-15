@@ -1,0 +1,83 @@
+
+.title{
+    text-align: center;
+  }
+  
+  
+  .sp{
+    font-size: 1.5rem;
+  }
+  
+  .fle{
+    display: flex;
+  }
+  
+  .number{
+      width: 100%;
+      height: calc(1.5em + .75rem + 2px);
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+      transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  
+  .modal-content-size{
+      height: 85vh;
+  }
+  
+  .modal-body-size{
+      overflow: auto;
+  }
+  
+  .footer-modal {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: red;
+      color: white;
+      text-align: center;
+    }
+  
+  .btn-circle {
+      width: 42px;
+      height: 42px;
+      line-height: 42px;
+      text-align: center;
+      padding: 0;
+      border-radius: 50%;
+      margin: auto;
+    }
+    
+    .btn-circle i {
+      position: relative;
+  
+      margin: auto;
+    }
+    
+    .btn-circle-sm {
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      font-size: 0.9rem;
+    }
+    
+    .btn-circle-lg {
+      width: 55px;
+      height: 55px;
+      line-height: 55px;
+      font-size: 1.1rem;
+    }
+    
+    .btn-circle-xl {
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+      font-size: 1.3rem;
+    }

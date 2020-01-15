@@ -1,0 +1,29 @@
+<div class="container" >
+    <br>
+    <h1 class="title text-center">Data: {{time | date:'dd-MM-yyyy '}}</h1>
+    <h1 class="title text-center">Ora: {{time | date:'hh:mm:ss a'}}</h1>
+    <hr>
+    
+    
+    
+      <!-- Button to Open the Modal -->
+      <button routerLink="/tables" type="button" class="btn btn-primary btn-block" >
+        <br>
+        <i class="fas fa-table fa-4x"><h3>Tavoli</h3></i>
+      </button>
+      <br>
+      <button routerLink="/orders" type="button" class="btn btn-outline-primary  btn-block" >
+        <br>
+        <i class="fas fa-clipboard-list fa-4x"><h3>Ordini</h3></i>
+      </button>
+      <br>
+      <button routerLink="/staff" type="button" class="btn btn-primary btn-block" >
+        <br>
+        <i class="fas fa-users fa-4x"><h3>Utenti</h3></i>
+      </button>
+      <br>
+      <button routerLink="/statistics" type="button" class="btn btn-outline-primary btn-block" >
+        <br>
+        <i class="fas fa-chart-line fa-4x"><h3>Statistiche</h3></i>
+      </button>
+</div>

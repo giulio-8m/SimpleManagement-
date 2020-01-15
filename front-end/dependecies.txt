@@ -3,3 +3,11 @@ npm install bootstrap --save
 npm i jwt-decode --save
 
 npm i socket.io-client --save
+
+npm install bootstrap --save
+
+npm install jquery --save
+
+npm install popper.js --save
+
+npm install chart.js --save

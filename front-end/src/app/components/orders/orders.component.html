@@ -1,0 +1,102 @@
+<br>
+<div class="container" >
+  <ng-container *ngFor="let order of orders; let i = index" >
+
+
+  <div *ngIf="order.status== 'ongoing'" class="bg-white rounded-lg p-1 shadow row " id="{{order._id}}" >
+
+    <div class="col-6 border-right ">
+        <br>
+        <h1 class="text-center font-weight-bold"> Tavolo</h1>
+        <hr>
+        <h2 class="text-center font-weight-bold" > {{order.table}}</h2>
+        <br>
+        <a  href="#orders-{{i}}" class="btn btn-primary btn-block" data-toggle="collapse" ><h2>Ordini</h2></a>
+    </div>
+    <div class="col-6">
+      <br>
+      <h2 class="h4 font-weight-bold text-center mb-4">Preparazione</h2>
+      <!-- Progress bar 3 -->
+      <div class="progress mx-auto" data-value='order.status'  >
+        <span class="progress-left">
+          <span class="progress-bar border-success"></span>
+        </span>
+        <span class="progress-right">
+          <span class="progress-bar border-success"></span>
+        </span>
+        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+          <div class="h2 font-weight-bold">{{order.progress | number:'1.0-0'}}<sup class="small">%</sup></div>
+        </div>
+      </div>
+      <!-- END -->
+
+      <!-- Demo info 
+      <div class="row text-center mt-4">
+        <div class="col-6 border-right">
+          <div class="h4 font-weight-bold mb-0">{{100-(order.status | number:0)}}%</div><span class="small text-gray">Rimanente</span>
+        </div>
+        <div class="col-6">
+          <div class="h4 font-weight-bold mb-0">{{order.status | number:0}}%</div><span class="small text-gray">Completato</span>
+        </div>
+      </div>
+        END -->
+    <br >
+    </div>
+    <div id="orders-{{i}}" class="collapse col-12 border-top text-center font-weight-bold show">
+      <div class="row align-items-center border-bottom">
+          <div class="col-7">
+              <h2 class="h4 font-weight-bold text-center m-2">Portata</h2>
+          </div>
+          <div class="col-5">
+            <h2 class="h4 font-weight-bold text-center m-2">Status</h2>
+          </div>
+      </div>
+      
+      <div  class="row align-items-center border-bottom " *ngFor="let item of order.items">
+        <div class="col-7 ">
+          <div class="row align-items-center ">
+            <div class="col-4 p-0 ">
+              <h5 class="font-weight-bold">Nome:</h5>
+            </div>
+            <div class="col-8">
+                <h5 class="font-weight-bold" >{{item.name}}</h5>
+            </div>
+          </div>
+          <div class="row align-items-center">
+              <div class="col-4 p-0 ">
+                <h5 class="font-weight-bold">Quantità:</h5>
+              </div>
+              <div class="col-8">
+                  <h5 class="font-weight-bold" >{{item.amount}}</h5>
+              </div>
+          </div>
+          <div class="row align-items-center ">
+              <div class="col-4 p-0 ">
+                <h5 class="font-weight-bold" >Tempo:</h5>
+              </div>
+              <div class="col-8">
+                  <h5 class="font-weight-bold">{{item.time}}m</h5>
+              </div>
+          </div>  
+        </div>
+        <div class="col-5 p-0">
+            <ng-container *ngIf="statusCheck(item)!='3'; then starts; else ended"></ng-container>
+            <ng-template #starts>
+              <button *ngIf="statusCheck(item)=='1'" class="btn btn-success pl-2 pr-2 pt-1 pb-0" (click)="start(item,order)"><i class="far fa-caret-square-right fa-3x"><h5 class="mb-0">Inizio</h5></i></button>
+              <button *ngIf="statusCheck(item)=='2'" class="btn btn-warning pl-1 pr-1 pt-1 pb-0"><i class="fas fa-spinner fa-pulse fa-3x"></i><h5 class="mb-0">... .. ...</h5></button>
+              <button  class="btn btn-danger ml-1 pl-2 pr-2 pt-1 pb-0"(click)="finish(item,order)"><i class="fas fa-check-circle fa-3x"><h5 class="mb-0">Fine</h5></i></button>
+            </ng-template>
+            <ng-template #ended>
+              <h1 class="completed font-weight-bold">Pronto</h1>
+            </ng-template> 
+        </div>
+      <hr>
+      </div>
+
+      
+    </div>
+    <br>
+  </div>
+  <br *ngIf="order.status== 'ongoing'">
+</ng-container>
+</div>

@@ -11,12 +11,24 @@ import { ErrorsService } from './services/errors.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import { HeadersService } from './services/headers.service';
+import { OrderComponent } from './components/order/order.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { CashDeskComponent } from './components/cash-desk/cash-desk.component';
+import { StaffComponent } from './components/staff/staff.component';
+import { CheckOutComponent } from './components/check-out/check-out.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     RoutingComponents,
-    TablesComponent
+    TablesComponent,
+    OrderComponent,
+    OrdersComponent,
+    CashDeskComponent,
+    StaffComponent,
+    CheckOutComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,

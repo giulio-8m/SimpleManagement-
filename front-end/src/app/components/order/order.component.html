@@ -1,0 +1,120 @@
+<div class="container">
+    <br>
+    <h1 class="title">Ordine Tavolo: {{tableCode}}</h1>
+    <hr>
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#First_dishes">
+      <br>
+      <i class="fas fa-utensils fa-4x"><h3>Primi</h3></i>
+    </button>
+    <br>
+    <button type="button" class="btn btn-outline-primary  btn-block" data-toggle="modal" data-target="#Second_dishes">
+      <br>
+      <i class="fas fa-utensils fa-4x"><h3>Secondi</h3></i>
+    </button>
+    <br>
+    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#Drinks">
+      <br>
+      <i class="fas fa-glass-martini-alt fa-4x"><h3>Bevande</h3></i>
+    </button>
+    <br>
+    <div class=" justify-content-between fle">
+      <button routerLink="/tables" class="btn btn-danger" (click)="goBack()"><i class="fas fa-reply fa-4x"><h5>Back</h5></i></button>
+      <button routerLink="/tables" class="btn btn-success" (click)="sendOrder()"><i class="fas fa-check fa-4x"><h5>Send</h5></i></button>
+    </div>
+    <br>
+  
+    <!-- Modal First_Dishes -->
+    <div class="modal fade" id="First_dishes">
+      <div class="modal-dialog modal-dialog-centered ">
+        <div class=" modal-content modal-content-size ">
+          
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h3 class="modal-title">Primi</h3>
+          </div>
+          <!-- Modal body -->
+          <div class=" modal-body modal-body-size  pt-0">
+              <div class="row align-items-center border-bottom" *ngFor="let dish of firstDishes">
+                  <div class="col-6  font-weight-bold red">
+                    <h4 class="m-0">{{dish.name}}</h4>
+                  </div>
+                  <div class="col-6 green p-2 text-right">
+  
+                      <input type="text" class=" col-4 number " #amout="ngModel" [(ngModel)]="dish.amount" >
+                      <button class="btn btn-success btn-circle m-1 align-self-center" (click)="add(dish)" ><i class="fa fa-plus align-self-auto"></i></button>      
+                      <button class="btn btn-danger btn-circle align-self-center m-1 " (click)="remove(dish)"><i class="fa fa-minus align-self-auto"></i></button> 
+                    
+                  </div>        
+              </div>   
+          </div>    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- Modal Second_Dishes -->
+    <div class="modal fade" id="Second_dishes">
+      <div class="modal-dialog modal-dialog-centered ">
+        <div class=" modal-content modal-content-size ">
+          
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h3 class="modal-title">Secondi</h3>
+          </div>
+          <!-- Modal body -->
+          <div class=" modal-body modal-body-size pt-0">
+              <div class="row align-items-center border-bottom" *ngFor="let dish of secondDishes">
+                  <div class="col-6  font-weight-bold red">
+                    <h4 class="m-0">{{dish.name}}</h4>
+                  </div>
+                  <div class="col-6 green p-2 text-right">
+  
+                      <input type="text" class=" col-4 number " #amout="ngModel" [(ngModel)]="dish.amount" >
+                      <button class="btn btn-success btn-circle m-1 align-self-center" (click)="add(dish)" ><i class="fa fa-plus align-self-auto"></i></button>      
+                      <button class="btn btn-danger btn-circle align-self-center m-1 " (click)="remove(dish)"><i class="fa fa-minus align-self-auto"></i></button> 
+                    
+                  </div>        
+              </div>   
+          </div>    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <!--Modal Drinks-->
+    <div class="modal fade" id="Drinks">
+      <div class="modal-dialog modal-dialog-centered ">
+        <div class=" modal-content modal-content-size ">     
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h3 class="modal-title">Bevande</h3>
+          </div>
+          <!-- Modal body -->
+          <div class=" modal-body modal-body-size pt-0">
+              <div class="row align-items-center border-bottom" *ngFor="let drink of drinks">
+                  <div class="col-6  font-weight-bold red">
+                    <h4 class="m-0">{{drink.name}}</h4>
+                  </div>
+                  <div class="col-6 green p-2 text-right">
+                      <input type="text" class=" col-4 number " #amout="ngModel" [(ngModel)]="drink.amount" >
+                      <button class="btn btn-success btn-circle m-1 align-self-center" (click)="add(drink)" ><i class="fa fa-plus align-self-auto"></i></button>      
+                      <button class="btn btn-danger btn-circle align-self-center m-1 " (click)="remove(drink)"><i class="fa fa-minus align-self-auto"></i></button>        
+                  </div>        
+              </div>   
+          </div>    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>       
+        </div>
+      </div>
+    </div>
+  </div>
+  

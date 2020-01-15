@@ -18,12 +18,13 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {
     this.user=new User(null,null,null);
     this.passwordConfirmation=null;
-
   }
 
   public submit(){
     this.usersService.signUp(this.user).subscribe(
-      (res) => {console.log("success registrato")},
+      (res)  => {
+
+        console.log("success registrato")},
       (error) => {
         this.errorMessage=error.statusText;
         console.log(this.errorMessage);
