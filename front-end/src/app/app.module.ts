@@ -17,6 +17,8 @@ import { CashDeskComponent } from './components/cash-desk/cash-desk.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { ToastsComponent } from './components/toasts/toasts.component';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,8 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
     CashDeskComponent,
     StaffComponent,
     CheckOutComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ToastsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    
+    ToastrModule.forRoot({positionClass: 'toast-top-right'})
   ],
   providers: [
     AuthGuardService,

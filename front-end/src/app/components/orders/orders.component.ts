@@ -19,9 +19,10 @@ export class OrdersComponent implements OnInit {
   constructor(private location:Location,private ordersService:OrdersService,private usersService:UsersService) { }
 
   ngOnInit() {
-    if(location.pathname=="/kitchen"){
+    console.log(location.pathname);
+    if(location.pathname.includes("kitchen")){
       this.where="kitchen";
-    }else if(location.pathname=="/bar"){
+    }else if(location.pathname.includes("bar")){
       this.where="bar";
     }else{
       this.where="desk";
