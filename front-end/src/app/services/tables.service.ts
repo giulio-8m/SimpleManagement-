@@ -8,16 +8,18 @@ import { environment } from 'src/environments/environment';
 })
 export class TablesService {
 
+
+
   constructor(private http:HttpClient) { }
 
 
   newTable(table:Table){
     console.log(table);
-    return this.http.post(`${environment.URL}/tables`,table);
+    return this.http.post<any>(`${environment.URL}/tables`,table);
   }
 
   updateTable(tableCode:string,table?){
-    return this.http.put(`${environment.URL}/tables/${tableCode}`,table);
+    return this.http.put<any>(`${environment.URL}/tables/${tableCode}`,table);
   }
 
   getTables(){

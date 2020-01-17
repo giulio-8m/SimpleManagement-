@@ -2,7 +2,7 @@ const passport = require('passport');
 const jwt=require('jsonwebtoken');
 const mongoose = require('mongoose');
 const Recipt = mongoose.model('Recipt');
-const errorHandler = require('../helpers/errors.helper').errorHandler;
+const resHandler = require('../helpers/res.helper').resHandler;
 
 const Error=400;
 const Ok=200;
@@ -10,16 +10,16 @@ const Ok=200;
 const getRecipts = (req,res) =>{
     if(req.query && req.query.date){
         Recipt.find({date:req.query.date}).then((recipts)=>{
-            res.status(Ok).json(recipts);
+            res.status(200).json(recipts);
         }).catch((err)=>{
-            res.status(errorHandler(Error));
+            res.status(400).json(err);
         });
     }else{
 
         Recipt.find({}).then((recipts)=>{
-            res.status(Ok).json(recipts);
+            res.status(200).json(recipts);
         }).catch((err)=>{
-            res.status(errorHandler(Error));
+            res.status(400).json(err);
         });
     }
 }
@@ -36,9 +36,9 @@ const newRecipt = (req,res) =>{
     recipt.total=req.body.total;
 
     recipt.save().then((recipt)=>{
-        res.sendStatus(Ok);
+        res.status(200).json(resHandler(200));
     }).catch((err)=>{
-        res.sendStatus(errorHandler(Error));
+        res.status(400).json(err);
     });
 }
 

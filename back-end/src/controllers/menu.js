@@ -2,7 +2,7 @@ const passport = require('passport');
 const jwt=require('jsonwebtoken');
 const mongoose = require('mongoose');
 const MenuItem = mongoose.model('MenuItem');
-const errorHandler = require('../helpers/errors.helper').errorHandler;
+const resHandler = require('../helpers/res.helper').resHandler;
 
 const Error=400;
 const Ok=200;
@@ -10,16 +10,16 @@ const Ok=200;
 const getMenu = (req,res) =>{
     if(req.query.type){
         MenuItem.find({type:req.query.type}).then((items)=>{
-            res.status(Ok).json(items);
+            res.status(200).json(items);
         }).catch((err)=>{
-            res.status(errorHandler(Error));
+            res.status(400).json(err);
         });
     }else{
 
-        MenuItem.find({}).then((menu)=>{
-            res.status(Ok).json(menu);
+        MenuItem.find({}).then((items)=>{
+            res.status(200).json(items);
         }).catch((err)=>{
-            res.sendStatus(errorHandler(Error));
+            res.status(400).json(err);
         });
     }
 }
@@ -33,9 +33,9 @@ const newItem = (req,res) =>{
     item.time=req.body.time;
 
     item.save().then((item)=>{
-        res.sendStatus(Ok);
+        res.status(200).json(resHandler(200));
     }).catch((err)=>{
-        res.sendStatus(errorHandler(Error));
+        res.status(400).json(err);
     });
 }
 

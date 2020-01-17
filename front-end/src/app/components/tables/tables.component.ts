@@ -19,13 +19,17 @@ export class TablesComponent implements OnInit {
   constructor(private usersService:UsersService,private socketService:SocketService,private tablesService:TablesService,private router:Router) { }
 
   ngOnInit() {  
+
+    this.socketService.socket.on('updateTables',()=>{
+      this.getTables();
+    })
     this.getTables();
   }
 
   getTables(){
     this.tablesService.getTables().subscribe(
-      res => { this.tables = res },
-      error=>this.errorMessage = error.statusText,
+      (res) => { this.tables = res },
+      (err)=>this.errorMessage = err.statusText,
       () => { }           
     );
   }
@@ -41,15 +45,9 @@ export class TablesComponent implements OnInit {
   book(table:Table){
     
     this.tablesService.updateTable(table.tableCode,table).subscribe(
-      (res)=>{
-        console.log("booked table"); 
-      },
+      (res)=>{},
       (err)=>console.log(err),
-      ()=>{  console.log("booking table");
-      //this.socketService.socket.emit('booked_table');
-    }
-       
-    );
+      ()=>{this.socketService.socket.emit('updateTables');});
   }
 
   ordine(event,table:Table){
@@ -57,16 +55,15 @@ export class TablesComponent implements OnInit {
   }
 
   search(){
-    console.log("searching");
-    var input = (<HTMLInputElement>document.getElementById("searchTables")).value;
-    var filter = input.toLowerCase();
+    let input = (<HTMLInputElement>document.getElementById("searchTables")).value;
+    let filter = input.toLowerCase();
     console.log(filter);
-    var listOfUsers = document.getElementById("list-of-ttables");
+    let listOfUsers = document.getElementById("list-of-ttables");
     console.log(listOfUsers);
-    var ttables = listOfUsers.getElementsByClassName("ttable");
+    let ttables = listOfUsers.getElementsByClassName("ttable");
     console.log(ttables);
-    var ttable;
-    var ttablename:string;
+    let ttable;
+    let ttablename:string;
     for(var i=0;i<ttables.length;i++){
       ttable=ttables[i].getElementsByClassName('code')[0];
       console.log(ttable);

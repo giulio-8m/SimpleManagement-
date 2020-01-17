@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/models/user';
 import { UsersService } from 'src/app/services/users.service';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,7 +13,7 @@ export class SignInComponent implements OnInit {
   public user:User;
   public errorMessage:string;
 
-  constructor(private usersService:UsersService) { }
+  constructor(private usersService:UsersService,private socketService:SocketService) { }
 
   ngOnInit() {
     this.user=new User(null,null,null);
@@ -22,7 +23,10 @@ export class SignInComponent implements OnInit {
   public submit(){
     this.usersService.signIn(this.user).subscribe(
       (res) => { localStorage.setItem('user_token',res);
-                this.usersService.parseToken(res) },
+                this.usersService.parseToken(res);
+                this.socketService.connect();
+              
+              },
       (error) => {
         this.errorMessage=error.statusText;
         console.log(this.errorMessage);

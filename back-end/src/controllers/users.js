@@ -2,11 +2,11 @@ const passport = require('passport');
 const jwt=require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const errorHandler = require('../helpers/errors.helper').errorHandler;
+const resHandler = require('../helpers/res.helper').resHandler;
 
 function generateJwt(user) {
     let expiry = new Date();
-    expiry.setDate(expiry.getDate() + 1); //FIXME: at the moment the token expires in 1 days. A bit too much
+    expiry.setDate(expiry.getDate() + 1);
     let token = {
       id: user._id,
       username: user.username,
@@ -24,9 +24,9 @@ const signUp = (req,res)=>{
     user.role=req.body.role;
 
     user.save().then((registered)=>{
-       res.sendStatus(200);
+       res.status(200).json(resHandler(200));
     }).catch((err)=>{
-        res.sendStatus(errorHandler(400));
+        res.status(400).json(err);
     });
 
 };
@@ -50,15 +50,15 @@ const signIn = (req,res)=>{
 const getUsers = (req,res)=>{
     if(req.query.role){
         User.find({role:req.query.role}).then((users)=>{
-            return res.status(200).json(users);
-         }).catch((err)=>{
-            return res.sendStatus(errorHandler(400));
-         });
+            res.status(200).json(users);
+        }).catch((err)=>{
+            res.status(400).json(err);
+        });
     }else{
         User.find({}).then((users)=>{
-        return res.status(200).json(users);
+            res.status(200).json(users);
         }).catch((err)=>{
-        return res.sendStatus(errorHandler(400));
+            res.status(400).json(err);
         });
     }
 }
@@ -66,19 +66,18 @@ const getUsers = (req,res)=>{
 const updateUser = (req,res)=>{
 
     User.findOneAndUpdate({username:req.params.username},{jobs:req.body.jobs},{new:true}).then((user)=>{
-        res.sendStatus(200);
+        res.status(200).json(resHandler(200));
     }).catch((err)=>{
-        console.log(err);
-        res.sendStatus(errorHandler(400));
+        res.status(400).json(err);
     });
 }
 
 const deleteUser = (req,res)=>{
     User.deleteOne({username:req.params.username}).then((user)=>{
-        res.sendStatus(200);
+        res.status(200).json(resHandler(200));
     }).catch((err)=>{
-        res.sendStatus(errorHandler(400));
-    })
+        res.status(400).json(err);
+    });
 }
 
 module.exports={

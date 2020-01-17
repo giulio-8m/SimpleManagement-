@@ -45,6 +45,12 @@ require('./helpers/passport.helper');
         credentials: true
     }));
 
+    app.get('/',(req,res)=>{
+        res.json({
+            'POST /users': '',
+        })
+    });
+
     app.use(passport.initialize());
     app.use(bodyParser.json());
     app.use(usersRoute);
@@ -79,46 +85,28 @@ const socketioJwt=require('socketio-jwt');
         //this socket is authenticated, we are good to handle more events from it.
         console.log('hello! ' + socket.decoded_token.username);
 
-        socket.on('booked_table',function(){
-        console.log("table booked"); 
-        socket.broadcast.emit('update_tables');
-        });
+        socket.on('updateTables',function(){
+            socket.broadcast.emit('updateTables');
+        })
 
-            socket.on('kitchenOrder',function(){
-            console.log('kitchen order message');
-            socket.broadcast.emit('update_kitchenOrders');
-            });
+        socket.on('updateBar',function(){
+            socket.broadcast.emit('updateBar');
+        })
 
-            socket.on('barOrder',function(){
-            console.log('bar order message');
-            socket.broadcast.emit('update_barOrders');
-            });
+        socket.on('updateKitchen',function(){
+            socket.broadcast.emit('updateKitchen');
+        })
 
-            socket.on('kitchenOrderReady',function(){
-            console.log("kitcehn order ready");
-            socket.broadcast.emit('update_kitchenMessages');
-            });
+        socket.on('updateUsers',function(){
+            socket.broadcast.emit('updateUsers');
+        })
 
-            socket.on('barOrderReady',function(){
-            console.log("bar order ready");
-            socket.broadcast.emit('update_barMessages');
-            })
+        socket.on('updateRecipts',function(){
+            socket.broadcast.emit('updateRecipts');
+        })
 
-            socket.on('deleted_user',function(){
-            console.log("deleted user");
-            socket.broadcast.emit('update_users');
-            })
-
-            socket.on('updated_user',function(){
-            socket.broadcast.emit('update_users');
-            })
         
-            socket.on('disconnect', function() {
-            console.log("Bye bye " + socket.decoded_token.username)
-            //delete global.userSocket[user];
-            });
-
-        });
+    });
 
 
 

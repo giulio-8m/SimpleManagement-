@@ -2,7 +2,7 @@ const passport = require('passport');
 const jwt=require('jsonwebtoken');
 const mongoose = require('mongoose');
 const KitchenOrder = mongoose.model('KitchenOrder');
-const errorHandler = require('../helpers/errors.helper').errorHandler;
+const resHandler = require('../helpers/res.helper').resHandler;
 
 const Error=400;
 const Ok=200;
@@ -12,19 +12,19 @@ const getOrders = (req,res)=>{
         KitchenOrder.find({tableCode:req.query.tableCode}).then((orders)=>{
             res.status(200).json(orders);
         }).catch((err)=>{
-            res.sendStatus(errorHandler(Error));
+            res.status(400).json(err);
         });
     }else if(req.query.status){
         KitchenOrder.find({status:req.query.status}).then((orders)=>{
             res.status(200).json(orders);
         }).catch((err)=>{
-            res.sendStatus(errorHandler(Error));
+            res.status(400).json(err);
         });
     }else{
         KitchenOrder.find({}).then((orders)=>{
             res.status(200).json(orders);
         }).catch((err)=>{
-            res.sendStatus(errorHandler(Error));
+            res.status(400).json(err);
         });
     }
 
@@ -40,9 +40,9 @@ const newOrder = (req,res) =>{
     order.date=req.body.date;
  
     order.save().then((doc)=>{
-         res.sendStatus(Ok);
+        res.status(200).json(resHandler(200));
     }).catch((err)=>{
-        res.sendStatus(errorHandler(Error));
+        res.status(400).json(err);
     });
 
 }
@@ -50,20 +50,18 @@ const newOrder = (req,res) =>{
 const updateOrder = (req,res)=>{
 
     KitchenOrder.findOneAndUpdate({_id:req.params.id},{status:req.body.status,progress:req.body.progress,items:req.body.items},{new:true}).then((order)=>{
-        res.sendStatus(Ok);
+        res.status(200).json(resHandler(200));
     }).catch((err)=>{
-        console.log(err);
-        res.sendStatus(errorHandler(Error));
+        res.status(400).json(err);
     });
 }
 
 const checkOut = (req,res)=>{
     KitchenOrder.updateMany({tableCode:req.query.tableCode},{status:"checked-out"}).then((orders)=>{
-        res.sendStatus(Ok);
+        res.status(200).json(resHandler(200));
     }).catch((err)=>{
-        console.log(err);
-        res.sendStatus(errorHandler(Error));
-    })
+        res.status(400).json(err);
+    });
 }
 
 
