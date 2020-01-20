@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client'
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class SocketService {
   }
 
   connect(){
-    this.socket = io.connect(`http://localhost:3000`);
+    this.socket = io.connect(`${environment.URL}`);
     this.socket
         .emit('authenticate', {token: localStorage.getItem('user_token')}) //send the jwt
         .on('authenticated', function () {

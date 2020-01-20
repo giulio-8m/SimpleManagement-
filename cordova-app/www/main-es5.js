@@ -1269,24 +1269,22 @@ var OrdersComponent = /** @class */ (function () {
         }
     };
     OrdersComponent.prototype.start = function (dish, order) {
+        var _this = this;
         dish.status = "cooking";
-        this.ordersService.updateOrder(this.where, order).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { });
+        this.ordersService.updateOrder(this.where, order).subscribe(function (res) { }, function (err) { return _this.errorMessage = err.statusText; }, function () { _this.socketService.socket.emit('updateOrders'); });
     };
     OrdersComponent.prototype.finish = function (dish, order) {
+        var _this = this;
         dish.status = "finish";
         var prop = 100 / order.items.length;
         order.progress += prop;
         this.update(order);
         this.usersService.user.jobs += 1;
-        console.log(this.usersService.user.jobs);
-        this.usersService.updateUser(this.usersService.user.username).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { });
+        this.usersService.updateUser(this.usersService.user.username).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { _this.socketService.socket.emit('updateUsers'); });
         if (order.progress > 99.98) {
             order.status = "completed";
         }
-        this.ordersService.updateOrder(this.where, order).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { });
-        if (order.status == "completed") {
-            // this.socketService.socket.emit('kitchenOrderReady');
-        }
+        this.ordersService.updateOrder(this.where, order).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { _this.socketService.socket.emit('updateOrders'); });
     };
     OrdersComponent.ctorParameters = function () { return [
         { type: _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"] },
@@ -1809,7 +1807,7 @@ var TablesComponent = /** @class */ (function () {
     };
     TablesComponent.prototype.getTables = function () {
         var _this = this;
-        this.tablesService.getTables().subscribe(function (res) { _this.tables = res; }, function (error) { return _this.errorMessage = error.statusText; }, function () { });
+        this.tablesService.getTables().subscribe(function (res) { _this.tables = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () { });
     };
     TablesComponent.prototype.free = function (seats) {
         return seats == 0;
@@ -1819,10 +1817,7 @@ var TablesComponent = /** @class */ (function () {
     };
     TablesComponent.prototype.book = function (table) {
         var _this = this;
-        this.tablesService.updateTable(table.tableCode, table).subscribe(function (res) {
-            _this.socketService.socket.emit('updateTables');
-        }, function (err) { return console.log(err); }, function () {
-        });
+        this.tablesService.updateTable(table.tableCode, table).subscribe(function (res) { }, function (err) { return console.log(err); }, function () { _this.socketService.socket.emit('updateTables'); });
     };
     TablesComponent.prototype.ordine = function (event, table) {
         this.router.navigate(['/order', table.tableCode, table.clients]);
@@ -2240,6 +2235,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+
 
 
 
@@ -2249,7 +2246,7 @@ var SocketService = /** @class */ (function () {
         this.connect();
     }
     SocketService.prototype.connect = function () {
-        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"]("http://localhost:3000");
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"]("" + src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL);
         this.socket
             .emit('authenticate', { token: localStorage.getItem('user_token') }) //send the jwt
             .on('authenticated', function () {
@@ -2407,7 +2404,7 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 var environment = {
-    URL: "http://localhost:3000",
+    URL: "http://10.0.2.2:3000",
     production: false
 };
 /*

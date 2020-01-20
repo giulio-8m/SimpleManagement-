@@ -1,5 +1,9 @@
 <br>
 <div class="container" >
+  <h1 class="text-center font-weight-bold">Ordini</h1>
+  <hr>
+
+  <div class="alert alert-danger text-center" *ngIf="errorMessage">Something bad happened error : {{errorMessage}}</div>
   <ng-container *ngFor="let order of orders; let i = index" >
 
 

@@ -8,7 +8,14 @@ const Error=400;
 const Ok=200;
 
 const getOrders = (req,res)=>{
-    if(req.query.tableCode){
+    if(req.query.waiter && req.query.status){
+        KitchenOrder.find({waiter:req.query.waiter}).and({status:req.query.status}).then((orders)=>{
+            res.status(200).json(orders);
+        }).catch((err)=>{
+            res.status(400).json(err);
+        });
+    }
+    else if(req.query.tableCode){
         KitchenOrder.find({tableCode:req.query.tableCode}).then((orders)=>{
             res.status(200).json(orders);
         }).catch((err)=>{

@@ -4,6 +4,7 @@ import { Recipt } from 'src/models/recipt';
 import {Chart} from 'chart.js'
 import { ReciptsService } from 'src/app/services/recipts.service';
 import { OrdersService } from 'src/app/services/orders.service';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-statistics',
@@ -12,6 +13,7 @@ import { OrdersService } from 'src/app/services/orders.service';
 })
 export class StatisticsComponent implements OnInit {
 
+  errorMessage:string;
   ordersKitchen:Array<Order>;
   ordersBar:Array<Order>;
   recipts:Array<Recipt>;
@@ -20,34 +22,37 @@ export class StatisticsComponent implements OnInit {
   chartOrders;
   chartRecipts;
   date:string;
-  constructor(private reciptsService:ReciptsService,private ordersService:OrdersService) { }
+  constructor(private reciptsService:ReciptsService,private socketService:SocketService,private ordersService:OrdersService) { }
 
   ngOnInit() {
 
     let dateS=new Date();
     this.date=dateS.getDate()+'/'+dateS.getMonth()+'/'+dateS.getFullYear();
     this.stats=[0,0];
-    console.log("staats",this.stats);
     this.initChartOrders();
     this.initChartRecipts();
 
     this.getKitchenOrders(this.date);
     this.getBarOrders(this.date);
     this.getRecipts(this.date);
-     /* this.socketService.socket.on('update_kitchenOrders',()=>{
-        this.getKitchenOrders(this.date);
-      })
+    this.socketService.socket.on('updateRecipts',()=>{
+      this.getRecipts(this.date);
+    });
+    this.socketService.socket.on('updateBar',()=>{
+      this.getBarOrders(this.date);
+      
+    })
 
-      this.socketService.socket.on('update_barOrders',()=>{
-        this.getBarOrders(this.date);
-      })*/
+    this.socketService.socket.on('updateKitchen',()=>{
+      this.getKitchenOrders(this.date);
+    })
 
   }
 
   getKitchenOrders(date:string){
     this.ordersService.getOrders("kitchen",'?date='+date).subscribe(
       (res)=>this.ordersKitchen=res,
-      (err)=>console.log(err),
+      (err)=>this.errorMessage=err.statusText,
       ()=>{
         this.stats[0]=this.ordersKitchen.length;
         console.log(this.ordersKitchen)
@@ -62,7 +67,7 @@ export class StatisticsComponent implements OnInit {
   getBarOrders(date:string){
     this.ordersService.getOrders("bar",'?date='+date).subscribe(
       (res)=>this.ordersBar=res,
-      (err)=>console.log(err),
+      (err)=>this.errorMessage=err.statusText,
       ()=>{
         console.log(this.ordersBar)
         this.stats[1]=this.ordersBar.length;
@@ -80,7 +85,7 @@ export class StatisticsComponent implements OnInit {
 
     this.reciptsService.getRecipts("?").subscribe(
       (res)=>this.recipts=res,
-      (err)=>console.log(err),
+      (err)=>this.errorMessage=err.statusText,
       ()=>{
         console.log("wqwqq");
         console.log(this.recipts);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/models/user';
 import { UsersService } from 'src/app/services/users.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +14,7 @@ export class SignUpComponent implements OnInit {
   passwordConfirmation:string;
   errorMessage:string;
 
-  constructor(private usersService:UsersService) { }
+  constructor(private usersService:UsersService,private location:Location) { }
 
   ngOnInit() {
     this.user=new User(null,null,null);
@@ -22,13 +23,12 @@ export class SignUpComponent implements OnInit {
 
   public submit(){
     this.usersService.signUp(this.user).subscribe(
-      (res)  => {
-
-        console.log("success registrato")},
-      (error) => {
-        this.errorMessage=error.statusText;
+      (res)  => {},
+      (err) => {
+        this.errorMessage=err.statusText;
         console.log(this.errorMessage);
       },
+      ()=> this.location.back()
     );
   }
 

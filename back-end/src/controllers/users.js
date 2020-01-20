@@ -11,7 +11,8 @@ function generateJwt(user) {
       id: user._id,
       username: user.username,
       role: user.role,
-      exp: parseInt(expiry.getTime() / 1000, 10)
+      jobs:user.jobs,
+      exp: `8h`
     };
     return jwt.sign(token, process.env.JWT_SECRET, {algorithm: 'RS256'});
 };

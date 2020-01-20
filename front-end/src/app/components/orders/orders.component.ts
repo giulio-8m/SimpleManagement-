@@ -23,14 +23,20 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     console.log(location.pathname);
     if(location.pathname.includes("kitchen")){
+      this.socketService.socket.on('updateKitchen',()=>{
+        this.getOrders();
+      })
       this.where="kitchen";
     }else if(location.pathname.includes("bar")){
+      this.socketService.socket.on('updateBar',()=>{
+        this.getOrders();
+      })
       this.where="bar";
     }else{
       this.where="desk";
     }
 
-    this.socketService.socket.on('updateOrders',()=>{
+    this.socketService.socket.on('updateKitchen',()=>{
       this.getOrders();
     })
 
@@ -115,7 +121,7 @@ export class OrdersComponent implements OnInit {
     this.usersService.user.jobs+=1;
     this.usersService.updateUser(this.usersService.user.username).subscribe(
       (res)=>console.log(res),
-      (err)=>console.log(err),
+      (err)=>this.errorMessage=err.statusText,
       ()=>{this.socketService.socket.emit('updateUsers')}
     );
 
@@ -124,7 +130,7 @@ export class OrdersComponent implements OnInit {
     }
     this.ordersService.updateOrder(this.where,order).subscribe(
       (res)=>console.log(res),
-      (err)=>console.log(err),
+      (err)=>this.errorMessage=err.statusText,
       ()=>{this.socketService.socket.emit('updateOrders')}
     );
 

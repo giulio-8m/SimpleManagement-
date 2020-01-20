@@ -1,7 +1,11 @@
 <div class="container">
     <br>
+
+   
+
     <h1 class="text-center ">Utenti</h1>
     <hr>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">Something bad happened error : {{errorMessage}}</div>
     <a href="#waiterS" data-toggle="collapse" class="btn btn-primary btn-block">
         <br>
         <i class="fas fa-utensils fa-4x"><h3>Camerieri</h3></i>

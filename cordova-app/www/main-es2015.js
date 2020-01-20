@@ -1205,8 +1205,8 @@ let OrdersComponent = class OrdersComponent {
         let progressBar = '#' + order._id;
         jquery__WEBPACK_IMPORTED_MODULE_4__(progressBar).find(".progress").each(function () {
             let value = order.progress;
-            var left = jquery__WEBPACK_IMPORTED_MODULE_4__(this).find('.progress-left .progress-bar');
-            var right = jquery__WEBPACK_IMPORTED_MODULE_4__(this).find('.progress-right .progress-bar');
+            let left = jquery__WEBPACK_IMPORTED_MODULE_4__(this).find('.progress-left .progress-bar');
+            let right = jquery__WEBPACK_IMPORTED_MODULE_4__(this).find('.progress-right .progress-bar');
             if (value <= 50) {
                 right.css('transform', 'rotate(' + (value / 100 * 360) + 'deg)');
             }
@@ -1229,7 +1229,7 @@ let OrdersComponent = class OrdersComponent {
     }
     start(dish, order) {
         dish.status = "cooking";
-        this.ordersService.updateOrder(this.where, order).subscribe((res) => console.log(res), (err) => console.log(err), () => { });
+        this.ordersService.updateOrder(this.where, order).subscribe((res) => { }, (err) => this.errorMessage = err.statusText, () => { this.socketService.socket.emit('updateOrders'); });
     }
     finish(dish, order) {
         dish.status = "finish";
@@ -1237,15 +1237,11 @@ let OrdersComponent = class OrdersComponent {
         order.progress += prop;
         this.update(order);
         this.usersService.user.jobs += 1;
-        console.log(this.usersService.user.jobs);
-        this.usersService.updateUser(this.usersService.user.username).subscribe((res) => console.log(res), (err) => console.log(err), () => { });
+        this.usersService.updateUser(this.usersService.user.username).subscribe((res) => console.log(res), (err) => console.log(err), () => { this.socketService.socket.emit('updateUsers'); });
         if (order.progress > 99.98) {
             order.status = "completed";
         }
-        this.ordersService.updateOrder(this.where, order).subscribe((res) => console.log(res), (err) => console.log(err), () => { });
-        if (order.status == "completed") {
-            // this.socketService.socket.emit('kitchenOrderReady');
-        }
+        this.ordersService.updateOrder(this.where, order).subscribe((res) => console.log(res), (err) => console.log(err), () => { this.socketService.socket.emit('updateOrders'); });
     }
 };
 OrdersComponent.ctorParameters = () => [
@@ -1752,7 +1748,7 @@ let TablesComponent = class TablesComponent {
         this.getTables();
     }
     getTables() {
-        this.tablesService.getTables().subscribe((res) => { this.tables = res; }, (error) => this.errorMessage = error.statusText, () => { });
+        this.tablesService.getTables().subscribe((res) => { this.tables = res; }, (err) => this.errorMessage = err.statusText, () => { });
     }
     free(seats) {
         return seats == 0;
@@ -1761,24 +1757,21 @@ let TablesComponent = class TablesComponent {
         this.router.navigate(['/orders-desk', table.tableCode]);
     }
     book(table) {
-        this.tablesService.updateTable(table.tableCode, table).subscribe((res) => {
-            this.socketService.socket.emit('updateTables');
-        }, (err) => console.log(err), () => {
-        });
+        this.tablesService.updateTable(table.tableCode, table).subscribe((res) => { }, (err) => console.log(err), () => { this.socketService.socket.emit('updateTables'); });
     }
     ordine(event, table) {
         this.router.navigate(['/order', table.tableCode, table.clients]);
     }
     search() {
-        var input = document.getElementById("searchTables").value;
-        var filter = input.toLowerCase();
+        let input = document.getElementById("searchTables").value;
+        let filter = input.toLowerCase();
         console.log(filter);
-        var listOfUsers = document.getElementById("list-of-ttables");
+        let listOfUsers = document.getElementById("list-of-ttables");
         console.log(listOfUsers);
-        var ttables = listOfUsers.getElementsByClassName("ttable");
+        let ttables = listOfUsers.getElementsByClassName("ttable");
         console.log(ttables);
-        var ttable;
-        var ttablename;
+        let ttable;
+        let ttablename;
         for (var i = 0; i < ttables.length; i++) {
             ttable = ttables[i].getElementsByClassName('code')[0];
             console.log(ttable);
@@ -2172,6 +2165,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+
 
 
 
@@ -2181,7 +2176,7 @@ let SocketService = class SocketService {
         this.connect();
     }
     connect() {
-        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"](`http://localhost:3000`);
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"](`${src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL}`);
         this.socket
             .emit('authenticate', { token: localStorage.getItem('user_token') }) //send the jwt
             .on('authenticated', function () {
@@ -2336,7 +2331,7 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 const environment = {
-    URL: `http://localhost:3000`,
+    URL: `http://10.0.2.2:3000`,
     production: false
 };
 /*

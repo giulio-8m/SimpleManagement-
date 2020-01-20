@@ -10,10 +10,7 @@ export class AuthGuardService  implements CanActivate {
   constructor( private router: Router,private userService:UsersService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-
     return true;
-    console.log(route.routeConfig.path);
-
       if(this.userService.user){ 
           if(this.userService.user.role=="Barista" && route.routeConfig.path=="bar"){
             return true;

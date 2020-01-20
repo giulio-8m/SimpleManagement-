@@ -2,6 +2,7 @@
     <br>
     <h1 class="text-center font-weight-bold">Tavoli</h1>
     <hr>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">Something bad happened error : {{errorMessage}}</div>
   
     <div class="d-flex flex-wrap justify-content-center p-0 m-0" id="list-of-ttables">
       <ng-container *ngFor="let table of tables; let i=index">

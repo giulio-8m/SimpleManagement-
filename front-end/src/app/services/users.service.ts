@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
 import {environment} from '../../environments/environment'
-import { MenuItem } from 'src/models/menuItem';
-import { Table } from 'src/models/table';
+
 
 
 @Injectable({
@@ -19,8 +18,7 @@ export class UsersService {
     this.user=null;
     let token=localStorage.getItem('user_token');
     if(token){
-      let decoded:User=jwt_decode(token);
-      this.user=new User(decoded.username,null,decoded.role);
+      this.parseToken(token);
     }
   }
 
@@ -35,6 +33,7 @@ export class UsersService {
   parseToken (token:string){
     let decoded:User=jwt_decode(token);
     this.user=new User(decoded.username,null,decoded.role);
+    this.user.jobs=decoded.jobs;
   }
 
   updateUser(username:string){

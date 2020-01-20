@@ -15,6 +15,7 @@ export class OrdersService {
   }
 
   getOrders(where:string,query?:string){
+    console.log(where);
       if(query)
         return this.http.get<any>(`${environment.URL}/${where}${query}`);
       else

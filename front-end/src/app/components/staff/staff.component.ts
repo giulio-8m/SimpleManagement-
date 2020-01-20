@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { User } from 'src/models/user';
 import {Chart} from 'chart.js';
+import { SocketService } from 'src/app/services/socket.service';
 
 
 @Component({
@@ -11,6 +12,7 @@ import {Chart} from 'chart.js';
 })
 export class StaffComponent implements OnInit {
 
+  errorMessage:string;
   users:Array<User>;
   waiters:Array<User>;
   chefs:Array<User>;
@@ -28,7 +30,7 @@ export class StaffComponent implements OnInit {
   stats=[];
 
 
-  constructor(private usersService:UsersService) { }
+  constructor(private usersService:UsersService,private socketService:SocketService) { }
 
   ngOnInit() {
     this.getWaiters();
@@ -36,24 +38,25 @@ export class StaffComponent implements OnInit {
     this.getChefs();
     this.getDesks();
 
-    /*
-    this.socketService.socket.on('update_users',()=>{
+  
+    this.socketService.socket.on('updateUsers',()=>{
       this.totalServices=0;
       this.totalDishes=0;
       this.totalDrinks=0;
       this.totalCashed=0;
+      this.stats=[];
       this.getWaiters();
       this.getBarMans();
       this.getChefs();
       this.getDesks();
-    });*/
+    });
     
   }
 
   getWaiters(){
     this.usersService.getUsers('?role=Cameriere').subscribe(
       (res)=>this.waiters=res,
-      (err)=>console.log(err),
+      (err)=>this.errorMessage=err.statusText,
       ()=>{
   
           this.totalServices=this.waiters.reduce(function(prev, cur) {
@@ -66,7 +69,7 @@ export class StaffComponent implements OnInit {
   getChefs(){
     this.usersService.getUsers('?role=Cuoco').subscribe(
       (res)=>this.chefs=res,
-      (err)=>console.log(err),
+      (err)=>this.errorMessage=err.statusText,
       ()=>{
        this.totalDishes=this.chefs.reduce(function(prev, cur) {
           return prev + cur.jobs;
@@ -79,7 +82,7 @@ export class StaffComponent implements OnInit {
   getBarMans(){
     this.usersService.getUsers('?role=Barista').subscribe(
       (res)=>this.barMans=res,
-      (err)=>console.log(err),
+      (err)=>this.errorMessage=err.statusText,
       ()=>{
         this.totalDrinks=this.barMans.reduce(function(prev, cur) {
           return prev + cur.jobs;
@@ -92,7 +95,7 @@ export class StaffComponent implements OnInit {
   getDesks(){
     this.usersService.getUsers('?role=Cassa').subscribe(
       (res)=>this.desks=res,
-      (err)=>console.log(err),
+      (err)=>this.errorMessage=err.statusText,
       ()=>{
           this.totalCashed=this.desks.reduce(function(prev, cur) {
             return prev + cur.jobs;
@@ -150,8 +153,9 @@ export class StaffComponent implements OnInit {
   deleteUser(user:string){
     this.usersService.deleteUser(user).subscribe(
       (res)=>console.log(res),
-      (err)=>console.log(err),
+      (err)=>this.errorMessage=err.statusText,
       ()=>{
+        this.socketService.socket.emit('updateUsers');
       ;}
     );
 

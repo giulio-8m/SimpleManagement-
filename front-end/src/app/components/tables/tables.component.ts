@@ -46,7 +46,7 @@ export class TablesComponent implements OnInit {
     
     this.tablesService.updateTable(table.tableCode,table).subscribe(
       (res)=>{},
-      (err)=>console.log(err),
+      (err)=>this.errorMessage = err.statusText,
       ()=>{this.socketService.socket.emit('updateTables');});
   }
 
