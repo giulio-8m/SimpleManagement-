@@ -4,6 +4,8 @@ import { SocketService } from 'src/app/services/socket.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { UsersService } from 'src/app/services/users.service';
 import { Order } from 'src/models/order';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-toasts',
   templateUrl: './toasts.component.html',
@@ -13,13 +15,12 @@ export class ToastsComponent implements OnInit {
 
   messages:Array<any>;
 
-  constructor(private toastr: ToastrService,private socketService:SocketService,private usersService:UsersService,private ordersService:OrdersService) { }
+  constructor(private router:Router,private toastr: ToastrService,private socketService:SocketService,private usersService:UsersService,private ordersService:OrdersService) { }
 
   ngOnInit() {
     this.messages=null;
 
     if(this.usersService.user && this.usersService.user.role=="Cameriere"){
-      console.log(" tost cameriere");
       this.getKitchenMessages();
       this.getBarMessages();
       this.socketService.socket.on('updateKitchen',()=>{
@@ -32,34 +33,27 @@ export class ToastsComponent implements OnInit {
   }
 
   getKitchenMessages(){
-    this.ordersService.getOrders(`kitchen`,`?waiter=${this.usersService.user.username}&status=completed`).subscribe(
+    this.ordersService.getOrders(`kitchen`,`?waiter=${this.usersService.user.username}&status=completato`).subscribe(
       (res)=>this.messages=res,
       (err)=>console.log(err),
       ()=>{
-        console.log("toaasasstiss");
-
         for(let i=0;i<this.messages.length;i++){
-
-          if(this.messages[i].status=="completed" ){
             this.pop(this.messages[i],"kitchen");
-          }
+
         }
       }
     );
   }
 
   getBarMessages(){
-    this.ordersService.getOrders(`bar`,`?waiter=${this.usersService.user.username}&status=completed`).subscribe(
+    this.ordersService.getOrders(`bar`,`?waiter=${this.usersService.user.username}&status=completato`).subscribe(
       (res)=>this.messages=res,
       (err)=>console.log(err),
       ()=>{
-        console.log("toaasasstiss");
 
         for(let i=0;i<this.messages.length;i++){
-
-          if(this.messages[i].status=="completed" ){
             this.pop(this.messages[i],"bar");
-          }
+        
         }
       }
     );
@@ -67,22 +61,37 @@ export class ToastsComponent implements OnInit {
 
   pop(order:Order,type:string){
     let orderNumber:number;
-    if(type=="Kitchen"){
+    if(type=="kitchen"){
       orderNumber=order.kitchenNumber;
     }else{
       orderNumber=order.barNumber;
     }
-    this.toastr.success('Table : '+order.tableCode, 'Order '+ orderNumber+ ' from '+type+' ready',{
+    this.toastr.success('Tavolo : '+order.tableCode, 'Ordine '+ orderNumber+ ' '+'da servire',{
       disableTimeOut: true
     }).onTap.subscribe(
       ()=>{
         
-          order.status="delivered";
+          order.status="servito";
           this.ordersService.updateOrder(type,order).subscribe(
             (res)=>console.log(res),
             (err)=>console.log(err),
-            ()=>console.log("done")
+            ()=>{
+              if(type=="kitchen"){
+                this.socketService.socket.emit('updateKitchen');
+              }else if(type=="bar"){
+                this.socketService.socket.emit('updateBar');
+              }
+            }
           );
+          this.usersService.user.jobs+=1;
+          this.usersService.updateUser(this.usersService.user.username).subscribe(
+            (res)=>{},
+            (err)=>console.log(err),
+            ()=>this.socketService.socket.emit('updateUsers')
+          );
+
+          this.router.navigate(['/tables']);
+        
         
       }
     );

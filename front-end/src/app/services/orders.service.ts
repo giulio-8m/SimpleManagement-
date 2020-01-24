@@ -15,21 +15,20 @@ export class OrdersService {
   }
 
   getOrders(where:string,query?:string){
-    console.log(where);
       if(query)
-        return this.http.get<any>(`${environment.URL}/${where}${query}`);
+        return this.http.get<any>(`${environment.URL}/API/sm/${where}${query}`);
       else
-        return this.http.get<any>(`${environment.URL}/${where}`);
+        return this.http.get<any>(`${environment.URL}/API/sm/${where}`);
     
   }
 
   updateOrder(where:string,order:Order){
-      return this.http.put(`${environment.URL}/${where}/${order._id}`,order);
+      return this.http.put(`${environment.URL}/API/sm/${where}/${order._id}`,order);
 
   }
 
   checkOut(where:string,tableCode:string){
-    return this.http.put(`${environment.URL}/${where}?tableCode=${tableCode}`,null);
+    return this.http.put(`${environment.URL}/API/sm/${where}?tableCode=${tableCode}`,null);
   }
 
 

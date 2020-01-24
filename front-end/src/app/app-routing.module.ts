@@ -11,10 +11,12 @@ import { CashDeskComponent } from './components/cash-desk/cash-desk.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { TableOrdersComponent } from './components/table-orders/table-orders.component';
 
 
 const routes: Routes = [
-  {path:'',component:HomeComponent,canActivate:[AuthGuardService]},
+  {path:'',component:SignInComponent},
+  {path:'table-orders/:tableCode',component:TableOrdersComponent,canActivate:[AuthGuardService]},
   {path:'statistics',component:StatisticsComponent,canActivate:[AuthGuardService]},
   {path:'check-out/:tableCode/:clients',component:CheckOutComponent,canActivate:[AuthGuardService]},
   {path:'staff',component:StaffComponent,canActivate:[AuthGuardService]},
@@ -23,9 +25,9 @@ const routes: Routes = [
   {path:'kitchen',component:OrdersComponent,canActivate:[AuthGuardService]},
   {path:'order/:tableCode/:clients',component:OrderComponent,canActivate:[AuthGuardService]},
   {path:'tables',component:TablesComponent,canActivate:[AuthGuardService]},
-  {path:'sign-in',component:SignInComponent,canActivate:[AuthGuardService]},
+  {path:'sign-in',component:SignInComponent},
   {path:'sign-up',component:SignUpComponent,canActivate:[AuthGuardService]},
-  {path:'**',component:HomeComponent,canActivate:[AuthGuardService]},
+  {path:'**',component:SignInComponent},
 ];
 
 @NgModule({
@@ -35,7 +37,12 @@ const routes: Routes = [
 export class AppRoutingModule { }
 
 export const RoutingComponents=[
-  
+  TableOrdersComponent,
+  StatisticsComponent,
+  CheckOutComponent,
+  StaffComponent,
+  CashDeskComponent,
+  OrdersComponent,
   OrderComponent,
   TablesComponent,
   SignInComponent,

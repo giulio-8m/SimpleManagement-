@@ -11,13 +11,15 @@ export class ReciptsService {
   constructor(private http:HttpClient) { }
 
   getRecipts(query?:string){
-
-    return this.http.get<any>(`${environment.URL}/recipts${query}`);
+    if(query)
+      return this.http.get<any>(`${environment.URL}/API/sm/recipts${query}`);
+    else 
+      return this.http.get<any>(`${environment.URL}/API/sm/recipts`);
 
   }
 
   newRecipt(recipt:Recipt){
-    return this.http.post(`${environment.URL}/recipts`,recipt);
+    return this.http.post(`${environment.URL}/API/sm/recipts`,recipt);
   }
 
 }

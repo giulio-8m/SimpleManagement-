@@ -79,13 +79,13 @@ export class OrderComponent implements OnInit {
 
     let kitchenItems=this.firstDishes.concat(this.secondDishes).filter((item)=>{return item.amount>0});
     kitchenItems.map((item)=>{
-      item.status="start";
+      item.status="da_iniziare";
     })
     kitchenItems.sort(this.itemSort);
 
     let barItems=this.drinks.filter((item)=>{ return item.amount>0});
     barItems.map((item)=>{
-      item.status="start";
+      item.status="da_iniziare";
     });
     barItems.sort(this.itemSort);
 
@@ -106,6 +106,8 @@ export class OrderComponent implements OnInit {
         ()=>this.socketService.socket.emit('updateBar')
       );
     }
+
+    
 
     this.location.back();
 

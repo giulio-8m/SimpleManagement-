@@ -4,12 +4,12 @@ const router = express.Router();
 const controller = require('../controllers/kitchen');
 const auth=require('passport').authenticate('jwt',{session:false});
 
-router.post('/kitchen',controller.newOrder);
+router.post('/API/sm/kitchen',auth,controller.newOrder);
 
-router.put('/kitchen/:id',controller.updateOrder);
+router.put('/API/sm/kitchen/:id',auth,controller.updateOrder);
 
-router.get('/kitchen',controller.getOrders);
+router.get('/API/sm/kitchen',auth,controller.getOrders);
 
-router.put('/kitchen',controller.checkOut);
+router.put('/API/sm/kitchen',auth,controller.checkOut);
 
 module.exports=router;

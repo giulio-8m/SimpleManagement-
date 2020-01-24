@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/models/user';
 import { UsersService } from 'src/app/services/users.service';
 import { Location } from '@angular/common'
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +15,7 @@ export class SignUpComponent implements OnInit {
   passwordConfirmation:string;
   errorMessage:string;
 
-  constructor(private usersService:UsersService,private location:Location) { }
+  constructor(private usersService:UsersService,private socketService:SocketService,private location:Location) { }
 
   ngOnInit() {
     this.user=new User(null,null,null);
@@ -28,7 +29,8 @@ export class SignUpComponent implements OnInit {
         this.errorMessage=err.statusText;
         console.log(this.errorMessage);
       },
-      ()=> this.location.back()
+      ()=> {this.socketService.socket.emit('updateUsers');
+        this.location.back()}
     );
   }
 

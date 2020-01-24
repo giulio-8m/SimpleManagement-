@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/models/user';
 import { UsersService } from 'src/app/services/users.service';
 import * as $ from 'jquery'
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,7 @@ export class NavbarComponent implements OnInit {
     open:boolean = false;
   
   
-    constructor(private usersService:UsersService) { }
+    constructor(private usersService:UsersService,private socketService:SocketService) { }
   
     ngOnInit() {
       if(this.usersService.user==null){
@@ -22,16 +23,16 @@ export class NavbarComponent implements OnInit {
         }
       }
   
-      $('.container').click(()=>{
-        if(this.open){
-          console.log("hello container");
-          this.toggle();
-        } 
-      })
+
   
     }
   
     toggle(){
+      $('.container').click(()=>{
+        if(this.open){
+          this.toggle();
+        } 
+      })
       
       if(this.open){
         $(".dual-nav").removeClass('show').addClass('collapsing');
@@ -50,6 +51,7 @@ export class NavbarComponent implements OnInit {
     exit(){
       this.usersService.user=null;
       localStorage.removeItem('user_token');
+      this.socketService.socket.emit('disconnect');
     }
   
     isChef(){

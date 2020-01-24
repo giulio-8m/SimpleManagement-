@@ -4,11 +4,9 @@ const mongoose = require('mongoose');
 const Recipt = mongoose.model('Recipt');
 const resHandler = require('../helpers/res.helper').resHandler;
 
-const Error=400;
-const Ok=200;
 
 const getRecipts = (req,res) =>{
-    if(req.query && req.query.date){
+    if(req.query.date){
         Recipt.find({date:req.query.date}).then((recipts)=>{
             res.status(200).json(recipts);
         }).catch((err)=>{

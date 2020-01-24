@@ -1,0 +1,7 @@
+@-moz-document url-prefix() { 
+
+    .spazio{
+        padding-right: 7px !important;
+        padding-left: 7px !important;
+    }
+}

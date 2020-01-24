@@ -20,7 +20,7 @@ let kitchenOrderSchema= new Schema({
     status:{
         type:String,
         required:true,
-        default:"ongoing"
+        default:"in_corso"
     },
     progress:{
         type:Number,

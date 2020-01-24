@@ -23,11 +23,11 @@ export class UsersService {
   }
 
   signUp(user:User){
-    return this.http.post<any>(`${environment.URL}/users`,user);
+    return this.http.post<any>(`${environment.URL}/API/sm/users`,user);
   }
 
   signIn(user:User){
-    return this.http.post<any>(`${environment.URL}/users/login`,user);
+    return this.http.post<any>(`${environment.URL}/API/sm/users/login`,user);
   }
 
   parseToken (token:string){
@@ -37,15 +37,18 @@ export class UsersService {
   }
 
   updateUser(username:string){
-    return this.http.put(`${environment.URL}/users/${username}`,this.user);
+    return this.http.put(`${environment.URL}/API/sm/users/${username}`,this.user);
   }
 
   getUsers(query?:string){
-    return this.http.get<any>(`${environment.URL}/users${query}`);
+    if(query)
+      return this.http.get<any>(`${environment.URL}/API/sm/users${query}`);
+    else 
+      return this.http.get<any>(`${environment.URL}/API/sm/users`);
   }
 
   deleteUser(username:string){
-    return this.http.delete(`${environment.URL}/users/${username}`);
+    return this.http.delete(`${environment.URL}/API/sm/users/${username}`);
   }
 
 }

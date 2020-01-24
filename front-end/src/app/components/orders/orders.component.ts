@@ -21,7 +21,6 @@ export class OrdersComponent implements OnInit {
   constructor(private location:Location,private ordersService:OrdersService,private usersService:UsersService,private socketService:SocketService) { }
 
   ngOnInit() {
-    console.log(location.pathname);
     if(location.pathname.includes("kitchen")){
       this.socketService.socket.on('updateKitchen',()=>{
         this.getOrders();
@@ -33,7 +32,7 @@ export class OrdersComponent implements OnInit {
       })
       this.where="bar";
     }else{
-      this.where="desk";
+      console.log("error");
     }
 
     this.socketService.socket.on('updateKitchen',()=>{
@@ -45,33 +44,19 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrders(){
-    this.ordersService.getOrders(this.where,"?status=ongoing").subscribe(
+    this.ordersService.getOrders(this.where,"?status=in_corso").subscribe(
       (res)=>this.orders=res,
-      (err)=>{
-        console.log(err)
-        this.errorMessage=err.statusText;
-        },
-      ()=>{}
+      (err)=>this.errorMessage=err.statusText,
+      ()=>{
+        $(document).ready(()=>{
+          for(let i=0;i<this.orders.length;i++){
+            this.update(this.orders[i]);
+          }
+        })
+        }
     );
   }
 
-  ngAfterViewChecked(){
-    if(this.orders)
-      for(let i=0;i<this.orders.length;i++){
-        this.update(this.orders[i]);
-        this.orders[i].items.sort( function(a:MenuItem,b:MenuItem){
-          if(a.time>b.time){    
-            return -1;
-          }
-          else if(a.time==b.time){
-            return 0;
-          }
-          else{
-            return 1;
-          }
-        });
-      }
-  }
 
   update(order:Order){
     let progressBar:string='#'+order._id;
@@ -91,30 +76,39 @@ export class OrdersComponent implements OnInit {
   }
 
   statusCheck(item:MenuItem){
-    if(item.status=="start"){
+    if(item.status=="da_iniziare"){
       return 1;
-    }else if(item.status=="cooking"){
+    }else if(item.status=="in_preparazione"){
       return 2;
     }
     else{
       return 3;
     }
-
   }
 
   start(dish:MenuItem,order:Order){
-    dish.status="cooking";
+    dish.status="in_preparazione";
     this.ordersService.updateOrder(this.where,order).subscribe(
       (res)=>{},
       (err)=>this.errorMessage=err.statusText,
-      ()=>{this.socketService.socket.emit('updateOrders')}
+      ()=>{
+
+        if(this.where=="kitchen"){
+          this.socketService.socket.emit('updateKitchen');
+        }else if(this.where=="bar"){
+          this.socketService.socket.emit('updateBar');
+        }else{
+          this.socketService.socket.emit('updateOrders');
+        }
+        
+      }
     );
     
   }
 
   finish(dish:MenuItem,order:Order){
 
-    dish.status="finish";
+    dish.status="pronto";
     let prop:number=100/order.items.length;
     order.progress+=prop;
     this.update(order);
@@ -126,12 +120,20 @@ export class OrdersComponent implements OnInit {
     );
 
     if(order.progress>99.98){
-      order.status="completed";
+      order.status="completato";
     }
     this.ordersService.updateOrder(this.where,order).subscribe(
       (res)=>console.log(res),
       (err)=>this.errorMessage=err.statusText,
-      ()=>{this.socketService.socket.emit('updateOrders')}
+      ()=>{
+        if(this.where=="kitchen"){
+          this.socketService.socket.emit('updateKitchen');
+        }else if(this.where=="bar"){
+          this.socketService.socket.emit('updateBar');
+        }else{
+          this.socketService.socket.emit('updateOrders');
+        }
+       }
     );
 
   }

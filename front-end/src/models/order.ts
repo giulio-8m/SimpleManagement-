@@ -7,7 +7,7 @@ export class Order{
         this.tableCode=tableCode;
         this.waiter=waiter;
         this.clients=clients;
-        this.status="ongoing";
+        this.status="in_corso";
         this.progress=0;
         this.kitchenNumber=null;
         this.barNumber=null;

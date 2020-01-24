@@ -4,8 +4,6 @@ const mongoose = require('mongoose');
 const MenuItem = mongoose.model('MenuItem');
 const resHandler = require('../helpers/res.helper').resHandler;
 
-const Error=400;
-const Ok=200;
 
 const getMenu = (req,res) =>{
     if(req.query.type){
@@ -39,8 +37,42 @@ const newItem = (req,res) =>{
     });
 }
 
+const updateItem = (req,res)=>{
+    if(req.body.price && req.body.time){
+        MenuItem.findOneAndUpdate({name:req.params.name},{price:req.body.price,time:req.body.time},{new:true}).then((item)=>{
+            res.status(200).json(resHandler(200));
+        }).catch((err)=>{
+            res.status(400).json(err);
+        });
+    }else if(req.body.price){
+        MenuItem.findOneAndUpdate({name:req.params.name},{price:req.body.price},{new:true}).then((item)=>{
+            res.status(200).json(resHandler(200));
+        }).catch((err)=>{
+            res.status(400).json(err);
+        });
+    }else if(req.body.time){
+        MenuItem.findOneAndUpdate({name:req.params.name},{time:req.body.time},{new:true}).then((item)=>{
+            res.status(200).json(resHandler(200));
+        }).catch((err)=>{
+            res.status(400).json(err);
+        });
+    }else{
+        res.status(400).json(resHandler(400));
+    }
+}
+
+const deleteItem = (req,res)=>{
+    MenuItem.deleteOne({name:req.params.name}).then((item)=>{
+        res.status(200).json(resHandler(200));
+    }).catch((err)=>{
+        res.status(400).json(err);
+    });
+}
+
 
 module.exports={
     getMenu,
     newItem,
+    updateItem,
+    deleteItem
 }

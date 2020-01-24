@@ -14,16 +14,15 @@ export class TablesService {
 
 
   newTable(table:Table){
-    console.log(table);
-    return this.http.post<any>(`${environment.URL}/tables`,table);
+    return this.http.post<any>(`${environment.URL}/API/sm/tables`,table);
   }
 
-  updateTable(tableCode:string,table?){
-    return this.http.put<any>(`${environment.URL}/tables/${tableCode}`,table);
+  updateTable(tableCode:string,table?:Object){
+    return this.http.patch<any>(`${environment.URL}/API/sm/tables/${tableCode}`,table);
   }
 
   getTables(){
-    return this.http.get<any>(`${environment.URL}/tables`);
+    return this.http.get<any>(`${environment.URL}/API/sm/tables`);
   }
 
 

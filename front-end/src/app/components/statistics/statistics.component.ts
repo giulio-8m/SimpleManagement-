@@ -29,6 +29,7 @@ export class StatisticsComponent implements OnInit {
     let dateS=new Date();
     this.date=dateS.getDate()+'/'+dateS.getMonth()+'/'+dateS.getFullYear();
     this.stats=[0,0];
+    this.statsRecipts=[0,0];
     this.initChartOrders();
     this.initChartRecipts();
 
@@ -54,10 +55,7 @@ export class StatisticsComponent implements OnInit {
       (res)=>this.ordersKitchen=res,
       (err)=>this.errorMessage=err.statusText,
       ()=>{
-        this.stats[0]=this.ordersKitchen.length;
-        console.log(this.ordersKitchen)
-        console.log("done");
-        console.log(this.stats);
+        this.stats[0]=this.ordersKitchen.length-1;
         this.chartOrders.update();
         this.chartRecipts.update();
       }
@@ -69,10 +67,7 @@ export class StatisticsComponent implements OnInit {
       (res)=>this.ordersBar=res,
       (err)=>this.errorMessage=err.statusText,
       ()=>{
-        console.log(this.ordersBar)
-        this.stats[1]=this.ordersBar.length;
-        console.log("done");
-        console.log(this.stats);
+        this.stats[1]=this.ordersBar.length-1;
         this.chartOrders.update();
         this.chartRecipts.update();
 
@@ -83,13 +78,12 @@ export class StatisticsComponent implements OnInit {
 
   getRecipts(date:string){
 
-    this.reciptsService.getRecipts("?").subscribe(
+    this.reciptsService.getRecipts('?date='+date).subscribe(
       (res)=>this.recipts=res,
       (err)=>this.errorMessage=err.statusText,
       ()=>{
-        console.log("wqwqq");
         console.log(this.recipts);
-        this.statsRecipts=[0,0];
+
         for(let i=0;i<this.recipts.length;i++){
           this.statsRecipts[0]+=this.recipts[i].totalKitchen;
           this.statsRecipts[1]+=this.recipts[i].totalBar;
@@ -134,29 +128,29 @@ export class StatisticsComponent implements OnInit {
 initChartRecipts(){
   
   this.chartRecipts = new Chart(<HTMLCanvasElement>document.getElementById("statsRecipts"), {
-  type: 'doughnut',
-  data: {
-    labels: ["Euro cucina", "Euro bar"],
-    datasets:[
-      {
-        backgroundColor: ["#ffcc00", "#3e95cd"],
-        data: this.statsRecipts
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'Guadagni',
-      fontSize:35
+    type: 'doughnut',
+    data: {
+      labels: ["Euro cucina", "Euro bar"],
+      datasets:[
+        {
+          backgroundColor: ["#ffcc00", "#3e95cd"],
+          data: this.statsRecipts
+        }
+      ]
     },
-    scales:{
-      scaleLabel:{
-        fontSize:50
-      }
-    } 
-  }
-});
+    options: {
+      title: {
+        display: true,
+        text: 'Guadagni',
+        fontSize:35
+      },
+      scales:{
+        scaleLabel:{
+          fontSize:50
+        }
+      } 
+    }
+  });
 }
 
 

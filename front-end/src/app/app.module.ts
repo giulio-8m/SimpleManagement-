@@ -19,6 +19,7 @@ import { CheckOutComponent } from './components/check-out/check-out.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ToastsComponent } from './components/toasts/toasts.component';
 import { ToastrModule } from 'ngx-toastr';
+import { TableOrdersComponent } from './components/table-orders/table-orders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { ToastrModule } from 'ngx-toastr';
     StaffComponent,
     CheckOutComponent,
     StatisticsComponent,
-    ToastsComponent
+    ToastsComponent,
+    TableOrdersComponent
   ],
   imports: [
     BrowserModule,

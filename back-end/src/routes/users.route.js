@@ -4,15 +4,15 @@ const router = express.Router();
 const controller = require('../controllers/users');
 const auth=require('passport').authenticate('jwt',{session:false});
 
-router.post('/users',controller.signUp);
+router.post('/API/sm/users',auth,controller.signUp);
 
-router.post('/users/login',controller.signIn);
+router.post('/API/sm/users/login',controller.signIn);
 
-router.put('/users/:username',controller.updateUser);
+router.put('/API/sm/users/:username',auth,controller.updateUser);
 
-router.get('/users',controller.getUsers);
+router.get('/API/sm/users',auth,controller.getUsers);
 
-router.delete('/users/:username',controller.deleteUser);
+router.delete('/API/sm/users/:username',auth,controller.deleteUser);
 
 
 module.exports=router;

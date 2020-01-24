@@ -118,8 +118,7 @@ export class StaffComponent implements OnInit {
   }
 
   initChart(id:string,role:string,jobs:number){
-  
-      console.log(id+" "+jobs);
+
       this.stats=[];
       this.stats[0]=jobs;
       this.stats[1]=(this.set(role)-jobs);
@@ -127,7 +126,7 @@ export class StaffComponent implements OnInit {
       this.chart = new Chart(<HTMLCanvasElement>document.getElementById(id), {
       type: 'doughnut',
       data: {
-        labels: ["User", "Others"],
+        labels: ["Utente", "Rimanenti"],
         datasets: [
           {
             backgroundColor: ["#3e95cd", "#8e5ea2"],
@@ -138,7 +137,7 @@ export class StaffComponent implements OnInit {
       options: {
         title: {
           display: true,
-          text: 'job completati ',
+          text: 'completati',
           fontSize:20
         },
         scales:{
@@ -150,11 +149,23 @@ export class StaffComponent implements OnInit {
     });
   }
 
-  deleteUser(user:string){
-    this.usersService.deleteUser(user).subscribe(
+  deleteUser(user:User){
+    this.usersService.deleteUser(user.username).subscribe(
       (res)=>console.log(res),
       (err)=>this.errorMessage=err.statusText,
       ()=>{
+        if(user.role=="Cameriere"){
+          this.getWaiters();
+        }else if(user.role=="Cuoco"){
+          this.getChefs();
+        }else if(user.role=="Barista"){
+          this.getBarMans();
+        }else if(user.role=="Cassa"){
+          this.getDesks();
+        }else{
+          console.log("error");
+        }
+
         this.socketService.socket.emit('updateUsers');
       ;}
     );

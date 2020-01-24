@@ -11,15 +11,15 @@ export class MenuService {
   constructor(private http:HttpClient) { }
 
   newMenuItem(item:MenuItem){
-    return this.http.post(`${environment.URL}/menu`,item);
+    return this.http.post(`${environment.URL}/API/sm/menu`,item);
   }
 
   getMenu(query?:string){
 
     if(query){
-      return this.http.get<any>(`${environment.URL}/menu${query}`);
+      return this.http.get<any>(`${environment.URL}/API/sm/menu${query}`);
     }
-    else return this.http.get<any>(`${environment.URL}/menu`);
+    else return this.http.get<any>(`${environment.URL}/API/sm/menu`);
   }
 
   

@@ -4,9 +4,9 @@ const router = express.Router();
 const controller = require('../controllers/recipts');
 const auth=require('passport').authenticate('jwt',{session:false});
 
-router.post('/recipts',controller.newRecipt);
+router.post('/API/sm/recipts',auth,controller.newRecipt);
 
-router.get('/recipts',controller.getRecipts);
+router.get('/API/sm/recipts',auth,controller.getRecipts);
 
 
 module.exports=router;

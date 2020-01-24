@@ -6,7 +6,7 @@ export class MenuItem{
         this.price=price;
         this.time=time;
         this.amount=0;
-        this.status="start";
+        this.status="da_iniziare";
     }
     amount:number;
     name:string;

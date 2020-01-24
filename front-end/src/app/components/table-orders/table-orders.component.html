@@ -1,0 +1,174 @@
+<br>
+<div class="container" >
+  <h1 class="text-center font-weight-bold">Ordini tavolo {{this.tableCode}}</h1>
+  <hr>
+
+  <div class="alert alert-danger text-center" *ngIf="errorMessage">Something bad happened error : {{errorMessage}}</div>
+  <ng-container *ngFor="let order of kitchenOrders; let i = index" >
+
+
+  <div  class="bg-white rounded-lg p-1 shadow row " id="{{order._id}}" >
+
+    <div class="col-6 border-right ">
+        <br>
+        <h1 class="text-center font-weight-bold"> Tavolo {{order.tableCode}}</h1>
+        <hr>
+        <h4 class="text-center font-weight-bold mt-4" > Cameriere {{order.waiter}}</h4>
+        
+        <a  href="#ordersK-{{i}}" class="btn btn-primary btn-block mt-4 mb-1" data-toggle="collapse" ><h2>Ordini</h2></a>
+    </div>
+    <div class="col-6">
+      <br>
+      <h2 class="h4 font-weight-bold text-center mb-2">Preparazione</h2>
+      <!-- Progress bar 3 -->
+      <div class="progress mx-auto" data-value='order.status'  >
+        <span class="progress-left">
+          <span class="progress-bar border-success"></span>
+        </span>
+        <span class="progress-right">
+          <span class="progress-bar border-success"></span>
+        </span>
+        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+          <div class="h2 font-weight-bold">{{order.progress | number:'1.0-0'}}<sup class="small">%</sup></div>
+        </div>
+      </div>
+      <h3 class="text-center font-weight-bold mt-2" >Stato : {{order.status}}</h3>
+    </div>
+    <div id="ordersK-{{i}}" class="collapse col-12 border-top text-center font-weight-bold">
+      <div class="row align-items-center border-bottom">
+          <div class="col-7">
+              <h2 class="h4 font-weight-bold text-center m-2">Portata</h2>
+          </div>
+          <div class="col-5">
+            <h2 class="h4 font-weight-bold text-center m-2">Status</h2>
+          </div>
+      </div>
+      
+      <div  class="row align-items-center border-bottom " *ngFor="let item of order.items">
+        <div class="col-7 ">
+          <div class="row align-items-center ">
+            <div class="col-4 p-0 ">
+              <h5 class="font-weight-bold">Nome:</h5>
+            </div>
+            <div class="col-8">
+                <h5 class="font-weight-bold" >{{item.name}}</h5>
+            </div>
+          </div>
+          <div class="row align-items-center">
+              <div class="col-4 p-0 ">
+                <h5 class="font-weight-bold">Quantità:</h5>
+              </div>
+              <div class="col-8">
+                  <h5 class="font-weight-bold" >{{item.amount}}</h5>
+              </div>
+          </div>
+          <div class="row align-items-center ">
+              <div class="col-4 p-0 ">
+                <h5 class="font-weight-bold" >Tempo:</h5>
+              </div>
+              <div class="col-8">
+                  <h5 class="font-weight-bold">{{item.time}}m</h5>
+              </div>
+          </div>  
+        </div>
+        <div class="col-5 p-0">
+            <h3 *ngIf="statusCheck(item)=='3'" class="completed font-weight-bold">Pronto</h3>
+            <h4 *ngIf="statusCheck(item)=='2'" class="ongoing font-weight-bold">In preparazione</h4>
+            <h3 *ngIf="statusCheck(item)=='1'" class="starting font-weight-bold">Da iniziare</h3>
+        </div>
+      <hr>
+      </div>
+
+      
+    </div>
+    <br>
+    
+  </div>
+  <br>
+  <br *ngIf="order.status!= 'checked-out'">
+</ng-container>
+
+
+<ng-container *ngFor="let order of barOrders; let i = index" >
+
+
+  <div  class="bg-white rounded-lg p-1 shadow row " id="{{order._id}}" >
+
+    <div class="col-6 border-right ">
+        <br>
+        <h1 class="text-center font-weight-bold"> Tavolo {{order.tableCode}}</h1>
+        <hr>
+        <h4 class="text-center font-weight-bold mt-4" > Cameriere {{order.waiter}}</h4>
+        <a  href="#ordersB-{{i}}" class="btn btn-primary btn-block mt-4 mb-1" data-toggle="collapse" ><h2>Ordini</h2></a>
+    </div>
+    <div class="col-6">
+      <br>
+      <h2 class="h4 font-weight-bold text-center mb-2">Preparazione</h2>
+      <!-- Progress bar 3 -->
+      <div class="progress mx-auto" data-value='order.status'  >
+        <span class="progress-left">
+          <span class="progress-bar border-success"></span>
+        </span>
+        <span class="progress-right">
+          <span class="progress-bar border-success"></span>
+        </span>
+        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+          <div class="h2 font-weight-bold">{{order.progress | number:'1.0-0'}}<sup class="small">%</sup></div>
+        </div>
+      </div>
+      <h3 class="text-center font-weight-bold mt-3" >Stato : {{order.status}}</h3>
+    </div>
+    <div id="ordersB-{{i}}" class="collapse col-12 border-top text-center font-weight-bold ">
+      <div class="row align-items-center border-bottom">
+          <div class="col-7">
+              <h2 class="h4 font-weight-bold text-center m-2">Portata</h2>
+          </div>
+          <div class="col-5">
+            <h2 class="h4 font-weight-bold text-center m-2">Status</h2>
+          </div>
+      </div>
+      
+      <div  class="row align-items-center border-bottom " *ngFor="let item of order.items">
+        <div class="col-7 ">
+          <div class="row align-items-center ">
+            <div class="col-4 p-0 ">
+              <h5 class="font-weight-bold">Nome:</h5>
+            </div>
+            <div class="col-8">
+                <h5 class="font-weight-bold" >{{item.name}}</h5>
+            </div>
+          </div>
+          <div class="row align-items-center">
+              <div class="col-4 p-0 ">
+                <h5 class="font-weight-bold">Quantità:</h5>
+              </div>
+              <div class="col-8">
+                  <h5 class="font-weight-bold" >{{item.amount}}</h5>
+              </div>
+          </div>
+          <div class="row align-items-center ">
+              <div class="col-4 p-0 ">
+                <h5 class="font-weight-bold" >Tempo:</h5>
+              </div>
+              <div class="col-8">
+                  <h5 class="font-weight-bold">{{item.time}}m</h5>
+              </div>
+          </div>  
+        </div>
+        <div class="col-5 p-0">
+          <h3 *ngIf="statusCheck(item)=='3'" class="completed font-weight-bold">Pronto</h3>
+          <h4 *ngIf="statusCheck(item)=='2'" class="ongoing font-weight-bold">In preparazione</h4>
+          <h3 *ngIf="statusCheck(item)=='1'" class="starting font-weight-bold">Da iniziare</h3>
+        </div>
+      <hr>
+      </div>
+
+      
+    </div>
+    <br>
+    
+  </div>
+  <br>
+  <br *ngIf="order.status!= 'checked-out'">
+</ng-container>
+</div>

@@ -5,16 +5,13 @@ const User = mongoose.model('User');
 const resHandler = require('../helpers/res.helper').resHandler;
 
 function generateJwt(user) {
-    let expiry = new Date();
-    expiry.setDate(expiry.getDate() + 1);
     let token = {
       id: user._id,
       username: user.username,
       role: user.role,
       jobs:user.jobs,
-      exp: `8h`
     };
-    return jwt.sign(token, process.env.JWT_SECRET, {algorithm: 'RS256'});
+    return jwt.sign(token, process.env.JWT_SECRET, {algorithm: 'RS256', expiresIn: '8h' });
 };
 
 const signUp = (req,res)=>{
@@ -35,8 +32,7 @@ const signUp = (req,res)=>{
 const signIn = (req,res)=>{
     passport.authenticate('local', (err, user, info) => {
         let token;
-        if (err) {
-            console.log("errore qui\n");    
+        if (err) { 
             return res.status(401).json(err);
         }
         if (user) {
@@ -66,11 +62,27 @@ const getUsers = (req,res)=>{
 
 const updateUser = (req,res)=>{
 
-    User.findOneAndUpdate({username:req.params.username},{jobs:req.body.jobs},{new:true}).then((user)=>{
-        res.status(200).json(resHandler(200));
-    }).catch((err)=>{
-        res.status(400).json(err);
-    });
+    if(req.body.jobs && req.body.role){
+        User.findOneAndUpdate({username:req.params.username},{jobs:req.body.jobs,role:req.body.role},{new:true}).then((user)=>{
+            res.status(200).json(resHandler(200));
+        }).catch((err)=>{
+            res.status(400).json(err);
+        });
+    }else if(req.body.role){
+        User.findOneAndUpdate({username:req.params.username},{role:req.body.role},{new:true}).then((user)=>{
+            res.status(200).json(resHandler(200));
+        }).catch((err)=>{
+            res.status(400).json(err);
+        });
+    }else if(req.body.jobs){
+        User.findOneAndUpdate({username:req.params.username},{jobs:req.body.jobs},{new:true}).then((user)=>{
+            res.status(200).json(resHandler(200));
+        }).catch((err)=>{
+            res.status(400).json(err);
+        });
+    }else{
+        res.status(400).json(resHandler(400));
+    }
 }
 
 const deleteUser = (req,res)=>{

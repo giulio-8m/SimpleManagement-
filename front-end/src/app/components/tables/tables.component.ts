@@ -39,7 +39,7 @@ export class TablesComponent implements OnInit {
   }
 
   previous(event,table:Table){
-    this.router.navigate(['/orders-desk',table.tableCode]);
+    this.router.navigate(['/table-orders',table.tableCode]);
   }
 
   book(table:Table){
@@ -57,18 +57,14 @@ export class TablesComponent implements OnInit {
   search(){
     let input = (<HTMLInputElement>document.getElementById("searchTables")).value;
     let filter = input.toLowerCase();
-    console.log(filter);
     let listOfUsers = document.getElementById("list-of-ttables");
-    console.log(listOfUsers);
     let ttables = listOfUsers.getElementsByClassName("ttable");
-    console.log(ttables);
+
     let ttable;
     let ttablename:string;
     for(var i=0;i<ttables.length;i++){
       ttable=ttables[i].getElementsByClassName('code')[0];
-      console.log(ttable);
       ttablename=ttable.textContent.toLowerCase();
-      console.log(ttablename)
       if(ttablename.indexOf(filter) > -1) {
         $(ttables[i]).css('display' , "");
       } else {
