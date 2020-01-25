@@ -6,8 +6,10 @@
 Prerequisiti : 
 	1. Essere connessi ad internet.
 	2. Aver installato node.js ed il gestore di pacchetti npm.
-	3. Aver installato apache cordova con i relativi skd per l'emulatore android
-	4. Aver installato electron
+	3. Aver installato angular (npm install -g @angular/cli)
+	4. Aver installato apache cordova  (npm install -g cordova)
+	5. Avere i relativi skd per l'emulatore android di cordova reperibili dall'installazione di android studio
+	6. Aver installato electron (npm install -g electron)
 	
 Il database è online quindi non è necessario caricare dei dati in esso visto che sono già presenti.
 
