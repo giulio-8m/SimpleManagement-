@@ -17,10 +17,12 @@ export class OrdersComponent implements OnInit {
   errorMessage:string;
   where:string;
   orders:Array<Order>;
+  upMessages:boolean;
 
   constructor(private location:Location,private ordersService:OrdersService,private usersService:UsersService,private socketService:SocketService) { }
 
   ngOnInit() {
+    this.upMessages=false;
     if(location.pathname.includes("kitchen")){
       this.socketService.socket.on('updateKitchen',()=>{
         this.getOrders();
@@ -121,11 +123,23 @@ export class OrdersComponent implements OnInit {
 
     if(order.progress>99.98){
       order.status="completato";
+      this.upMessages=true;
     }
     this.ordersService.updateOrder(this.where,order).subscribe(
       (res)=>{},
       (err)=>this.errorMessage=err.statusText,
       ()=>{
+        if(this.upMessages){
+        
+          if(this.where=="kitchen"){
+            this.socketService.socket.emit('updateKitchenMessages');
+          }else if(this.where=="bar"){
+            this.socketService.socket.emit('updateBarMessages');
+          }else{
+            this.socketService.socket.emit('updateOrdersMessages');
+          }
+          this.upMessages=false;
+        }
         if(this.where=="kitchen"){
           this.socketService.socket.emit('updateKitchen');
         }else if(this.where=="bar"){

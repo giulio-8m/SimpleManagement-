@@ -46,34 +46,34 @@ require('./helpers/passport.helper');
     }));
 
     app.get('/API',(req,res)=>{
-        res.json({
-            'POST /API/sm/users/login':'',
-            'POST /API/sm/users   ':'',
-            'GET /API/sm/users   ' : '',
-            'PUT /API/sm/users/:username ' : '',
-            'DELETE /API/sm/users/:username ' : '',
-            'GET /API/sm/tables     ' : '',
-            'POST /API/sm/tables' : '',
-            'PATCH /API/sm/tables/:tableCode' : '',
-            'DELETE /API/sm/tables/:tableCode    ': '',
-            'GET /API/sm/menu ' :'',
-            'POST /API/sm/menu  ' : '',
-            'PATCH /API/sm/menu/:name ' : '',
-            'DELETE /API/sm/menu/:name  ' : '',
-            'GET /API/sm/bar ' : '',
-            'POST /API/sm/bar  ' : '',
-            'PUT /API/sm/bar/:id ' : '',
-            'PATCH /API/sm/bar' : '',
-            'DELETE/API/sm/bar/:id  ':'',
-            'GET /API/sm/kitchen ' : '',
-            'POST /API/sm/kitchen ' : '',
-            'PUT /API/sm/kitchen/:id ' : '',
-            'PATCH /API/sm/kitchen' : '',
-            'DELETE/API/sm/kitchen/:id  ':'',
-            'GET /API/sm/recipts   ' : '',
-            'POST /API/sm/recipts' : '',
-            'DELETE/API/sm/recipts/:id ' : ''
-        })
+        res.json({ api_version: "1.0", endpoints: [
+            'POST /API/sm/users/login',
+            'POST /API/sm/users',
+            'GET /API/sm/users',
+            'PUT /API/sm/users/:username' ,
+            'DELETE /API/sm/users/:username',
+            'GET /API/sm/tables',
+            'POST /API/sm/tables',
+            'PATCH /API/sm/tables/:tableCode',
+            'DELETE /API/sm/tables/:tableCode',
+            'GET /API/sm/menu',
+            'POST /API/sm/menu',
+            'PATCH /API/sm/menu/:name',
+            'DELETE /API/sm/menu/:name',
+            'GET /API/sm/bar',
+            'POST /API/sm/bar',
+            'PUT /API/sm/bar/:id',
+            'PATCH /API/sm/bar',
+            'DELETE /API/sm/bar/:id',
+            'GET /API/sm/kitchen',
+            'POST /API/sm/kitchen',
+            'PUT /API/sm/kitchen/:id',
+            'PATCH /API/sm/kitchen',
+            'DELETE/API/sm/kitchen/:id',
+            'GET /API/sm/recipts',
+            'POST /API/sm/recipts',
+            'DELETE /API/sm/recipts/:id'
+        ]})
     });
 
     app.use(passport.initialize());
@@ -105,9 +105,9 @@ const socketioJwt=require('socketio-jwt');
 
     io.on('connection', socketioJwt.authorize({
         secret: process.env.PUBLIC_KEY,
-        timeout: 0 // 15 seconds to send the authentication message
+        timeout: 0 
     })).on('authenticated', function(socket) {
-        //this socket is authenticated, we are good to handle more events from it.
+        
         console.log('hello! ' + socket.decoded_token.username);
 
         socket.on('updateTables',function(){
@@ -128,6 +128,14 @@ const socketioJwt=require('socketio-jwt');
 
         socket.on('updateRecipts',function(){
             socket.broadcast.emit('updateRecipts');
+        })
+
+        socket.on('updateKitchenMessages',function(){
+            socket.broadcast.emit('updateKitchenMessages');
+        })
+
+        socket.on('updateBarMessages',function(){
+            socket.broadcast.emit('updateBarMessages');
         })
 
         

@@ -98,13 +98,19 @@ export class CheckOutComponent implements OnInit {
     this.ordersService.checkOut("bar",this.tableCode).subscribe(
       (res)=>console.log(res),
       (err)=>this.errorMessage=err.statusText,
-      ()=>this.socketService.socket.emit('updateBar')
+      ()=>{
+        this.socketService.socket.emit('updateBar')
+        this.socketService.socket.emit('updateBarMessages')
+      }
     );
 
     this.ordersService.checkOut("kitchen",this.tableCode).subscribe(
       (res)=>console.log(res),
       (err)=>this.errorMessage=err.statusText,
-      ()=>this.socketService.socket.emit('updateKitchen')
+      ()=>{
+        this.socketService.socket.emit('updateKitchen')
+        this.socketService.socket.emit('updateKitchenMessages')
+      }
     );
 
     this.reciptsService.newRecipt(this.recipt).subscribe(

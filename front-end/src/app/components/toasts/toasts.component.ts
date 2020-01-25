@@ -13,46 +13,39 @@ import { Router } from '@angular/router';
 })
 export class ToastsComponent implements OnInit {
 
-  messages:Array<any>;
+  barMessages:Array<Order>;
+  kitchenMessages:Array<Order>
 
   constructor(private router:Router,private toastr: ToastrService,private socketService:SocketService,private usersService:UsersService,private ordersService:OrdersService) { }
 
   ngOnInit() {
-    this.messages=null;
     this.usersService.userOb.subscribe((user)=>{
-      if(this.usersService.user && this.usersService.user.role=="Cameriere"){
-        this.getKitchenMessages();
-        this.getBarMessages();
-        this.socketService.socket.on('updateKitchen',()=>{
-          this.getKitchenMessages();
-        });
-        this.socketService.socket.on('updateBar',()=>{
+        if(this.usersService.user && this.usersService.user.role=="Cameriere"){
+
           this.getBarMessages();
-        })
-      }
-      
+          this.socketService.socket.on('updateBarMessages',()=>{
+            this.getBarMessages();
+          })
+          
+        }
+        if(this.usersService.user && this.usersService.user.role=="Cameriere"){
+          this.getKitchenMessages();
+          this.socketService.socket.on('updateKitchenMessages',()=>{
+            this.getKitchenMessages();
+          });
+          
+        }
     });
 
-    if(this.usersService.user && this.usersService.user.role=="Cameriere"){
-      this.getKitchenMessages();
-      this.getBarMessages();
-      this.socketService.socket.on('updateKitchen',()=>{
-        this.getKitchenMessages();
-      });
-      this.socketService.socket.on('updateBar',()=>{
-        this.getBarMessages();
-      })
-    }
   }
 
   getKitchenMessages(){
     this.ordersService.getOrders(`kitchen`,`?waiter=${this.usersService.user.username}&status=completato`).subscribe(
-      (res)=>this.messages=res,
+      (res)=>this.kitchenMessages=res,
       (err)=>console.log(err),
       ()=>{
-        for(let i=0;i<this.messages.length;i++){
-            this.pop(this.messages[i],"kitchen");
-
+        for(let i=0;i<this.kitchenMessages.length;i++){
+            this.popKitchen(this.kitchenMessages[i]);
         }
       }
     );
@@ -60,53 +53,71 @@ export class ToastsComponent implements OnInit {
 
   getBarMessages(){
     this.ordersService.getOrders(`bar`,`?waiter=${this.usersService.user.username}&status=completato`).subscribe(
-      (res)=>this.messages=res,
+      (res)=>this.barMessages=res,
       (err)=>console.log(err),
       ()=>{
-
-        for(let i=0;i<this.messages.length;i++){
-            this.pop(this.messages[i],"bar");
+        for(let i=0;i<this.barMessages.length;i++){
+            this.popBar(this.barMessages[i]);
         
         }
       }
     );
   }
 
-  pop(order:Order,type:string){
-    let orderNumber:number;
-    if(type=="kitchen"){
-      orderNumber=order.kitchenNumber;
-    }else{
-      orderNumber=order.barNumber;
-    }
-    this.toastr.success('Tavolo : '+order.tableCode, 'Ordine '+ orderNumber+ ' '+'da servire',{
+
+  popKitchen(order:Order){
+    this.toastr.success('Tavolo : '+order.tableCode, 'Ordine cucina'+' '+ order.kitchenNumber+ ' '+'da servire',{
       disableTimeOut: true
     }).onTap.subscribe(
       ()=>{
-        
-          order.status="servito";
-          this.ordersService.updateOrder(type,order).subscribe(
-            (res)=>{},
-            (err)=>console.log(err),
-            ()=>{
-              if(type=="kitchen"){
+        for(let i=0;i<this.kitchenMessages.length && this.usersService.user.role=="Cameriere";i++){
+          if(order._id==this.kitchenMessages[i]._id){
+            order.status="servito";
+            this.ordersService.updateOrder('kitchen',order).subscribe(
+              (res)=>{},
+              (err)=>console.log(err),
+              ()=>{
                 this.socketService.socket.emit('updateKitchen');
-              }else if(type=="bar"){
-                this.socketService.socket.emit('updateBar');
+                this.router.navigate(['/tables']);
               }
-            }
-          );
-          this.usersService.user.jobs+=1;
-          this.usersService.updateUser(this.usersService.user.username).subscribe(
-            (res)=>{},
-            (err)=>console.log(err),
-            ()=>this.socketService.socket.emit('updateUsers')
-          );
+            );
+            this.usersService.user.jobs+=1;
+            this.usersService.updateUser(this.usersService.user.username).subscribe(
+              (res)=>{},
+              (err)=>console.log(err),
+              ()=>this.socketService.socket.emit('updateUsers')
+            );
+          }
+        }  
+     }
+    );
+  }
 
-          this.router.navigate(['/tables']);
-        
-        
-      }
+  popBar(order:Order){
+    this.toastr.success('Tavolo : '+order.tableCode, 'Ordine bar'+' '+ order.barNumber+ ' '+'da servire',{
+      disableTimeOut: true
+    }).onTap.subscribe(
+      ()=>{
+        for(let i=0;i<this.barMessages.length && this.usersService.user.role=="Cameriere";i++){
+          if(order._id==this.barMessages[i]._id){
+            order.status="servito";
+            this.ordersService.updateOrder('bar',order).subscribe(
+              (res)=>{},
+              (err)=>console.log(err),
+              ()=>{
+                this.socketService.socket.emit('updateBar');
+                this.router.navigate(['/tables']);
+              }
+            );
+            this.usersService.user.jobs+=1;
+            this.usersService.updateUser(this.usersService.user.username).subscribe(
+              (res)=>{},
+              (err)=>console.log(err),
+              ()=>this.socketService.socket.emit('updateUsers')
+            );
+          }
+        }  
+     }
     );
   }
 

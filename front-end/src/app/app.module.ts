@@ -27,7 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({positionClass: 'toast-top-right'})
+    ToastrModule.forRoot({positionClass: 'toast-top-right',progressBar:true})
   ],
   providers: [
     AuthGuardService,

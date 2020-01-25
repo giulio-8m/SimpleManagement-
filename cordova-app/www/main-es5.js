@@ -382,7 +382,7 @@ module.exports = "<div class=\"container\">\n    <br>\n    <h1 class=\"title\">O
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br>\n<div class=\"container\" >\n  <h1 class=\"text-center font-weight-bold\">Ordini</h1>\n  <hr>\n\n  <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n  <ng-container *ngFor=\"let order of orders; let i = index\" >\n\n\n  <div *ngIf=\"order.status== 'in_corso'\" class=\"bg-white rounded-lg p-1 shadow row \" id=\"{{order._id}}\" >\n\n    <div class=\"col-6 border-right \">\n        <br>\n        <h1 class=\"text-center font-weight-bold\"> Tavolo</h1>\n        \n        <h2 class=\"text-center font-weight-bold\" > {{order.tableCode}}</h2>\n        <hr>\n        <br>\n        <a  href=\"#orders-{{i}}\" class=\"btn btn-primary btn-block\" data-toggle=\"collapse\" ><h2>Ordini</h2></a>\n    </div>\n    <div class=\"col-6\">\n      <br>\n      <h2 class=\"h4 font-weight-bold text-center mb-4\">Preparazione</h2>\n      <!-- Progress bar 3 -->\n      <div class=\"progress mx-auto\" data-value='order.status'  >\n        <span class=\"progress-left\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <span class=\"progress-right\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <div class=\"progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center\">\n          <div class=\"h2 font-weight-bold\">{{order.progress | number:'1.0-0'}}<sup class=\"small\">%</sup></div>\n        </div>\n      </div>\n    <br >\n    </div>\n    <div id=\"orders-{{i}}\" class=\"collapse col-12 border-top text-center font-weight-bold show\">\n      <div class=\"row align-items-center border-bottom\">\n          <div class=\"col-7\">\n              <h2 class=\"h4 font-weight-bold text-center m-2\">Portata</h2>\n          </div>\n          <div class=\"col-5\">\n            <h2 class=\"h4 font-weight-bold text-center m-2\">Status</h2>\n          </div>\n      </div>\n      \n      <div  class=\"row align-items-center border-bottom \" *ngFor=\"let item of order.items\">\n        <div class=\"col-7 \">\n          <div class=\"row align-items-center \">\n            <div class=\"col-4 p-0 \">\n              <h5 class=\"font-weight-bold\">Nome:</h5>\n            </div>\n            <div class=\"col-8\">\n                <h5 class=\"font-weight-bold\" >{{item.name}}</h5>\n            </div>\n          </div>\n          <div class=\"row align-items-center\">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\">Quantità:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\" >{{item.amount}}</h5>\n              </div>\n          </div>\n          <div class=\"row align-items-center \">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\" >Tempo:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\">{{item.time}}m</h5>\n              </div>\n          </div>  \n        </div>\n        <div class=\"col-5 p-0\">\n            <ng-container *ngIf=\"statusCheck(item)!='3'; then starts; else ended\"></ng-container>\n            <ng-template #starts>\n              <button [disabled]=\"this.usersService.user.role=='Cassa'\" *ngIf=\"statusCheck(item)=='1'\" class=\"btn btn-success pl-2 pr-2 fix pt-1 pb-0 m-0\" (click)=\"start(item,order)\"><i class=\"far fa-caret-square-right fa-3x\"><h5 class=\"mb-0\">Inizio</h5></i></button>\n              <button [disabled]=\"this.usersService.user.role=='Cassa'\" *ngIf=\"statusCheck(item)=='2'\" class=\"btn btn-warning pl-2 pr-2 pt-1 pb-0 m-0\"><i class=\"fas fa-spinner fa-pulse fa-3x\"></i><h5 class=\"mb-0\">InPrep</h5></button>\n              <button [disabled]=\"this.usersService.user.role=='Cassa'\" class=\"btn btn-danger  pr-2.5 pr-2.5 pt-1 pb-0\" (click)=\"finish(item,order)\"><i class=\"fas fa-check-circle fa-3x\"><h5 class=\"mb-0\">Fine</h5></i></button>\n            </ng-template>\n            <ng-template #ended>\n              <h1 class=\"completed font-weight-bold\">Pronto</h1>\n            </ng-template> \n        </div>\n      <hr>\n      </div>\n\n      \n    </div>\n    <br>\n  </div>\n  <br *ngIf=\"order.status== 'ongoing'\">\n</ng-container>\n</div>"
+module.exports = "<br>\n<div class=\"container\" >\n  <h1 class=\"text-center font-weight-bold\">Ordini</h1>\n  <hr>\n\n  <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n  <ng-container *ngFor=\"let order of orders; let i = index\" >\n\n\n  <div *ngIf=\"order.status== 'in_corso'\" class=\"bg-white rounded-lg p-1 shadow row \" id=\"{{order._id}}\" >\n\n    <div class=\"col-6 border-right \">\n        <br>\n        <h1 class=\"text-center font-weight-bold\"> Tavolo</h1>\n        \n        <h2 class=\"text-center font-weight-bold\" > {{order.tableCode}}</h2>\n        <hr>\n        <br>\n        <a  href=\"#orders-{{i}}\" class=\"btn btn-primary btn-block\" data-toggle=\"collapse\" ><h2>Ordini</h2></a>\n    </div>\n    <div class=\"col-6\">\n      <br>\n      <h2 class=\"h4 font-weight-bold text-center mb-4\">Preparazione</h2>\n      <!-- Progress bar 3 -->\n      <div class=\"progress mx-auto\" data-value='order.status'  >\n        <span class=\"progress-left\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <span class=\"progress-right\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <div class=\"progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center\">\n          <div class=\"h2 font-weight-bold\">{{order.progress | number:'1.0-0'}}<sup class=\"small\">%</sup></div>\n        </div>\n      </div>\n    <br >\n    </div>\n    <div id=\"orders-{{i}}\" class=\"collapse col-12 border-top text-center font-weight-bold show\">\n      <div class=\"row align-items-center border-bottom\">\n          <div class=\"col-7\">\n              <h2 class=\"h4 font-weight-bold text-center m-2\">Portata</h2>\n          </div>\n          <div class=\"col-5\">\n            <h2 class=\"h4 font-weight-bold text-center m-2\">Status</h2>\n          </div>\n      </div>\n      \n      <div  class=\"row align-items-center border-bottom \" *ngFor=\"let item of order.items\">\n        <div class=\"col-7 \">\n          <div class=\"row align-items-center \">\n            <div class=\"col-4 p-0 \">\n              <h5 class=\"font-weight-bold\">Nome:</h5>\n            </div>\n            <div class=\"col-8\">\n                <h5 class=\"font-weight-bold\" >{{item.name}}</h5>\n            </div>\n          </div>\n          <div class=\"row align-items-center\">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\">Quantità:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\" >{{item.amount}}</h5>\n              </div>\n          </div>\n          <div class=\"row align-items-center \">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\" >Tempo:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\">{{item.time}}m</h5>\n              </div>\n          </div>  \n        </div>\n        <div class=\"col-5 p-0\">\n            <ng-container *ngIf=\"statusCheck(item)!='3'; then starts; else ended\"></ng-container>\n            <ng-template #starts>\n              <button [disabled]=\"this.usersService.user.role=='Cassa'\" *ngIf=\"statusCheck(item)=='1'\" class=\"btn btn-success pl-2 pr-2 fix pt-1 pb-0 m-0\" (click)=\"start(item,order)\"><i class=\"far fa-caret-square-right fa-3x\"><h5 class=\"mb-0\">Inizio</h5></i></button>\n              <button [disabled]=\"this.usersService.user.role=='Cassa'\" *ngIf=\"statusCheck(item)=='2'\" class=\"btn btn-warning pl-2 pr-2 pt-1 pb-0 m-0\"><i class=\"fas fa-spinner fa-pulse fa-3x\"></i><h5 class=\"mb-0\">InPrep</h5></button>\n              <button [disabled]=\"this.usersService.user.role=='Cassa'\" class=\"btn btn-danger  pr-2.5 pr-2.5 pt-1 pb-0\" (click)=\"finish(item,order)\"><i class=\"fas fa-check-circle fa-3x\"><h5 class=\"mb-0\">Fine</h5></i></button>\n            </ng-template>\n            <ng-template #ended>\n              <h1 class=\"completed font-weight-bold\">Pronto</h1>\n            </ng-template> \n        </div>\n      <hr>\n      </div>\n\n      \n    </div>\n    <br>\n  </div>\n  <br *ngIf=\"order.status== 'in_corso'\">\n</ng-container>\n</div>"
 
 /***/ }),
 
@@ -437,7 +437,7 @@ module.exports = "<div class=\"container \">\n    <br>\n    <h1 class=\"text-cen
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br>\n<div class=\"container\" >\n  <h1 class=\"text-center font-weight-bold\">Ordini tavolo {{this.tableCode}}</h1>\n  <hr>\n\n  <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n  <ng-container *ngFor=\"let order of kitchenOrders; let i = index\" >\n\n\n  <div  class=\"bg-white rounded-lg p-1 shadow row \" id=\"{{order._id}}\" >\n\n    <div class=\"col-6 border-right \">\n        <br>\n        <h1 class=\"text-center font-weight-bold\"> Tavolo {{order.tableCode}}</h1>\n        <hr>\n        <h4 class=\"text-center font-weight-bold mt-4\" > Cameriere {{order.waiter}}</h4>\n        \n        <a  href=\"#ordersK-{{i}}\" class=\"btn btn-primary btn-block mt-4 mb-1\" data-toggle=\"collapse\" ><h2>Ordini</h2></a>\n    </div>\n    <div class=\"col-6\">\n      <br>\n      <h2 class=\"h4 font-weight-bold text-center mb-2\">Preparazione</h2>\n      <!-- Progress bar 3 -->\n      <div class=\"progress mx-auto\" data-value='order.status'  >\n        <span class=\"progress-left\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <span class=\"progress-right\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <div class=\"progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center\">\n          <div class=\"h2 font-weight-bold\">{{order.progress | number:'1.0-0'}}<sup class=\"small\">%</sup></div>\n        </div>\n      </div>\n      <h3 class=\"text-center font-weight-bold mt-2\" >Stato : {{order.status}}</h3>\n    </div>\n    <div id=\"ordersK-{{i}}\" class=\"collapse col-12 border-top text-center font-weight-bold\">\n      <div class=\"row align-items-center border-bottom\">\n          <div class=\"col-7\">\n              <h2 class=\"h4 font-weight-bold text-center m-2\">Portata</h2>\n          </div>\n          <div class=\"col-5\">\n            <h2 class=\"h4 font-weight-bold text-center m-2\">Status</h2>\n          </div>\n      </div>\n      \n      <div  class=\"row align-items-center border-bottom \" *ngFor=\"let item of order.items\">\n        <div class=\"col-7 \">\n          <div class=\"row align-items-center \">\n            <div class=\"col-4 p-0 \">\n              <h5 class=\"font-weight-bold\">Nome:</h5>\n            </div>\n            <div class=\"col-8\">\n                <h5 class=\"font-weight-bold\" >{{item.name}}</h5>\n            </div>\n          </div>\n          <div class=\"row align-items-center\">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\">Quantità:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\" >{{item.amount}}</h5>\n              </div>\n          </div>\n          <div class=\"row align-items-center \">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\" >Tempo:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\">{{item.time}}m</h5>\n              </div>\n          </div>  \n        </div>\n        <div class=\"col-5 p-0\">\n            <h4 *ngIf=\"statusCheck(item)=='3'\" class=\"completed font-weight-bold\">Pronto</h4>\n            <h4 *ngIf=\"statusCheck(item)=='2'\" class=\"ongoing font-weight-bold\">In preparazione</h4>\n            <h4 *ngIf=\"statusCheck(item)=='1'\" class=\"starting font-weight-bold\">Da iniziare</h4>\n        </div>\n      <hr>\n      </div>\n\n      \n    </div>\n    <br>\n    \n  </div>\n  <br>\n  <br *ngIf=\"order.status!= 'checked-out'\">\n</ng-container>\n\n\n<ng-container *ngFor=\"let order of barOrders; let i = index\" >\n\n\n  <div  class=\"bg-white rounded-lg p-1 shadow row \" id=\"{{order._id}}\" >\n\n    <div class=\"col-6 border-right \">\n        <br>\n        <h1 class=\"text-center font-weight-bold\"> Tavolo {{order.tableCode}}</h1>\n        <hr>\n        <h4 class=\"text-center font-weight-bold mt-4\" > Cameriere {{order.waiter}}</h4>\n        <a  href=\"#ordersB-{{i}}\" class=\"btn btn-primary btn-block mt-4 mb-1\" data-toggle=\"collapse\" ><h2>Ordini</h2></a>\n    </div>\n    <div class=\"col-6\">\n      <br>\n      <h2 class=\"h4 font-weight-bold text-center mb-2\">Preparazione</h2>\n      <!-- Progress bar 3 -->\n      <div class=\"progress mx-auto\" data-value='order.status'  >\n        <span class=\"progress-left\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <span class=\"progress-right\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <div class=\"progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center\">\n          <div class=\"h2 font-weight-bold\">{{order.progress | number:'1.0-0'}}<sup class=\"small\">%</sup></div>\n        </div>\n      </div>\n      <h3 class=\"text-center font-weight-bold mt-3\" >Stato : {{order.status}}</h3>\n    </div>\n    <div id=\"ordersB-{{i}}\" class=\"collapse col-12 border-top text-center font-weight-bold \">\n      <div class=\"row align-items-center border-bottom\">\n          <div class=\"col-7\">\n              <h2 class=\"h4 font-weight-bold text-center m-2\">Portata</h2>\n          </div>\n          <div class=\"col-5\">\n            <h2 class=\"h4 font-weight-bold text-center m-2\">Status</h2>\n          </div>\n      </div>\n      \n      <div  class=\"row align-items-center border-bottom \" *ngFor=\"let item of order.items\">\n        <div class=\"col-7 \">\n          <div class=\"row align-items-center \">\n            <div class=\"col-4 p-0 \">\n              <h5 class=\"font-weight-bold\">Nome:</h5>\n            </div>\n            <div class=\"col-8\">\n                <h5 class=\"font-weight-bold\" >{{item.name}}</h5>\n            </div>\n          </div>\n          <div class=\"row align-items-center\">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\">Quantità:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\" >{{item.amount}}</h5>\n              </div>\n          </div>\n          <div class=\"row align-items-center \">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\" >Tempo:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\">{{item.time}}m</h5>\n              </div>\n          </div>  \n        </div>\n        <div class=\"col-5 p-0\">\n          <h3 *ngIf=\"statusCheck(item)=='3'\" class=\"completed font-weight-bold\">Pronto</h3>\n          <h4 *ngIf=\"statusCheck(item)=='2'\" class=\"ongoing font-weight-bold\">In preparazione</h4>\n          <h3 *ngIf=\"statusCheck(item)=='1'\" class=\"starting font-weight-bold\">Da iniziare</h3>\n        </div>\n      <hr>\n      </div>\n\n      \n    </div>\n    <br>\n    \n  </div>\n  <br>\n  <br *ngIf=\"order.status!= 'checked-out'\">\n</ng-container>\n</div>"
+module.exports = "<br>\n<div class=\"container\" >\n  <h1 class=\"text-center font-weight-bold\">Ordini tavolo {{this.tableCode}}</h1>\n  <hr>\n\n  <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n  <ng-container *ngFor=\"let order of kitchenOrders; let i = index\" >\n\n\n  <div  class=\"bg-white rounded-lg p-1 shadow row \" id=\"{{order._id}}\" >\n\n    <div class=\"col-6 border-right \">\n        <br>\n        <h1 class=\"text-center font-weight-bold\"> Tavolo {{order.tableCode}}</h1>\n        <hr>\n        <h4 class=\"text-center font-weight-bold mt-4\" > Cameriere {{order.waiter}}</h4>\n        \n        <a  href=\"#ordersK-{{i}}\" class=\"btn btn-primary btn-block mt-4 mb-1\" data-toggle=\"collapse\" ><h2>Ordini</h2></a>\n    </div>\n    <div class=\"col-6\">\n      <br>\n      <h2 class=\"h4 font-weight-bold text-center mb-2\">Preparazione</h2>\n      <!-- Progress bar 3 -->\n      <div class=\"progress mx-auto\" data-value='order.status'  >\n        <span class=\"progress-left\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <span class=\"progress-right\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <div class=\"progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center\">\n          <div class=\"h2 font-weight-bold\">{{order.progress | number:'1.0-0'}}<sup class=\"small\">%</sup></div>\n        </div>\n      </div>\n      <h3 class=\"text-center font-weight-bold mt-2\" >Stato : {{order.status}}</h3>\n    </div>\n    <div id=\"ordersK-{{i}}\" class=\"collapse col-12 border-top text-center font-weight-bold\">\n      <div class=\"row align-items-center border-bottom\">\n          <div class=\"col-7\">\n              <h2 class=\"h4 font-weight-bold text-center m-2\">Portata</h2>\n          </div>\n          <div class=\"col-5\">\n            <h2 class=\"h4 font-weight-bold text-center m-2\">Status</h2>\n          </div>\n      </div>\n      \n      <div  class=\"row align-items-center border-bottom \" *ngFor=\"let item of order.items\">\n        <div class=\"col-7 \">\n          <div class=\"row align-items-center \">\n            <div class=\"col-4 p-0 \">\n              <h5 class=\"font-weight-bold\">Nome:</h5>\n            </div>\n            <div class=\"col-8\">\n                <h5 class=\"font-weight-bold\" >{{item.name}}</h5>\n            </div>\n          </div>\n          <div class=\"row align-items-center\">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\">Quantità:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\" >{{item.amount}}</h5>\n              </div>\n          </div>\n          <div class=\"row align-items-center \">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\" >Tempo:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\">{{item.time}}m</h5>\n              </div>\n          </div>  \n        </div>\n        <div class=\"col-5 p-0\">\n            <h4 *ngIf=\"statusCheck(item)=='3'\" class=\"completed font-weight-bold\">Pronto</h4>\n            <h4 *ngIf=\"statusCheck(item)=='2'\" class=\"ongoing font-weight-bold\">In preparazione</h4>\n            <h4 *ngIf=\"statusCheck(item)=='1'\" class=\"starting font-weight-bold\">Da iniziare</h4>\n        </div>\n      <hr>\n      </div>\n\n      \n    </div>\n    <br>\n    \n  </div>\n  <br>\n  <br *ngIf=\"order.status!= 'checked-out'\">\n</ng-container>\n\n\n<ng-container *ngFor=\"let order of barOrders; let i = index\" >\n\n\n  <div  class=\"bg-white rounded-lg p-1 shadow row \" id=\"{{order._id}}\" >\n\n    <div class=\"col-6 border-right \">\n        <br>\n        <h1 class=\"text-center font-weight-bold\"> Tavolo {{order.tableCode}}</h1>\n        <hr>\n        <h4 class=\"text-center font-weight-bold mt-4\" > Cameriere {{order.waiter}}</h4>\n        <a  href=\"#ordersB-{{i}}\" class=\"btn btn-primary btn-block mt-4 mb-1\" data-toggle=\"collapse\" ><h2>Ordini</h2></a>\n    </div>\n    <div class=\"col-6\">\n      <br>\n      <h2 class=\"h4 font-weight-bold text-center mb-2\">Preparazione</h2>\n      <!-- Progress bar 3 -->\n      <div class=\"progress mx-auto\" data-value='order.status'  >\n        <span class=\"progress-left\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <span class=\"progress-right\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <div class=\"progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center\">\n          <div class=\"h2 font-weight-bold\">{{order.progress | number:'1.0-0'}}<sup class=\"small\">%</sup></div>\n        </div>\n      </div>\n      <h3 class=\"text-center font-weight-bold mt-3\" >Stato : {{order.status}}</h3>\n    </div>\n    <div id=\"ordersB-{{i}}\" class=\"collapse col-12 border-top text-center font-weight-bold \">\n      <div class=\"row align-items-center border-bottom\">\n          <div class=\"col-7\">\n              <h2 class=\"h4 font-weight-bold text-center m-2\">Portata</h2>\n          </div>\n          <div class=\"col-5\">\n            <h2 class=\"h4 font-weight-bold text-center m-2\">Status</h2>\n          </div>\n      </div>\n      \n      <div  class=\"row align-items-center border-bottom \" *ngFor=\"let item of order.items\">\n        <div class=\"col-7 \">\n          <div class=\"row align-items-center \">\n            <div class=\"col-4 p-0 \">\n              <h5 class=\"font-weight-bold\">Nome:</h5>\n            </div>\n            <div class=\"col-8\">\n                <h5 class=\"font-weight-bold\" >{{item.name}}</h5>\n            </div>\n          </div>\n          <div class=\"row align-items-center\">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\">Quantità:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\" >{{item.amount}}</h5>\n              </div>\n          </div>\n          <div class=\"row align-items-center \">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\" >Tempo:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\">{{item.time}}m</h5>\n              </div>\n          </div>  \n        </div>\n        <div class=\"col-5 p-0\">\n          <h3 *ngIf=\"statusCheck(item)=='3'\" class=\"completed font-weight-bold\">Pronto</h3>\n          <h4 *ngIf=\"statusCheck(item)=='2'\" class=\"ongoing font-weight-bold\">In preparazione</h4>\n          <h3 *ngIf=\"statusCheck(item)=='1'\" class=\"starting font-weight-bold\">Da iniziare</h3>\n        </div>\n      <hr>\n      </div>\n\n      \n    </div>\n    <br>\n    \n  </div>\n  <br>\n  <br *ngIf=\"order.status!= 'pagato'\">\n</ng-container>\n</div>"
 
 /***/ }),
 
@@ -646,7 +646,7 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__["BrowserAnimationsModule"],
-                ngx_toastr__WEBPACK_IMPORTED_MODULE_13__["ToastrModule"].forRoot({ positionClass: 'toast-top-right' })
+                ngx_toastr__WEBPACK_IMPORTED_MODULE_13__["ToastrModule"].forRoot({ positionClass: 'toast-top-right', progressBar: true })
             ],
             providers: [
                 _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_7__["AuthGuardService"],
@@ -841,8 +841,14 @@ var CheckOutComponent = /** @class */ (function () {
     };
     CheckOutComponent.prototype.checkOut = function () {
         var _this = this;
-        this.ordersService.checkOut("bar", this.tableCode).subscribe(function (res) { return console.log(res); }, function (err) { return _this.errorMessage = err.statusText; }, function () { return _this.socketService.socket.emit('updateBar'); });
-        this.ordersService.checkOut("kitchen", this.tableCode).subscribe(function (res) { return console.log(res); }, function (err) { return _this.errorMessage = err.statusText; }, function () { return _this.socketService.socket.emit('updateKitchen'); });
+        this.ordersService.checkOut("bar", this.tableCode).subscribe(function (res) { return console.log(res); }, function (err) { return _this.errorMessage = err.statusText; }, function () {
+            _this.socketService.socket.emit('updateBar');
+            _this.socketService.socket.emit('updateBarMessages');
+        });
+        this.ordersService.checkOut("kitchen", this.tableCode).subscribe(function (res) { return console.log(res); }, function (err) { return _this.errorMessage = err.statusText; }, function () {
+            _this.socketService.socket.emit('updateKitchen');
+            _this.socketService.socket.emit('updateKitchenMessages');
+        });
         this.reciptsService.newRecipt(this.recipt).subscribe(function (res) { return console.log(res); }, function (err) { return _this.errorMessage = err.statusText; }, function () { return _this.socketService.socket.emit('updateRecipts'); });
         this.usersService.user.jobs += 1;
         this.usersService.updateUser(this.usersService.user.username).subscribe(function (res) { return console.log(res); }, function (err) { return _this.errorMessage = err.statusText; }, function () { return _this.socketService.socket.emit('updateUsers'); });
@@ -1216,6 +1222,7 @@ var OrdersComponent = /** @class */ (function () {
     }
     OrdersComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.upMessages = false;
         if (location.pathname.includes("kitchen")) {
             this.socketService.socket.on('updateKitchen', function () {
                 _this.getOrders();
@@ -1297,8 +1304,21 @@ var OrdersComponent = /** @class */ (function () {
         this.usersService.updateUser(this.usersService.user.username).subscribe(function (res) { }, function (err) { return _this.errorMessage = err.statusText; }, function () { _this.socketService.socket.emit('updateUsers'); });
         if (order.progress > 99.98) {
             order.status = "completato";
+            this.upMessages = true;
         }
         this.ordersService.updateOrder(this.where, order).subscribe(function (res) { }, function (err) { return _this.errorMessage = err.statusText; }, function () {
+            if (_this.upMessages) {
+                if (_this.where == "kitchen") {
+                    _this.socketService.socket.emit('updateKitchenMessages');
+                }
+                else if (_this.where == "bar") {
+                    _this.socketService.socket.emit('updateBarMessages');
+                }
+                else {
+                    _this.socketService.socket.emit('updateOrdersMessages');
+                }
+                _this.upMessages = false;
+            }
             if (_this.where == "kitchen") {
                 _this.socketService.socket.emit('updateKitchen');
             }
@@ -2100,70 +2120,71 @@ var ToastsComponent = /** @class */ (function () {
     }
     ToastsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.messages = null;
         this.usersService.userOb.subscribe(function (user) {
             if (_this.usersService.user && _this.usersService.user.role == "Cameriere") {
-                _this.getKitchenMessages();
                 _this.getBarMessages();
-                _this.socketService.socket.on('updateKitchen', function () {
-                    _this.getKitchenMessages();
-                });
-                _this.socketService.socket.on('updateBar', function () {
+                _this.socketService.socket.on('updateBarMessages', function () {
                     _this.getBarMessages();
                 });
             }
-        });
-        if (this.usersService.user && this.usersService.user.role == "Cameriere") {
-            this.getKitchenMessages();
-            this.getBarMessages();
-            this.socketService.socket.on('updateKitchen', function () {
+            if (_this.usersService.user && _this.usersService.user.role == "Cameriere") {
                 _this.getKitchenMessages();
-            });
-            this.socketService.socket.on('updateBar', function () {
-                _this.getBarMessages();
-            });
-        }
+                _this.socketService.socket.on('updateKitchenMessages', function () {
+                    _this.getKitchenMessages();
+                });
+            }
+        });
     };
     ToastsComponent.prototype.getKitchenMessages = function () {
         var _this = this;
-        this.ordersService.getOrders("kitchen", "?waiter=" + this.usersService.user.username + "&status=completato").subscribe(function (res) { return _this.messages = res; }, function (err) { return console.log(err); }, function () {
-            for (var i = 0; i < _this.messages.length; i++) {
-                _this.pop(_this.messages[i], "kitchen");
+        this.ordersService.getOrders("kitchen", "?waiter=" + this.usersService.user.username + "&status=completato").subscribe(function (res) { return _this.kitchenMessages = res; }, function (err) { return console.log(err); }, function () {
+            for (var i = 0; i < _this.kitchenMessages.length; i++) {
+                _this.popKitchen(_this.kitchenMessages[i]);
             }
         });
     };
     ToastsComponent.prototype.getBarMessages = function () {
         var _this = this;
-        this.ordersService.getOrders("bar", "?waiter=" + this.usersService.user.username + "&status=completato").subscribe(function (res) { return _this.messages = res; }, function (err) { return console.log(err); }, function () {
-            for (var i = 0; i < _this.messages.length; i++) {
-                _this.pop(_this.messages[i], "bar");
+        this.ordersService.getOrders("bar", "?waiter=" + this.usersService.user.username + "&status=completato").subscribe(function (res) { return _this.barMessages = res; }, function (err) { return console.log(err); }, function () {
+            for (var i = 0; i < _this.barMessages.length; i++) {
+                _this.popBar(_this.barMessages[i]);
             }
         });
     };
-    ToastsComponent.prototype.pop = function (order, type) {
+    ToastsComponent.prototype.popKitchen = function (order) {
         var _this = this;
-        var orderNumber;
-        if (type == "kitchen") {
-            orderNumber = order.kitchenNumber;
-        }
-        else {
-            orderNumber = order.barNumber;
-        }
-        this.toastr.success('Tavolo : ' + order.tableCode, 'Ordine ' + orderNumber + ' ' + 'da servire', {
+        this.toastr.success('Tavolo : ' + order.tableCode, 'Ordine cucina' + ' ' + order.kitchenNumber + ' ' + 'da servire', {
             disableTimeOut: true
         }).onTap.subscribe(function () {
-            order.status = "servito";
-            _this.ordersService.updateOrder(type, order).subscribe(function (res) { }, function (err) { return console.log(err); }, function () {
-                if (type == "kitchen") {
-                    _this.socketService.socket.emit('updateKitchen');
+            for (var i = 0; i < _this.kitchenMessages.length && _this.usersService.user.role == "Cameriere"; i++) {
+                if (order._id == _this.kitchenMessages[i]._id) {
+                    order.status = "servito";
+                    _this.ordersService.updateOrder('kitchen', order).subscribe(function (res) { }, function (err) { return console.log(err); }, function () {
+                        _this.socketService.socket.emit('updateKitchen');
+                        _this.router.navigate(['/tables']);
+                    });
+                    _this.usersService.user.jobs += 1;
+                    _this.usersService.updateUser(_this.usersService.user.username).subscribe(function (res) { }, function (err) { return console.log(err); }, function () { return _this.socketService.socket.emit('updateUsers'); });
                 }
-                else if (type == "bar") {
-                    _this.socketService.socket.emit('updateBar');
+            }
+        });
+    };
+    ToastsComponent.prototype.popBar = function (order) {
+        var _this = this;
+        this.toastr.success('Tavolo : ' + order.tableCode, 'Ordine bar' + ' ' + order.barNumber + ' ' + 'da servire', {
+            disableTimeOut: true
+        }).onTap.subscribe(function () {
+            for (var i = 0; i < _this.barMessages.length && _this.usersService.user.role == "Cameriere"; i++) {
+                if (order._id == _this.barMessages[i]._id) {
+                    order.status = "servito";
+                    _this.ordersService.updateOrder('bar', order).subscribe(function (res) { }, function (err) { return console.log(err); }, function () {
+                        _this.socketService.socket.emit('updateBar');
+                        _this.router.navigate(['/tables']);
+                    });
+                    _this.usersService.user.jobs += 1;
+                    _this.usersService.updateUser(_this.usersService.user.username).subscribe(function (res) { }, function (err) { return console.log(err); }, function () { return _this.socketService.socket.emit('updateUsers'); });
                 }
-            });
-            _this.usersService.user.jobs += 1;
-            _this.usersService.updateUser(_this.usersService.user.username).subscribe(function (res) { }, function (err) { return console.log(err); }, function () { return _this.socketService.socket.emit('updateUsers'); });
-            _this.router.navigate(['/tables']);
+            }
         });
     };
     ToastsComponent.ctorParameters = function () { return [
