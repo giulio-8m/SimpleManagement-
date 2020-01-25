@@ -19,6 +19,19 @@ export class ToastsComponent implements OnInit {
 
   ngOnInit() {
     this.messages=null;
+    this.usersService.userOb.subscribe((user)=>{
+      if(this.usersService.user && this.usersService.user.role=="Cameriere"){
+        this.getKitchenMessages();
+        this.getBarMessages();
+        this.socketService.socket.on('updateKitchen',()=>{
+          this.getKitchenMessages();
+        });
+        this.socketService.socket.on('updateBar',()=>{
+          this.getBarMessages();
+        })
+      }
+      
+    });
 
     if(this.usersService.user && this.usersService.user.role=="Cameriere"){
       this.getKitchenMessages();
@@ -73,7 +86,7 @@ export class ToastsComponent implements OnInit {
         
           order.status="servito";
           this.ordersService.updateOrder(type,order).subscribe(
-            (res)=>console.log(res),
+            (res)=>{},
             (err)=>console.log(err),
             ()=>{
               if(type=="kitchen"){

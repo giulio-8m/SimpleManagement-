@@ -82,7 +82,7 @@ export class StatisticsComponent implements OnInit {
       (res)=>this.recipts=res,
       (err)=>this.errorMessage=err.statusText,
       ()=>{
-        console.log(this.recipts);
+        
 
         for(let i=0;i<this.recipts.length;i++){
           this.statsRecipts[0]+=this.recipts[i].totalKitchen;

@@ -29,20 +29,20 @@ const newTable = (req,res) =>{
 
 const updateTable = (req,res)=>{
 
-    if(req.body.clients && req.body.seats){
+    if(req.body.clients!=undefined && req.body.seats!=undefined){
 
         Table.findOneAndUpdate({tableCode:req.params.tableCode},{clients:req.body.clients,seats:req.body.seats},{new:true}).then((table)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
-    }else if(req.body.clients){
+    }else if(req.body.clients!=undefined){
         Table.findOneAndUpdate({tableCode:req.params.tableCode},{clients:req.body.clients},{new:true}).then((table)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
-    }else if(req.body.seats){
+    }else if(req.body.seats!=undefined){
         Table.findOneAndUpdate({tableCode:req.params.tableCode},{seats:req.body.seats},{new:true}).then((table)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{

@@ -62,19 +62,19 @@ const getUsers = (req,res)=>{
 
 const updateUser = (req,res)=>{
 
-    if(req.body.jobs && req.body.role){
+    if(req.body.jobs!=undefined && req.body.role!=undefined){
         User.findOneAndUpdate({username:req.params.username},{jobs:req.body.jobs,role:req.body.role},{new:true}).then((user)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
-    }else if(req.body.role){
+    }else if(req.body.role!=undefined){
         User.findOneAndUpdate({username:req.params.username},{role:req.body.role},{new:true}).then((user)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
-    }else if(req.body.jobs){
+    }else if(req.body.jobs!=undefined){
         User.findOneAndUpdate({username:req.params.username},{jobs:req.body.jobs},{new:true}).then((user)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{

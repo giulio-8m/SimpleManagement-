@@ -92,7 +92,7 @@ export class OrderComponent implements OnInit {
     if(kitchenItems.length>0){
       let kitchenOrder=new Order(this.tableCode,this.usersService.user.username,this.clients,kitchenItems);
       this.ordersService.sendOrder("kitchen",kitchenOrder).subscribe(
-        (res)=>console.log(res),
+        (res)=>{},
         (err)=>this.errorMessage=err.statusText,
         ()=>this.socketService.socket.emit('updateKitchen')
       );
@@ -101,7 +101,7 @@ export class OrderComponent implements OnInit {
     if(barItems.length>0){
       let barOrder=new Order(this.tableCode,this.usersService.user.username,this.clients,barItems);
       this.ordersService.sendOrder("bar",barOrder).subscribe(
-        (res)=>console.log(res),
+        (res)=>{},
         (err)=>this.errorMessage=err.statusText,
         ()=>this.socketService.socket.emit('updateBar')
       );

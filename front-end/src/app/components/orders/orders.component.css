@@ -87,3 +87,11 @@ word-wrap: break-word;
 .completed{
 color: rgb(30, 202, 30);
 }
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+  .fix{
+    padding-left: 12.5px !important;
+    padding-right: 12.5px !important;
+  }
+}

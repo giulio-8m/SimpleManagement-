@@ -114,7 +114,7 @@ export class OrdersComponent implements OnInit {
     this.update(order);
     this.usersService.user.jobs+=1;
     this.usersService.updateUser(this.usersService.user.username).subscribe(
-      (res)=>console.log(res),
+      (res)=>{},
       (err)=>this.errorMessage=err.statusText,
       ()=>{this.socketService.socket.emit('updateUsers')}
     );
@@ -123,7 +123,7 @@ export class OrdersComponent implements OnInit {
       order.status="completato";
     }
     this.ordersService.updateOrder(this.where,order).subscribe(
-      (res)=>console.log(res),
+      (res)=>{},
       (err)=>this.errorMessage=err.statusText,
       ()=>{
         if(this.where=="kitchen"){

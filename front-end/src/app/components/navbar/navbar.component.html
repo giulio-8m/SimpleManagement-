@@ -5,23 +5,21 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             
-            <div class="navbar-collapse collapse dual-nav order-1">
+            <div class="OnOff navbar-collapse collapse dual-nav order-1">
                 <ul class="navbar-nav">
-                    <li *ngIf="isWaiter()"class="nav-item">
-                        <a routerLink="tables" class="nav-link"  href="#">Tavoli</a>
-                    </li>
-                    <li *ngIf="isDesk()"class="nav-item">
-                        <a routerLink="tables" class="nav-link"  href="#">Tavoli</a>
-                    </li>
-                    <li *ngIf="isChef()" class="nav-item">
-                        <a routerLink="kitchen" class="nav-link"  href="#">Cucina</a>
-                    </li>
-                    <li *ngIf="isBarman()" class="nav-item">
-                            <a routerLink="bar" class="nav-link" href="#">Bar</a>
-                    </li>
                     <li *ngIf="isDesk()" class="nav-item">
                         <a routerLink="cash-desk" class="nav-link" href="#">Cassa</a>
                     </li>     
+                    <li *ngIf="isWaiter() || isDesk()"class="nav-item">
+                        <a routerLink="tables" class="nav-link"  href="#">Tavoli</a>
+                    </li>
+                    <li *ngIf="isChef() || isDesk()" class="nav-item">
+                        <a routerLink="kitchen" class="nav-link"  href="#">Cucina</a>
+                    </li>
+                    <li *ngIf="isBarman() || isDesk()" class="nav-item">
+                            <a routerLink="bar" class="nav-link" href="#">Bar</a>
+                    </li>
+
                     <li *ngIf="isDesk()" class="nav-item">
                         <a routerLink="staff" class="nav-link" href="#">Utenti</a>
                     </li>   
@@ -38,7 +36,7 @@
                 </ng-template> 
                 </ul> 
             </div>
-            <a routerLink="/" href="#" class="navbar-brand mx-auto d-block ml-auto text-center order-0 order-md-1 w-25"><img class="rounded"style="height:70px" src="assets/img/logo.jpg"></a>         
+            <a  class="navbar-brand mx-auto d-block ml-auto text-center order-0 order-md-1 w-25"><img class="rounded"style="height:70px" src="assets/img/logo.jpg"></a>         
         </div>
     </nav>
 </header>

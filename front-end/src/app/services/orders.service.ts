@@ -11,7 +11,7 @@ export class OrdersService {
   constructor(private http:HttpClient) { }
 
   sendOrder(where:string,order:Order){
-      return this.http.post(`${environment.URL}/${where}`,order);
+      return this.http.post(`${environment.URL}/API/sm/${where}`,order);
   }
 
   getOrders(where:string,query?:string){
@@ -28,7 +28,7 @@ export class OrdersService {
   }
 
   checkOut(where:string,tableCode:string){
-    return this.http.put(`${environment.URL}/API/sm/${where}?tableCode=${tableCode}`,null);
+    return this.http.patch(`${environment.URL}/API/sm/${where}?tableCode=${tableCode}`,{status:'pagato'});
   }
 
 

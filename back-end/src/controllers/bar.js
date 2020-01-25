@@ -54,55 +54,67 @@ const newOrder = (req,res) =>{
 
 const updateOrder = (req,res)=>{
 
-    if(req.body.status && req.body.progress && req.body.items){
+    if(req.body.status!=undefined && req.body.progress!=undefined && req.body.items!=undefined){
         BarOrder.findOneAndUpdate({_id:req.params.id},{status:req.body.status,progress:req.body.progress,items:req.body.items},{new:true}).then((order)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
-    }else if(req.body.status && req.body.progress){
+    }else if(req.body.status!=undefined && req.body.progress!=undefined){
         BarOrder.findOneAndUpdate({_id:req.params.id},{status:req.body.status,progress:req.body.progress},{new:true}).then((order)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
-    }else if(req.body.status && req.body.items){
+    }else if(req.body.status!=undefined && req.body.items!=undefined){
         BarOrder.findOneAndUpdate({_id:req.params.id},{status:req.body.status,items:req.body.items},{new:true}).then((order)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
-    }else if(req.body.progress && req.body.items){
+    }else if(req.body.progress!=undefined && req.body.items!=undefined){
         BarOrder.findOneAndUpdate({_id:req.params.id},{progress:req.body.progress,items:req.body.items},{new:true}).then((order)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
-    }else if(req.body.progress){
+    }else if(req.body.progress!=undefined){
         BarOrder.findOneAndUpdate({_id:req.params.id},{progress:req.body.progress},{new:true}).then((order)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });       
-    }else if(req.body.status){
+    }else if(req.body.status!=undefined){
         BarOrder.findOneAndUpdate({_id:req.params.id},{status:req.body.status},{new:true}).then((order)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
-    }else if(req.body.items){
+    }else if(req.body.items!=undefined){
         BarOrder.findOneAndUpdate({_id:req.params.id},{items:req.body.items},{new:true}).then((order)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
     }else{
-        res.status(200).json(resHandler(400));
+        res.status(400).json(resHandler(400));
     }
 }
 
-const checkOut = (req,res)=>{
-    BarOrder.updateMany({tableCode:req.query.tableCode},{status:"pagato"}).then((orders)=>{
+const updateStatus = (req,res)=>{
+    if(req.body.status!=undefined){
+        KitchenOrder.updateMany({tableCode:req.query.tableCode},{status:req.body.status}).then((orders)=>{
+            res.status(200).json(resHandler(200));
+        }).catch((err)=>{
+            res.status(400).json(err);
+        });
+    }else{
+        res.status(400).json(resHandler(400));
+    }
+}
+
+const deleteOrder =(req,res)=>{
+    BarOrder.deleteOne({_id:req.params.id}).then((order)=>{
         res.status(200).json(resHandler(200));
     }).catch((err)=>{
         res.status(400).json(err);
@@ -114,5 +126,6 @@ module.exports={
    getOrders,
    newOrder,
    updateOrder,
-   checkOut
+   updateStatus,
+   deleteOrder
 }

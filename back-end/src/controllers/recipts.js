@@ -6,8 +6,21 @@ const resHandler = require('../helpers/res.helper').resHandler;
 
 
 const getRecipts = (req,res) =>{
-    if(req.query.date){
+    
+    if(req.query.date && req.query.tableCode){
+        Recipt.find({date:req.query.date}).and({tableCode:req.query.tableCode}).then((recipts)=>{
+            res.status(200).json(recipts);
+        }).catch((err)=>{
+            res.status(400).json(err);
+        });
+    }else if(req.query.date){
         Recipt.find({date:req.query.date}).then((recipts)=>{
+            res.status(200).json(recipts);
+        }).catch((err)=>{
+            res.status(400).json(err);
+        });
+    }else if(req.query.tableCode){
+        Recipt.find({tableCode:req.query.tableCode}).then((recipts)=>{
             res.status(200).json(recipts);
         }).catch((err)=>{
             res.status(400).json(err);
@@ -40,8 +53,17 @@ const newRecipt = (req,res) =>{
     });
 }
 
+const deleteRecipt = (req,res)=>{
+    Recipt.deleteOne({_id:req.params.id}).then((recipt)=>{
+        res.status(200).json(resHandler(200));
+    }).catch((err)=>{
+        res.status(400).json(err);
+    });
+}
+
 
 module.exports={
     getRecipts,
-    newRecipt
+    newRecipt,
+    deleteRecipt
 }

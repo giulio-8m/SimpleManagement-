@@ -34,8 +34,8 @@ export class TableOrdersComponent implements OnInit {
   getOrders(where:string){
     this.ordersService.getOrders(where,`?tableCode=${this.tableCode}`).subscribe(
       (res)=>{
-        res.filter((order)=>{
-          if(order.status!="completato"){
+        res=res.filter((order)=>{
+          if(order.status!="pagato"){
             return true;
           }else
             return false;

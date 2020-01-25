@@ -8,7 +8,7 @@ router.post('/API/sm/menu',auth,controller.newItem);
 
 router.get('/API/sm/menu',auth,controller.getMenu);
 
-router.put('/API/sm/menu/:name',auth,controller.updateItem);
+router.patch('/API/sm/menu/:name',auth,controller.updateItem);
 
 router.delete('/API/sm/menu/:name',auth,controller.deleteItem);
 

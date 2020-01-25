@@ -38,19 +38,19 @@ const newItem = (req,res) =>{
 }
 
 const updateItem = (req,res)=>{
-    if(req.body.price && req.body.time){
+    if(req.body.price!=undefined && req.body.time!=undefined){
         MenuItem.findOneAndUpdate({name:req.params.name},{price:req.body.price,time:req.body.time},{new:true}).then((item)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
-    }else if(req.body.price){
+    }else if(req.body.price!=undefined){
         MenuItem.findOneAndUpdate({name:req.params.name},{price:req.body.price},{new:true}).then((item)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);
         });
-    }else if(req.body.time){
+    }else if(req.body.time!=undefined){
         MenuItem.findOneAndUpdate({name:req.params.name},{time:req.body.time},{new:true}).then((item)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{

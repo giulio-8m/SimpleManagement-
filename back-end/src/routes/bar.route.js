@@ -10,7 +10,8 @@ router.put('/API/sm/bar/:id',auth,controller.updateOrder);
 
 router.get('/API/sm/bar',auth,controller.getOrders);
 
-router.put('/API/sm/bar',auth,controller.checkOut);
+router.patch('/API/sm/bar',auth,controller.updateStatus);
 
+router.delete('/API/sm/bar/:id',auth,controller.getOrders);
 
 module.exports=router;

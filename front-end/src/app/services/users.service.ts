@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
 import {environment} from '../../environments/environment'
+import { Observable, BehaviorSubject } from 'rxjs';
 
 
 
@@ -13,9 +14,13 @@ import {environment} from '../../environments/environment'
 export class UsersService {
 
   user:User;
+  userOb:BehaviorSubject<User>;
+
 
   constructor(private http:HttpClient,private router:Router) { 
     this.user=null;
+    this.userOb=new BehaviorSubject(this.user);
+
     let token=localStorage.getItem('user_token');
     if(token){
       this.parseToken(token);
@@ -37,7 +42,7 @@ export class UsersService {
   }
 
   updateUser(username:string){
-    return this.http.put(`${environment.URL}/API/sm/users/${username}`,this.user);
+    return this.http.patch(`${environment.URL}/API/sm/users/${username}`,this.user);
   }
 
   getUsers(query?:string){

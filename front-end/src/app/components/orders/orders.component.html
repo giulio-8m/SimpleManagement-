@@ -75,9 +75,9 @@
         <div class="col-5 p-0">
             <ng-container *ngIf="statusCheck(item)!='3'; then starts; else ended"></ng-container>
             <ng-template #starts>
-              <button *ngIf="statusCheck(item)=='1'" class="btn btn-success pl-2 pr-2 pt-1 pb-0 m-0" (click)="start(item,order)"><i class="far fa-caret-square-right fa-3x"><h5 class="mb-0">Inizio</h5></i></button>
-              <button *ngIf="statusCheck(item)=='2'" class="btn btn-warning pl-2 pr-2 pt-1 pb-0 m-0"><i class="fas fa-spinner fa-pulse fa-3x"></i><h5 class="mb-0">InPrep</h5></button>
-              <button  class="btn btn-danger  pl-2 pr-2 pt-1 pb-0" (click)="finish(item,order)"><i class="fas fa-check-circle fa-3x"><h5 class="mb-0">Fine</h5></i></button>
+              <button [disabled]="this.usersService.user.role=='Cassa'" *ngIf="statusCheck(item)=='1'" class="btn btn-success pl-2 pr-2 fix pt-1 pb-0 m-0" (click)="start(item,order)"><i class="far fa-caret-square-right fa-3x"><h5 class="mb-0">Inizio</h5></i></button>
+              <button [disabled]="this.usersService.user.role=='Cassa'" *ngIf="statusCheck(item)=='2'" class="btn btn-warning pl-2 pr-2 pt-1 pb-0 m-0"><i class="fas fa-spinner fa-pulse fa-3x"></i><h5 class="mb-0">InPrep</h5></button>
+              <button [disabled]="this.usersService.user.role=='Cassa'" class="btn btn-danger  pr-2.5 pr-2.5 pt-1 pb-0" (click)="finish(item,order)"><i class="fas fa-check-circle fa-3x"><h5 class="mb-0">Fine</h5></i></button>
             </ng-template>
             <ng-template #ended>
               <h1 class="completed font-weight-bold">Pronto</h1>

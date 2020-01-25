@@ -30,10 +30,9 @@ export class SignInComponent implements OnInit {
               },
       (error) => {
         this.errorMessage=error.statusText;
-        console.log(this.errorMessage);
       },
     ()=>{
-
+      this.usersService.userOb.next(this.usersService.user);
       if(this.usersService.user.role=="Cameriere"){
         this.router.navigate(['/tables']);
       }else if(this.usersService.user.role=="Barista"){

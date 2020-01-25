@@ -27,7 +27,6 @@ export class SignUpComponent implements OnInit {
       (res)  => {},
       (err) => {
         this.errorMessage=err.statusText;
-        console.log(this.errorMessage);
       },
       ()=> {this.socketService.socket.emit('updateUsers');
         this.location.back()}

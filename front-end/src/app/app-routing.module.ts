@@ -15,7 +15,7 @@ import { TableOrdersComponent } from './components/table-orders/table-orders.com
 
 
 const routes: Routes = [
-  {path:'',component:SignInComponent},
+  {path:'',component:HomeComponent,canActivate:[AuthGuardService]},
   {path:'table-orders/:tableCode',component:TableOrdersComponent,canActivate:[AuthGuardService]},
   {path:'statistics',component:StatisticsComponent,canActivate:[AuthGuardService]},
   {path:'check-out/:tableCode/:clients',component:CheckOutComponent,canActivate:[AuthGuardService]},
@@ -27,7 +27,7 @@ const routes: Routes = [
   {path:'tables',component:TablesComponent,canActivate:[AuthGuardService]},
   {path:'sign-in',component:SignInComponent},
   {path:'sign-up',component:SignUpComponent,canActivate:[AuthGuardService]},
-  {path:'**',component:SignInComponent},
+  {path:'**',component:HomeComponent,canActivate:[AuthGuardService]},
 ];
 
 @NgModule({

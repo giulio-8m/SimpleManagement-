@@ -8,7 +8,7 @@ router.post('/API/sm/users',auth,controller.signUp);
 
 router.post('/API/sm/users/login',controller.signIn);
 
-router.put('/API/sm/users/:username',auth,controller.updateUser);
+router.patch('/API/sm/users/:username',auth,controller.updateUser);
 
 router.get('/API/sm/users',auth,controller.getUsers);
 

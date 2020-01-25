@@ -22,8 +22,12 @@ export class NavbarComponent implements OnInit {
           this.usersService.parseToken(token);
         }
       }
-  
-
+      
+      $('.OnOff').click(()=>{
+        if(this.open){
+          this.toggle();
+        } 
+      })
   
     }
   
@@ -33,7 +37,7 @@ export class NavbarComponent implements OnInit {
           this.toggle();
         } 
       })
-      
+ 
       if(this.open){
         $(".dual-nav").removeClass('show').addClass('collapsing');
         this.open=false;
@@ -55,9 +59,6 @@ export class NavbarComponent implements OnInit {
     }
   
     isChef(){
-      if(this.usersService.user && this.usersService.user.username=="cane"){
-        return true;
-      }
       if(this.usersService.user && this.usersService.user.role=="Cuoco" ){
         return true;
       }else{
@@ -66,9 +67,6 @@ export class NavbarComponent implements OnInit {
     }
   
     isBarman(){
-      if(this.usersService.user && this.usersService.user.username=="cane"){
-        return true;
-      }
       if(this.usersService.user && this.usersService.user.role=="Barista"){
         return true;
       }else{
@@ -77,9 +75,6 @@ export class NavbarComponent implements OnInit {
     }
     
     isDesk(){
-      if(this.usersService.user && this.usersService.user.username=="cane"){
-        return true;
-      }
       if(this.usersService.user && this.usersService.user.role=="Cassa"){
         return true;
       }else{
@@ -88,9 +83,6 @@ export class NavbarComponent implements OnInit {
     }
   
     isWaiter(){
-      if(this.usersService.user && this.usersService.user.username=="cane"){
-        return true;
-      }
       if(this.usersService.user && this.usersService.user.role=="Cameriere"){
         return true;
       }else{

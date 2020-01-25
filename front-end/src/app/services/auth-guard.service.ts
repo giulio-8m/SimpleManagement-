@@ -32,8 +32,31 @@ export class AuthGuardService  implements CanActivate {
                                               route.routeConfig.path=="statistics") ){
             return true;
           }
+          if(this.userService.user && route.routeConfig.path==''){
+            if(this.userService.user.role=="Cassa"){
+              this.router.navigate(['cash-desk']);
+              return false;
+            }else if(this.userService.user.role=="Barista"){
+              this.router.navigate(['bar']);
+              return false;
+            }else if(this.userService.user.role=="Cuoco"){
+              this.router.navigate(['kitchen']);
+              return false;
+            }else if(this.userService.user.role=="Cameriere"){
+              this.router.navigate(['tables']);
+              return false;
+            }else{
+              return true;
+            }
+          }
+
+          if(route.routeConfig.path=="**"){
+            return true;
+          }
+
           return false;
       }else{
+
           this.router.navigate(['sign-in']);
           return false;
       }

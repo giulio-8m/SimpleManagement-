@@ -10,6 +10,8 @@ router.put('/API/sm/kitchen/:id',auth,controller.updateOrder);
 
 router.get('/API/sm/kitchen',auth,controller.getOrders);
 
-router.put('/API/sm/kitchen',auth,controller.checkOut);
+router.patch('/API/sm/kitchen',auth,controller.updateStatus);
+
+router.delete('/API/sm/kitchen/:id',auth,controller.deleteOrder);
 
 module.exports=router;

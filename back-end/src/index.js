@@ -45,9 +45,34 @@ require('./helpers/passport.helper');
         credentials: true
     }));
 
-    app.get('/',(req,res)=>{
+    app.get('/API',(req,res)=>{
         res.json({
-            'POST /users': '',
+            'POST /API/sm/users/login':'',
+            'POST /API/sm/users   ':'',
+            'GET /API/sm/users   ' : '',
+            'PUT /API/sm/users/:username ' : '',
+            'DELETE /API/sm/users/:username ' : '',
+            'GET /API/sm/tables     ' : '',
+            'POST /API/sm/tables' : '',
+            'PATCH /API/sm/tables/:tableCode' : '',
+            'DELETE /API/sm/tables/:tableCode    ': '',
+            'GET /API/sm/menu ' :'',
+            'POST /API/sm/menu  ' : '',
+            'PATCH /API/sm/menu/:name ' : '',
+            'DELETE /API/sm/menu/:name  ' : '',
+            'GET /API/sm/bar ' : '',
+            'POST /API/sm/bar  ' : '',
+            'PUT /API/sm/bar/:id ' : '',
+            'PATCH /API/sm/bar' : '',
+            'DELETE/API/sm/bar/:id  ':'',
+            'GET /API/sm/kitchen ' : '',
+            'POST /API/sm/kitchen ' : '',
+            'PUT /API/sm/kitchen/:id ' : '',
+            'PATCH /API/sm/kitchen' : '',
+            'DELETE/API/sm/kitchen/:id  ':'',
+            'GET /API/sm/recipts   ' : '',
+            'POST /API/sm/recipts' : '',
+            'DELETE/API/sm/recipts/:id ' : ''
         })
     });
 

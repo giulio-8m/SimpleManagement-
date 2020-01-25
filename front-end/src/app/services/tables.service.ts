@@ -17,7 +17,7 @@ export class TablesService {
     return this.http.post<any>(`${environment.URL}/API/sm/tables`,table);
   }
 
-  updateTable(tableCode:string,table?:Object){
+  updateTable(tableCode:string,table?){
     return this.http.patch<any>(`${environment.URL}/API/sm/tables/${tableCode}`,table);
   }
 

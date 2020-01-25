@@ -8,7 +8,6 @@ const User = mongoose.model('User');
 
 passport.use(new LocalStrategy({},
 	(username, password, done) => {
-    console.log("helloooo thereeeee bitches\n");
 		User.findOne({ username: username },(err, user) => {
       if(err){
         console.log("errore on login\n");

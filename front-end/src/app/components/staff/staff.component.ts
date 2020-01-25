@@ -106,7 +106,6 @@ export class StaffComponent implements OnInit {
 
   set(role:string){
     if(role=="Cameriere"){
-      console.log(this.totalServices);
       return this.totalServices;
     }else if(role=="Cuoco"){
       return this.totalDishes;
@@ -151,7 +150,7 @@ export class StaffComponent implements OnInit {
 
   deleteUser(user:User){
     this.usersService.deleteUser(user.username).subscribe(
-      (res)=>console.log(res),
+      (res)=>{},
       (err)=>this.errorMessage=err.statusText,
       ()=>{
         if(user.role=="Cameriere"){
