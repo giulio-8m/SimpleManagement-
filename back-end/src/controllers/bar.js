@@ -103,7 +103,7 @@ const updateOrder = (req,res)=>{
 
 const updateStatus = (req,res)=>{
     if(req.body.status!=undefined){
-        KitchenOrder.updateMany({tableCode:req.query.tableCode},{status:req.body.status}).then((orders)=>{
+        BarOrder.updateMany({tableCode:req.query.tableCode},{status:req.body.status}).then((orders)=>{
             res.status(200).json(resHandler(200));
         }).catch((err)=>{
             res.status(400).json(err);

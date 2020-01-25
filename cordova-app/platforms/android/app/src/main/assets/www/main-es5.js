@@ -316,7 +316,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<router-outlet></router-outlet>\n"
+module.exports = "<app-navbar></app-navbar>\n<router-outlet></router-outlet>\n<app-toasts></app-toasts>\n"
 
 /***/ }),
 
@@ -327,7 +327,7 @@ module.exports = "<app-navbar></app-navbar>\n<router-outlet></router-outlet>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" >\n    <br>\n    <h1 class=\"title text-center\">Data: {{time | date:'dd-MM-yyyy '}}</h1>\n    <h1 class=\"title text-center\">Ora: {{time | date:'hh:mm:ss a'}}</h1>\n    <hr>\n      <!-- Button to Open the Modal -->\n      <button routerLink=\"/tables\" type=\"button\" class=\"btn btn-primary btn-block\" >\n        <br>\n        <i class=\"fas fa-table fa-4x\"><h3>Tavoli</h3></i>\n      </button>\n      <br>\n      <button routerLink=\"/orders\" type=\"button\" class=\"btn btn-outline-primary  btn-block\" >\n        <br>\n        <i class=\"fas fa-clipboard-list fa-4x\"><h3>Ordini</h3></i>\n      </button>\n      <br>\n      <button routerLink=\"/staff\" type=\"button\" class=\"btn btn-primary btn-block\" >\n        <br>\n        <i class=\"fas fa-users fa-4x\"><h3>Utenti</h3></i>\n      </button>\n      <br>\n      <button routerLink=\"/statistics\" type=\"button\" class=\"btn btn-outline-primary btn-block\" >\n        <br>\n        <i class=\"fas fa-chart-line fa-4x\"><h3>Statistiche</h3></i>\n      </button>\n</div>"
+module.exports = "<div class=\"container\" >\n    <br>\n    <h1 class=\"title text-center\">Data: {{time | date:'dd-MM-yyyy '}}</h1>\n    <h1 class=\"title text-center\">Ora: {{time | date:'hh:mm:ss a'}}</h1>\n    <hr>\n      <!-- Button to Open the Modal -->\n      <button routerLink=\"/tables\" type=\"button\" class=\"btn btn-primary btn-block\" >\n        <br>\n        <i class=\"fas fa-table fa-4x\"><h3>Tavoli</h3></i>\n      </button>\n      <br>\n      <div class=\"row\"> \n        <div class=\"col\">\n          <button routerLink=\"/kitchen\" type=\"button\" class=\"btn btn-outline-primary  btn-block\" >\n            <br>\n            <i class=\"fas fa-clipboard-list fa-4x\"><h3>Cucina</h3></i>\n          </button>\n        </div>\n        <div class=\"col\">\n          <button routerLink=\"/bar\" type=\"button\" class=\"btn btn-outline-primary  btn-block\" >\n            <br>\n            <i class=\"fas fa-clipboard-list fa-4x\"><h3>Bar</h3></i>\n          </button>\n        </div>\n      </div> \n      <br>\n      <button routerLink=\"/staff\" type=\"button\" class=\"btn btn-primary btn-block\" >\n        <br>\n        <i class=\"fas fa-users fa-4x\"><h3>Utenti</h3></i>\n      </button>\n      <br>\n      <button routerLink=\"/statistics\" type=\"button\" class=\"btn btn-outline-primary btn-block\" >\n        <br>\n        <i class=\"fas fa-chart-line fa-4x\"><h3>Statistiche</h3></i>\n      </button>\n      <br>\n</div>"
 
 /***/ }),
 
@@ -338,7 +338,7 @@ module.exports = "<div class=\"container\" >\n    <br>\n    <h1 class=\"title te
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <br>\n    <div class=\"card\">\n        <div class=\"card-header text-center\">\n            <h3>Tavolo: {{tableCode}}</h3>\n        </div>\n        <div class=\"card-body\">\n            <div class=\"row\" >\n                    <div class=\"col-6\">\n                       <h5>Name</h5>\n                    </div>\n                    <div class=\"col-2\">\n                        <h5>N.</h5>\n                    </div>\n                    <div class=\"col-2\">\n                        <h5>$.</h5>\n                    </div>\n                    <div class=\"col-2\">\n                        <h5>T.</h5>\n                    </div>\n            </div>\n            <div  class=\"row\" *ngFor=\"let item of recipt.kitchenItems\">\n                <div class=\"col-6\">\n                <h5>{{item.name}}</h5> \n                </div>\n                <div class=\"col-2\">\n                    {{item.amount}}\n                </div>\n                <div class=\"col-2\">\n                    {{item.price}}\n                </div>\n                <div class=\"col-2\">\n                    {{item.price * item.amount}}\n                </div>\n            </div>\n            <div  class=\"row\" *ngFor=\"let item of recipt.barItems\">\n                        <div class=\"col-6\">\n                        <h5>{{item.name}}</h5> \n                        </div>\n                        <div class=\"col-2\">\n                            {{item.amount}}\n                        </div>\n                        <div class=\"col-2\">\n                            {{item.price}}\n                        </div>\n                        <div class=\"col-2\">\n                            {{item.price * item.amount}}\n                        </div>\n            </div>\n\n        </div>\n        <div class=\"card-footer d-flex justify-content-between\">\n            <h3>Totale : </h3>\n            <h3>{{this.recipt.total}}$</h3>\n        </div>\n    </div>\n    <br>\n    <div class=\" justify-content-between d-flex\">\n\n            <button class=\"btn btn-danger\" ><i class=\"fas fa-reply fa-3x\"><h4>GoBack</h4></i></button>\n            <button  class=\"btn btn-success\" (click)=\"checkOut()\"><i class=\"fas fa-money-bill-wave fa-3x\"><h4>CheckOut</h4></i></button>\n            \n    </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n    <br>\n    <br>\n    <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n    <div class=\"card\">\n        <div class=\"card-header text-center\">\n            <h3>Tavolo: {{tableCode}}</h3>\n        </div>\n        <div class=\"card-body\">\n            <div class=\"row\" >\n                    <div class=\"col-6\">\n                       <h5>Name</h5>\n                    </div>\n                    <div class=\"col-2\">\n                        <h5>N.</h5>\n                    </div>\n                    <div class=\"col-2\">\n                        <h5>$.</h5>\n                    </div>\n                    <div class=\"col-2\">\n                        <h5>T.</h5>\n                    </div>\n            </div>\n            <div  class=\"row\" *ngFor=\"let item of recipt.kitchenItems\">\n                <div class=\"col-6\">\n                <h5>{{item.name}}</h5> \n                </div>\n                <div class=\"col-2\">\n                    {{item.amount}}\n                </div>\n                <div class=\"col-2\">\n                    {{item.price}}\n                </div>\n                <div class=\"col-2\">\n                    {{item.price * item.amount}}\n                </div>\n            </div>\n            <div  class=\"row\" *ngFor=\"let item of recipt.barItems\">\n                        <div class=\"col-6\">\n                        <h5>{{item.name}}</h5> \n                        </div>\n                        <div class=\"col-2\">\n                            {{item.amount}}\n                        </div>\n                        <div class=\"col-2\">\n                            {{item.price}}\n                        </div>\n                        <div class=\"col-2\">\n                            {{item.price * item.amount}}\n                        </div>\n            </div>\n\n        </div>\n        <div class=\"card-footer d-flex justify-content-between\">\n            <h3>Totale : </h3>\n            <h3>{{this.recipt.total}}$</h3>\n        </div>\n    </div>\n    <br>\n    <div class=\" justify-content-between d-flex\">\n\n            <button class=\"btn btn-danger pl-3 pr-3\"(click)=\"goBack()\" ><i class=\"fas fa-reply fa-3x\"><h4>Indietro</h4></i></button>\n            <button  class=\" p-1 btn btn-success\" (click)=\"checkOut()\"><i class=\"fas m-0 p-0 fa-money-bill-wave fa-3x\"><h4 class=\"m-0 p-0\">CheckOut</h4></i></button>\n            \n    </div>\n</div>\n"
 
 /***/ }),
 
@@ -349,7 +349,7 @@ module.exports = "<div class=\"container\">\n    <br>\n    <div class=\"card\">\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n    <div class=\"row\">\n\n        <div class=\"col\">\n            <label>Name</label>\n            <input type=\"text\" #name1=\"ngModel\" [(ngModel)]=\"name\" class=\"form-control\">\n            <p>{{name}}</p>\n            \n            <label>type</label>\n            <input type=\"text\" #name2=\"ngModel\" [(ngModel)]=\"type\" class=\"form-control\">\n            <p>{{type}}</p>\n            \n            <label>price</label>\n            <input type=\"text\" #name3=\"ngModel\" [(ngModel)]=\"price\" class=\"form-control\">\n            <p>{{price}}</p>\n            \n            <label>time</label>\n            <input type=\"text\" #name4=\"ngModel\" [(ngModel)]=\"time\" class=\"form-control\">\n            <p>{{time}}</p>\n            <button class=\"btn btn-block btn-primary\" (click)=\"newMenuItem()\">New Dish</button>\n        </div>\n\n        \n        <div class=\"col\">\n            <label>table</label>\n            <input type=\"text\" #name5=\"ngModel\" [(ngModel)]=\"tableCode\" class=\"form-control\">\n            <p>{{tableCode}}</p>\n            \n            <label>n seats</label>\n            <input type=\"text\" #name6=\"ngModel\" [(ngModel)]=\"seats\" class=\"form-control\">\n            <p>{{seats}}</p>\n            <button class=\"btn btn-block btn-primary\" (click)=\"newTable()\">New Table</button>\n        </div>\n\n    </div>\n\n\n</div>\n"
+module.exports = "<div class=\"container\">\n    <br>\n    <br>\n    <h1 class=\"text-center\">Pagina inesistente</h1>\n    <br>\n    <br>\n</div>"
 
 /***/ }),
 
@@ -360,7 +360,7 @@ module.exports = "<div class=\"container\">\n\n    <div class=\"row\">\n\n      
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header>  \n    <nav class=\"navbar navbar-dark navbar-expand-md \">\n        <div class=\"container-fluid\">\n            <button class=\"navbar-toggler\" type=\"button\" (click)=\"toggle()\">\n                <span class=\"navbar-toggler-icon\"></span>\n            </button>\n            \n            <div class=\"navbar-collapse collapse dual-nav order-1\">\n                <ul class=\"navbar-nav\">\n                    <li class=\"nav-item active\">\n                        <a routerLink=\"/\" class=\"nav-link pl-0\" href=\"#\">Home <span class=\"sr-only\">Home</span></a>\n                    </li>\n                    <li *ngIf=\"isWaiter()\"class=\"nav-item\">\n                        <a routerLink=\"tables\" class=\"nav-link\"  href=\"#\">Tables</a>\n                    </li>\n                    <li *ngIf=\"isChef()\" class=\"nav-item\">\n                        <a routerLink=\"kitchen\" class=\"nav-link\"  href=\"#\">Kitchen</a>\n                    </li>\n                    <li *ngIf=\"isBarman()\" class=\"nav-item\">\n                            <a routerLink=\"bar\" class=\"nav-link\" href=\"#\">Bar</a>\n                    </li>\n                    <li *ngIf=\"isDesk()\" class=\"nav-item\">\n                        <a routerLink=\"cash-desk\" class=\"nav-link\" href=\"#\">Desk</a>\n                    </li>     \n                <ng-container *ngIf=\"this.usersService.user; then thenTemplate; else elseTemplate\"></ng-container>\n                <ng-template #thenTemplate>                  \n                    <li class=\"nav-item\"><a routerLink=\"desk\" class=\"nav-link\"  href=\"#\">{{this.usersService.user.username}}</a></li>\n                    <li class=\"nav-item\"><a routerLink=\"\" class=\"nav-link\" href=\"#\" (click)=\"exit()\">Sign Out</a></li>\n                </ng-template>\n                <ng-template #elseTemplate>\n                    <li class=\"nav-item\"><a routerLink=\"sign-in\"  class=\"nav-link\" href=\"#\">Sign In</a></li>                 \n                </ng-template> \n                </ul> \n            </div>\n            <a routerLink=\"/\" href=\"#\" class=\"navbar-brand mx-auto d-block ml-auto text-center order-0 order-md-1 w-25\"><img class=\"rounded\"style=\"height:70px\" src=\"assets/img/logo.jpg\"></a>         \n        </div>\n    </nav>\n</header>"
+module.exports = "<header>  \n    <nav class=\"navbar navbar-dark navbar-expand-md \">\n        <div class=\"container-fluid\">\n            <button class=\"navbar-toggler\" type=\"button\" (click)=\"toggle()\">\n                <span class=\"navbar-toggler-icon\"></span>\n            </button>\n            \n            <div class=\"OnOff navbar-collapse fix collapse dual-nav order-1\">\n                <ul class=\"navbar-nav\">\n                    <li *ngIf=\"isDesk()\" class=\"nav-item\">\n                        <a routerLink=\"cash-desk\" class=\"nav-link\" href=\"#\">Cassa</a>\n                    </li>     \n                    <li *ngIf=\"isWaiter() || isDesk()\"class=\"nav-item\">\n                        <a routerLink=\"tables\" class=\"nav-link\"  href=\"#\">Tavoli</a>\n                    </li>\n                    <li *ngIf=\"isChef() || isDesk()\" class=\"nav-item\">\n                        <a routerLink=\"kitchen\" class=\"nav-link\"  href=\"#\">Cucina</a>\n                    </li>\n                    <li *ngIf=\"isBarman() || isDesk()\" class=\"nav-item\">\n                            <a routerLink=\"bar\" class=\"nav-link\" href=\"#\">Bar</a>\n                    </li>\n\n                    <li *ngIf=\"isDesk()\" class=\"nav-item\">\n                        <a routerLink=\"staff\" class=\"nav-link\" href=\"#\">Utenti</a>\n                    </li>   \n                    <li *ngIf=\"isDesk()\" class=\"nav-item\">\n                        <a routerLink=\"statistics\" class=\"nav-link\" href=\"#\">Statistiche</a>\n                    </li>   \n                <ng-container *ngIf=\"this.usersService.user; then thenTemplate; else elseTemplate\"></ng-container>\n                <ng-template #thenTemplate>                  \n                    <li class=\"nav-item\"><a  class=\"nav-link\" >{{this.usersService.user.username}}</a></li>\n                    <li class=\"nav-item\"><a routerLink=\"\" class=\"nav-link\" href=\"#\" (click)=\"exit()\">Sign Out</a></li>\n                </ng-template>\n                <ng-template #elseTemplate>\n                    <li class=\"nav-item\"><a routerLink=\"sign-in\"  class=\"nav-link\" href=\"#\">Sign In</a></li>                 \n                </ng-template> \n                </ul> \n            </div>\n            <a  class=\"navbar-brand mx-auto d-block ml-auto text-center order-0 order-md-1 w-25\"><img class=\"rounded\"style=\"height:70px\" src=\"assets/img/logo.jpg\"></a>         \n        </div>\n    </nav>\n</header>"
 
 /***/ }),
 
@@ -371,7 +371,7 @@ module.exports = "<header>  \n    <nav class=\"navbar navbar-dark navbar-expand-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <br>\n    <h1 class=\"title\">Ordine Tavolo: {{tableCode}}</h1>\n    <hr>\n    <!-- Button to Open the Modal -->\n    <button type=\"button\" class=\"btn btn-primary btn-block\" data-toggle=\"modal\" data-target=\"#First_dishes\">\n      <br>\n      <i class=\"fas fa-utensils fa-4x\"><h3>Primi</h3></i>\n    </button>\n    <br>\n    <button type=\"button\" class=\"btn btn-outline-primary  btn-block\" data-toggle=\"modal\" data-target=\"#Second_dishes\">\n      <br>\n      <i class=\"fas fa-utensils fa-4x\"><h3>Secondi</h3></i>\n    </button>\n    <br>\n    <button type=\"button\" class=\"btn btn-primary btn-block\" data-toggle=\"modal\" data-target=\"#Drinks\">\n      <br>\n      <i class=\"fas fa-glass-martini-alt fa-4x\"><h3>Bevande</h3></i>\n    </button>\n    <br>\n    <div class=\" justify-content-between fle\">\n      <button routerLink=\"/tables\" class=\"btn btn-danger\" (click)=\"goBack()\"><i class=\"fas fa-reply fa-4x\"><h5>Back</h5></i></button>\n      <button routerLink=\"/tables\" class=\"btn btn-success\" (click)=\"sendOrder()\"><i class=\"fas fa-check fa-4x\"><h5>Send</h5></i></button>\n    </div>\n    <br>\n  \n    <!-- Modal First_Dishes -->\n    <div class=\"modal fade\" id=\"First_dishes\">\n      <div class=\"modal-dialog modal-dialog-centered \">\n        <div class=\" modal-content modal-content-size \">\n          \n          <!-- Modal Header -->\n          <div class=\"modal-header\">\n            <h3 class=\"modal-title\">Primi</h3>\n          </div>\n          <!-- Modal body -->\n          <div class=\" modal-body modal-body-size  pt-0\">\n              <div class=\"row align-items-center border-bottom\" *ngFor=\"let dish of firstDishes\">\n                  <div class=\"col-6  font-weight-bold red\">\n                    <h4 class=\"m-0\">{{dish.name}}</h4>\n                  </div>\n                  <div class=\"col-6 green p-2 text-right\">\n  \n                      <input type=\"text\" class=\" col-4 number \" #amout=\"ngModel\" [(ngModel)]=\"dish.amount\" >\n                      <button class=\"btn btn-success btn-circle m-1 align-self-center\" (click)=\"add(dish)\" ><i class=\"fa fa-plus align-self-auto\"></i></button>      \n                      <button class=\"btn btn-danger btn-circle align-self-center m-1 \" (click)=\"remove(dish)\"><i class=\"fa fa-minus align-self-auto\"></i></button> \n                    \n                  </div>        \n              </div>   \n          </div>    \n          <!-- Modal footer -->\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n          </div>\n          \n        </div>\n      </div>\n    </div>\n    <!-- Modal Second_Dishes -->\n    <div class=\"modal fade\" id=\"Second_dishes\">\n      <div class=\"modal-dialog modal-dialog-centered \">\n        <div class=\" modal-content modal-content-size \">\n          \n          <!-- Modal Header -->\n          <div class=\"modal-header\">\n            <h3 class=\"modal-title\">Secondi</h3>\n          </div>\n          <!-- Modal body -->\n          <div class=\" modal-body modal-body-size pt-0\">\n              <div class=\"row align-items-center border-bottom\" *ngFor=\"let dish of secondDishes\">\n                  <div class=\"col-6  font-weight-bold red\">\n                    <h4 class=\"m-0\">{{dish.name}}</h4>\n                  </div>\n                  <div class=\"col-6 green p-2 text-right\">\n  \n                      <input type=\"text\" class=\" col-4 number \" #amout=\"ngModel\" [(ngModel)]=\"dish.amount\" >\n                      <button class=\"btn btn-success btn-circle m-1 align-self-center\" (click)=\"add(dish)\" ><i class=\"fa fa-plus align-self-auto\"></i></button>      \n                      <button class=\"btn btn-danger btn-circle align-self-center m-1 \" (click)=\"remove(dish)\"><i class=\"fa fa-minus align-self-auto\"></i></button> \n                    \n                  </div>        \n              </div>   \n          </div>    \n          <!-- Modal footer -->\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n          </div>\n          \n        </div>\n      </div>\n    </div>\n    <!--Modal Drinks-->\n    <div class=\"modal fade\" id=\"Drinks\">\n      <div class=\"modal-dialog modal-dialog-centered \">\n        <div class=\" modal-content modal-content-size \">     \n          <!-- Modal Header -->\n          <div class=\"modal-header\">\n            <h3 class=\"modal-title\">Bevande</h3>\n          </div>\n          <!-- Modal body -->\n          <div class=\" modal-body modal-body-size pt-0\">\n              <div class=\"row align-items-center border-bottom\" *ngFor=\"let drink of drinks\">\n                  <div class=\"col-6  font-weight-bold red\">\n                    <h4 class=\"m-0\">{{drink.name}}</h4>\n                  </div>\n                  <div class=\"col-6 green p-2 text-right\">\n                      <input type=\"text\" class=\" col-4 number \" #amout=\"ngModel\" [(ngModel)]=\"drink.amount\" >\n                      <button class=\"btn btn-success btn-circle m-1 align-self-center\" (click)=\"add(drink)\" ><i class=\"fa fa-plus align-self-auto\"></i></button>      \n                      <button class=\"btn btn-danger btn-circle align-self-center m-1 \" (click)=\"remove(drink)\"><i class=\"fa fa-minus align-self-auto\"></i></button>        \n                  </div>        \n              </div>   \n          </div>    \n          <!-- Modal footer -->\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n          </div>       \n        </div>\n      </div>\n    </div>\n  </div>\n  "
+module.exports = "<div class=\"container\">\n    <br>\n    <h1 class=\"title\">Ordine Tavolo: {{tableCode}}</h1>\n    <hr>\n    <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n    <!-- Button to Open the Modal -->\n    <button type=\"button\" class=\"btn btn-primary btn-block\" data-toggle=\"modal\" data-target=\"#First_dishes\">\n      <br>\n      <i class=\"fas fa-utensils fa-4x\"><h3>Primi</h3></i>\n    </button>\n    <br>\n    <button type=\"button\" class=\"btn btn-outline-primary  btn-block\" data-toggle=\"modal\" data-target=\"#Second_dishes\">\n      <br>\n      <i class=\"fas fa-utensils fa-4x\"><h3>Secondi</h3></i>\n    </button>\n    <br>\n    <button type=\"button\" class=\"btn btn-primary btn-block\" data-toggle=\"modal\" data-target=\"#Drinks\">\n      <br>\n      <i class=\"fas fa-glass-martini-alt fa-4x\"><h3>Bevande</h3></i>\n    </button>\n    <br>\n    <div class=\" justify-content-between fle\">\n      <button  class=\"btn btn-danger\" (click)=\"goBack()\"><i class=\"fas fa-reply fa-4x pl-2 pr-2\"><h5 class=\"mb-0\">Back</h5></i></button>\n      <button  class=\"btn btn-success\" (click)=\"sendOrder()\"><i class=\"fas fa-check fa-4x pl-2 pr-2\"><h5 class=\"mb-0\">Send</h5></i></button>\n    </div>\n    <br>\n  \n    <!-- Modal First_Dishes -->\n    <div class=\"modal fade\" id=\"First_dishes\">\n      <div class=\"modal-dialog modal-dialog-centered \">\n        <div class=\" modal-content modal-content-size \">\n          \n          <!-- Modal Header -->\n          <div class=\"modal-header\">\n            <h3 class=\"modal-title\">Primi</h3>\n          </div>\n          <!-- Modal body -->\n          <div class=\" modal-body modal-body-size  pt-0\">\n              <div class=\"row align-items-center border-bottom\" *ngFor=\"let dish of firstDishes\">\n                  <div class=\"col-6  font-weight-bold red\">\n                    <h4 class=\"m-0\">{{dish.name}}</h4>\n                  </div>\n                  <div class=\"col-6 green p-2 text-right\">\n  \n                      <input type=\"text\" class=\" col-4 number \" #amout=\"ngModel\" [(ngModel)]=\"dish.amount\" >\n                      <button class=\"btn btn-success btn-circle m-1 align-self-center\" (click)=\"add(dish)\" ><i class=\"fa fa-plus align-self-auto\"></i></button>      \n                      <button class=\"btn btn-danger btn-circle align-self-center m-1 \" (click)=\"remove(dish)\"><i class=\"fa fa-minus align-self-auto\"></i></button> \n                    \n                  </div>        \n              </div>   \n          </div>    \n          <!-- Modal footer -->\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n          </div>\n          \n        </div>\n      </div>\n    </div>\n    <!-- Modal Second_Dishes -->\n    <div class=\"modal fade\" id=\"Second_dishes\">\n      <div class=\"modal-dialog modal-dialog-centered \">\n        <div class=\" modal-content modal-content-size \">\n          \n          <!-- Modal Header -->\n          <div class=\"modal-header\">\n            <h3 class=\"modal-title\">Secondi</h3>\n          </div>\n          <!-- Modal body -->\n          <div class=\" modal-body modal-body-size pt-0\">\n              <div class=\"row align-items-center border-bottom\" *ngFor=\"let dish of secondDishes\">\n                  <div class=\"col-6  font-weight-bold red\">\n                    <h4 class=\"m-0\">{{dish.name}}</h4>\n                  </div>\n                  <div class=\"col-6 green p-2 text-right\">\n  \n                      <input type=\"text\" class=\" col-4 number \" #amout=\"ngModel\" [(ngModel)]=\"dish.amount\" >\n                      <button class=\"btn btn-success btn-circle m-1 align-self-center\" (click)=\"add(dish)\" ><i class=\"fa fa-plus align-self-auto\"></i></button>      \n                      <button class=\"btn btn-danger btn-circle align-self-center m-1 \" (click)=\"remove(dish)\"><i class=\"fa fa-minus align-self-auto\"></i></button> \n                    \n                  </div>        \n              </div>   \n          </div>    \n          <!-- Modal footer -->\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n          </div>\n          \n        </div>\n      </div>\n    </div>\n    <!--Modal Drinks-->\n    <div class=\"modal fade\" id=\"Drinks\">\n      <div class=\"modal-dialog modal-dialog-centered \">\n        <div class=\" modal-content modal-content-size \">     \n          <!-- Modal Header -->\n          <div class=\"modal-header\">\n            <h3 class=\"modal-title\">Bevande</h3>\n          </div>\n          <!-- Modal body -->\n          <div class=\" modal-body modal-body-size pt-0\">\n              <div class=\"row align-items-center border-bottom\" *ngFor=\"let drink of drinks\">\n                  <div class=\"col-6  font-weight-bold red\">\n                    <h4 class=\"m-0\">{{drink.name}}</h4>\n                  </div>\n                  <div class=\"col-6 green p-2 text-right\">\n                      <input type=\"text\" class=\" col-4 number \" #amout=\"ngModel\" [(ngModel)]=\"drink.amount\" >\n                      <button class=\"btn btn-success btn-circle m-1 align-self-center\" (click)=\"add(drink)\" ><i class=\"fa fa-plus align-self-auto\"></i></button>      \n                      <button class=\"btn btn-danger btn-circle align-self-center m-1 \" (click)=\"remove(drink)\"><i class=\"fa fa-minus align-self-auto\"></i></button>        \n                  </div>        \n              </div>   \n          </div>    \n          <!-- Modal footer -->\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n          </div>       \n        </div>\n      </div>\n    </div>\n  </div>\n  "
 
 /***/ }),
 
@@ -382,7 +382,7 @@ module.exports = "<div class=\"container\">\n    <br>\n    <h1 class=\"title\">O
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br>\n<div class=\"container\" >\n  <ng-container *ngFor=\"let order of orders; let i = index\" >\n\n\n  <div *ngIf=\"order.status== 'ongoing'\" class=\"bg-white rounded-lg p-1 shadow row \" id=\"{{order._id}}\" >\n\n    <div class=\"col-6 border-right \">\n        <br>\n        <h1 class=\"text-center font-weight-bold\"> Tavolo</h1>\n        <hr>\n        <h2 class=\"text-center font-weight-bold\" > {{order.table}}</h2>\n        <br>\n        <a  href=\"#orders-{{i}}\" class=\"btn btn-primary btn-block\" data-toggle=\"collapse\" ><h2>Ordini</h2></a>\n    </div>\n    <div class=\"col-6\">\n      <br>\n      <h2 class=\"h4 font-weight-bold text-center mb-4\">Preparazione</h2>\n      <!-- Progress bar 3 -->\n      <div class=\"progress mx-auto\" data-value='order.status'  >\n        <span class=\"progress-left\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <span class=\"progress-right\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <div class=\"progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center\">\n          <div class=\"h2 font-weight-bold\">{{order.progress | number:'1.0-0'}}<sup class=\"small\">%</sup></div>\n        </div>\n      </div>\n      <!-- END -->\n\n      <!-- Demo info \n      <div class=\"row text-center mt-4\">\n        <div class=\"col-6 border-right\">\n          <div class=\"h4 font-weight-bold mb-0\">{{100-(order.status | number:0)}}%</div><span class=\"small text-gray\">Rimanente</span>\n        </div>\n        <div class=\"col-6\">\n          <div class=\"h4 font-weight-bold mb-0\">{{order.status | number:0}}%</div><span class=\"small text-gray\">Completato</span>\n        </div>\n      </div>\n        END -->\n    <br >\n    </div>\n    <div id=\"orders-{{i}}\" class=\"collapse col-12 border-top text-center font-weight-bold show\">\n      <div class=\"row align-items-center border-bottom\">\n          <div class=\"col-7\">\n              <h2 class=\"h4 font-weight-bold text-center m-2\">Portata</h2>\n          </div>\n          <div class=\"col-5\">\n            <h2 class=\"h4 font-weight-bold text-center m-2\">Status</h2>\n          </div>\n      </div>\n      \n      <div  class=\"row align-items-center border-bottom \" *ngFor=\"let item of order.items\">\n        <div class=\"col-7 \">\n          <div class=\"row align-items-center \">\n            <div class=\"col-4 p-0 \">\n              <h5 class=\"font-weight-bold\">Nome:</h5>\n            </div>\n            <div class=\"col-8\">\n                <h5 class=\"font-weight-bold\" >{{item.name}}</h5>\n            </div>\n          </div>\n          <div class=\"row align-items-center\">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\">Quantità:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\" >{{item.amount}}</h5>\n              </div>\n          </div>\n          <div class=\"row align-items-center \">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\" >Tempo:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\">{{item.time}}m</h5>\n              </div>\n          </div>  \n        </div>\n        <div class=\"col-5 p-0\">\n            <ng-container *ngIf=\"statusCheck(item)!='3'; then starts; else ended\"></ng-container>\n            <ng-template #starts>\n              <button *ngIf=\"statusCheck(item)=='1'\" class=\"btn btn-success pl-2 pr-2 pt-1 pb-0\" (click)=\"start(item,order)\"><i class=\"far fa-caret-square-right fa-3x\"><h5 class=\"mb-0\">Inizio</h5></i></button>\n              <button *ngIf=\"statusCheck(item)=='2'\" class=\"btn btn-warning pl-1 pr-1 pt-1 pb-0\"><i class=\"fas fa-spinner fa-pulse fa-3x\"></i><h5 class=\"mb-0\">... .. ...</h5></button>\n              <button  class=\"btn btn-danger ml-1 pl-2 pr-2 pt-1 pb-0\"(click)=\"finish(item,order)\"><i class=\"fas fa-check-circle fa-3x\"><h5 class=\"mb-0\">Fine</h5></i></button>\n            </ng-template>\n            <ng-template #ended>\n              <h1 class=\"completed font-weight-bold\">Pronto</h1>\n            </ng-template> \n        </div>\n      <hr>\n      </div>\n\n      \n    </div>\n    <br>\n  </div>\n  <br *ngIf=\"order.status== 'ongoing'\">\n</ng-container>\n</div>"
+module.exports = "<br>\n<div class=\"container\" >\n  <h1 class=\"text-center font-weight-bold\">Ordini</h1>\n  <hr>\n\n  <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n  <ng-container *ngFor=\"let order of orders; let i = index\" >\n\n\n  <div *ngIf=\"order.status== 'in_corso'\" class=\"bg-white rounded-lg p-1 shadow row \" id=\"{{order._id}}\" >\n\n    <div class=\"col-6 border-right \">\n        <br>\n        <h1 class=\"text-center font-weight-bold\"> Tavolo</h1>\n        \n        <h2 class=\"text-center font-weight-bold\" > {{order.tableCode}}</h2>\n        <hr>\n        <br>\n        <a  href=\"#orders-{{i}}\" class=\"btn btn-primary btn-block\" data-toggle=\"collapse\" ><h2>Ordini</h2></a>\n    </div>\n    <div class=\"col-6\">\n      <br>\n      <h2 class=\"h4 font-weight-bold text-center mb-4\">Preparazione</h2>\n      <!-- Progress bar 3 -->\n      <div class=\"progress mx-auto\" data-value='order.status'  >\n        <span class=\"progress-left\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <span class=\"progress-right\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <div class=\"progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center\">\n          <div class=\"h2 font-weight-bold\">{{order.progress | number:'1.0-0'}}<sup class=\"small\">%</sup></div>\n        </div>\n      </div>\n    <br >\n    </div>\n    <div id=\"orders-{{i}}\" class=\"collapse col-12 border-top text-center font-weight-bold show\">\n      <div class=\"row align-items-center border-bottom\">\n          <div class=\"col-7\">\n              <h2 class=\"h4 font-weight-bold text-center m-2\">Portata</h2>\n          </div>\n          <div class=\"col-5\">\n            <h2 class=\"h4 font-weight-bold text-center m-2\">Status</h2>\n          </div>\n      </div>\n      \n      <div  class=\"row align-items-center border-bottom \" *ngFor=\"let item of order.items\">\n        <div class=\"col-7 \">\n          <div class=\"row align-items-center \">\n            <div class=\"col-4 p-0 \">\n              <h5 class=\"font-weight-bold\">Nome:</h5>\n            </div>\n            <div class=\"col-8\">\n                <h5 class=\"font-weight-bold\" >{{item.name}}</h5>\n            </div>\n          </div>\n          <div class=\"row align-items-center\">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\">Quantità:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\" >{{item.amount}}</h5>\n              </div>\n          </div>\n          <div class=\"row align-items-center \">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\" >Tempo:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\">{{item.time}}m</h5>\n              </div>\n          </div>  \n        </div>\n        <div class=\"col-5 p-0\">\n            <ng-container *ngIf=\"statusCheck(item)!='3'; then starts; else ended\"></ng-container>\n            <ng-template #starts>\n              <button [disabled]=\"this.usersService.user.role=='Cassa'\" *ngIf=\"statusCheck(item)=='1'\" class=\"btn btn-success pl-2 pr-2 fix pt-1 pb-0 m-0\" (click)=\"start(item,order)\"><i class=\"far fa-caret-square-right fa-3x\"><h5 class=\"mb-0\">Inizio</h5></i></button>\n              <button [disabled]=\"this.usersService.user.role=='Cassa'\" *ngIf=\"statusCheck(item)=='2'\" class=\"btn btn-warning pl-2 pr-2 pt-1 pb-0 m-0\"><i class=\"fas fa-spinner fa-pulse fa-3x\"></i><h5 class=\"mb-0\">InPrep</h5></button>\n              <button [disabled]=\"this.usersService.user.role=='Cassa'\" class=\"btn btn-danger  pr-2.5 pr-2.5 pt-1 pb-0\" (click)=\"finish(item,order)\"><i class=\"fas fa-check-circle fa-3x\"><h5 class=\"mb-0\">Fine</h5></i></button>\n            </ng-template>\n            <ng-template #ended>\n              <h1 class=\"completed font-weight-bold\">Pronto</h1>\n            </ng-template> \n        </div>\n      <hr>\n      </div>\n\n      \n    </div>\n    <br>\n  </div>\n  <br *ngIf=\"order.status== 'ongoing'\">\n</ng-container>\n</div>"
 
 /***/ }),
 
@@ -415,7 +415,7 @@ module.exports = "<br>\n<br>\n<br>\n<div class=\"container\">\n        <div clas
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <br>\n    <h1 class=\"text-center \">Utenti</h1>\n    <hr>\n    <a href=\"#waiterS\" data-toggle=\"collapse\" class=\"btn btn-primary btn-block\">\n        <br>\n        <i class=\"fas fa-utensils fa-4x\"><h3>Camerieri</h3></i>\n    </a>\n    <div class=\"table-responsive \" id=\"waiterS\" class=\"collapse\">\n            <!--Table-->\n            <table class=\"table text-center table-bordered\">  \n              <!--Table head-->\n              <thead class=\"head\">\n                <tr>\n                  <th class=\"td-center th-sm\" >Username</th>\n                  <th class=\"td-center th-sm\">Stats</th>\n                  <th class=\"td-center th-sm\">Delete</th>\n                </tr>\n              </thead>\n              <!--Table [ngClass]=\"{'free': free(table.clientsNumber),'busy': free(table.clientsNumber)}\" head-->\n              <tbody>           \n                <tr *ngFor=\"let user of waiters; let i=index\">\n                    <td class=\"td-center text-capitalize font-weight-bold\">{{user.username}}</td>\n    \n                    <td class=\"td-center p-0\"><a  type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\"(click)=\"initChart(user.username,user.role,user.jobs)\" href=\"#stats-{{user.username}}\"\n                        style=\"width:100%;\"><i class=\"fas fa-chart-pie fa-2x\"><h5 class=\"mb-0\">Stats</h5></i></a>\n                        </td>   \n                    <td class=\"td-center p-0\"><button  type=\"button\" class=\"btn btn-danger btn-lg\" (click)=\"deleteUser(user.username)\"\n                        style=\"width:100%;\"><i class=\"fas fa-user-slash fa-2x\"><h5 class=\"mb-0\">Delete</h5></i></button>\n                    </td> \n                    \n                    <!-- modal for statistics of user-->\n                    <div class=\"modal fade\" id=\"stats-{{user.username}}\">\n                            <div class=\"modal-dialog modal-dialog-centered \">\n                              <div class=\" modal-content modal-content-size \">\n                                \n                                <!-- Modal Header -->\n                                <div class=\"modal-header\">\n                                  <h3 class=\"modal-title\">Statistiche Utente</h3>\n                                 \n                                </div>\n                                <!-- Modal body -->\n                                <div class=\" modal-body modal-body-size\" >\n                                    <article  class=\"card-body\">\n                                            <canvas [id]=\"user.username\" width=\"70vw\" height=\"70vh\"></canvas>      \n                                    </article>\n                                    <h4>Ruolo : {{user.role}}</h4>\n                                    <h4>Username : {{user.username}}</h4>\n                                </div>    \n                                <!-- Modal footer -->\n                                <div class=\"modal-footer\">\n                                  <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n                                </div>\n                                \n                              </div>\n                            </div>\n                    </div>\n                    \n                </tr>\n              </tbody>\n          \n            </table>\n            <!--Table-->\n    </div>\n  \n    <br>\n    <a href=\"#barmans\" data-toggle=\"collapse\" class=\"btn btn-outline-primary btn-block\">\n        <br>\n        <i class=\"fas fa-cocktail fa-4x\"><h3>Baristi</h3></i>\n    </a>\n    <div class=\"table-responsive \" id=\"barmans\" class=\"collapse\">\n        <!--Table-->\n        <table class=\"table text-center table-bordered\">\n      \n          <!--Table head-->\n          <thead class=\"head\">\n            <tr>\n              <th class=\"td-center th-sm\" >Username</th>\n              <th class=\" td-center th-sm\">Stats</th>\n              <th class=\"td-center th-sm\">Delete</th>\n            </tr>\n          </thead>\n          <!--Table [ngClass]=\"{'free': free(table.clientsNumber),'busy': free(table.clientsNumber)}\" head-->\n          <tbody>           \n            <tr *ngFor=\"let user of barMans; let i=index\">\n                <td class=\"td-center text-capitalize font-weight-bold\">{{user.username}}</td>\n  \n                <td class=\"td-center p-0\"><a  type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\"(click)=\"initChart(user.username,user.role,user.jobs)\" href=\"#stats-{{user.username}}\"\n                    style=\"width:100%;\"><i class=\"fas fa-chart-pie fa-2x\"><h5 class=\"mb-0\">Stats</h5></i></a>\n                    </td>   \n                <td class=\"td-center p-0\"><button  type=\"button\" class=\"btn btn-danger btn-lg\" (click)=\"deleteUser(user.username)\"\n                    style=\"width:100%;\"><i class=\"fas fa-user-slash fa-2x\"><h5 class=\"mb-0\">Delete</h5></i></button>\n                </td> \n                \n                <!-- modal for statistics of user-->\n                <div class=\"modal fade\" id=\"stats-{{user.username}}\">\n                        <div class=\"modal-dialog modal-dialog-centered \">\n                          <div class=\" modal-content modal-content-size \">\n                            \n                            <!-- Modal Header -->\n                            <div class=\"modal-header\">\n                              <h3 class=\"modal-title\">Statistiche Utente</h3>\n                             \n                            </div>\n                            <!-- Modal body -->\n                            <div class=\" modal-body modal-body-size\" >\n                                <article  class=\"card-body\">\n                                        <canvas [id]=\"user.username\" width=\"70vw\" height=\"70vh\"></canvas>      \n                                </article>\n                                <h4>Ruolo : {{user.role}}</h4>\n                                <h4>Username : {{user.username}}</h4>\n                            </div>    \n                            <!-- Modal footer -->\n                            <div class=\"modal-footer\">\n                              <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n                            </div>\n                            \n                          </div>\n                        </div>\n                </div>\n                \n            </tr>\n          </tbody>\n      \n        </table>\n        <!--Table-->\n  </div>\n    <br>\n    <a href=\"#chefs\" data-toggle=\"collapse\" class=\"btn btn-primary btn-block\">\n        <br>\n        <i class=\"fas fa-fire fa-4x\"><h3>Cuochi</h3></i>\n    </a>\n    <div class=\"table-responsive \" id=\"chefs\" class=\"collapse\">\n        <!--Table-->\n        <table class=\"table text-center table-bordered\">\n      \n          <!--Table head-->\n          <thead class=\"head\">\n            <tr>\n              <th class=\"td-center th-sm\" >Username</th>\n              <th class=\" td-center th-sm\">Stats</th>\n              <th class=\"td-center th-sm\">Delete</th>\n            </tr>\n          </thead>\n          <!--Table [ngClass]=\"{'free': free(table.clientsNumber),'busy': free(table.clientsNumber)}\" head-->\n          <tbody>           \n            <tr *ngFor=\"let user of chefs; let i=index\">\n                <td class=\"td-center text-capitalize font-weight-bold\">{{user.username}}</td>\n  \n                <td class=\"td-center p-0\"><a  type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" (click)=\"initChart(user.username,user.role,user.jobs)\" href=\"#stats-{{user.username}}\"\n                    style=\"width:100%;\"><i class=\"fas fa-chart-pie fa-2x\"><h5 class=\"mb-0\">Stats</h5></i></a>\n                    </td>   \n                <td class=\"td-center p-0\"><button  type=\"button\" class=\"btn btn-danger btn-lg\" (click)=\"deleteUser(user.username)\"\n                    style=\"width:100%;\"><i class=\"fas fa-user-slash fa-2x\"><h5 class=\"mb-0\">Delete</h5></i></button>\n                </td> \n                \n                <!-- modal for statistics of user-->\n                <div class=\"modal fade\" id=\"stats-{{user.username}}\">\n                        <div class=\"modal-dialog modal-dialog-centered \">\n                          <div class=\" modal-content modal-content-size \">\n                            \n                            <!-- Modal Header -->\n                            <div class=\"modal-header\">\n                              <h3 class=\"modal-title\">Statistiche Utente</h3>\n                             \n                            </div>\n                            <!-- Modal body -->\n                            <div class=\" modal-body modal-body-size\" >\n                                <article  class=\"card-body\">\n                                        <canvas [id]=\"user.username\" width=\"70vw\" height=\"70vh\"></canvas>      \n                                </article>\n                                <h4>Ruolo : {{user.role}}</h4>\n                                <h4>Username : {{user.username}}</h4>\n                            </div>    \n                            <!-- Modal footer -->\n                            <div class=\"modal-footer\">\n                              <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n                            </div>\n                            \n                          </div>\n                        </div>\n                </div>\n                \n            </tr>\n          </tbody>\n      \n        </table>\n        <!--Table-->\n  </div>\n    <br>\n    <a href=\"#desks\" data-toggle=\"collapse\" class=\"btn btn-outline-primary btn-block\">\n        <br>\n        <i class=\"fas fa-cash-register fa-4x\"><h3>Cassieri</h3></i>\n    </a>\n    <div class=\"table-responsive \" id=\"desks\" class=\"collapse\">\n        <!--Table-->\n        <table class=\"table text-center table-bordered\">\n      \n          <!--Table head-->\n          <thead class=\"head\">\n            <tr>\n              <th class=\"td-center th-sm\" >Username</th>\n              <th class=\" td-center th-sm\">Stats</th>\n              <th class=\"td-center th-sm\">Delete</th>\n            </tr>\n          </thead>\n          <!--Table [ngClass]=\"{'free': free(table.clientsNumber),'busy': free(table.clientsNumber)}\" head-->\n          <tbody>           \n            <tr *ngFor=\"let user of desks; let i=index\">\n                <td class=\"td-center text-capitalize font-weight-bold\">{{user.username}}</td>\n  \n                <td class=\"td-center p-0\"><a  type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\"(click)=\"initChart(user.username,user.role,user.jobs)\" href=\"#stats-{{user.username}}\"\n                    style=\"width:100%;\"><i class=\"fas fa-chart-pie fa-2x\"><h5 class=\"mb-0\">Stats</h5></i></a>\n                    </td>   \n                <td class=\"td-center p-0\"><button  type=\"button\" class=\"btn btn-danger btn-lg\" (click)=\"deleteUser(user.username)\"\n                    style=\"width:100%;\"><i class=\"fas fa-user-slash fa-2x\"><h5 class=\"mb-0\">Delete</h5></i></button>\n                </td> \n                \n                <!-- modal for statistics of user-->\n                <div class=\"modal fade\" id=\"stats-{{user.username}}\">\n                        <div class=\"modal-dialog modal-dialog-centered \">\n                          <div class=\" modal-content modal-content-size \">\n                            \n                            <!-- Modal Header -->\n                            <div class=\"modal-header\">\n                              <h3 class=\"modal-title\">Statistiche Utente</h3>\n                             \n                            </div>\n                            <!-- Modal body -->\n                            <div class=\" modal-body modal-body-size\" >\n                                <article  class=\"card-body\">\n                                        <canvas [id]=\"user.username\" width=\"70vw\" height=\"70vh\"></canvas>      \n                                </article>\n                                <h4>Ruolo : {{user.role}}</h4>\n                                <h4>Username : {{user.username}}</h4>\n                            </div>    \n                            <!-- Modal footer -->\n                            <div class=\"modal-footer\">\n                              <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n                            </div>\n                            \n                          </div>\n                        </div>\n                </div>\n                \n            </tr>\n          </tbody>\n      \n        </table>\n        <!--Table-->\n  </div>\n    <br>\n  \n    <button routerLink=\"/sign-up\" type=\"button\" class=\"btn btn-primary btn-block\">\n      <br>\n      <i class=\"fas fa-user-plus fa-4x\"><h3> Crea Nuovo Utente</h3></i>\n  </button>\n  <br>\n  </div>\n  \n  "
+module.exports = "<div class=\"container\">\n    <br>\n\n   \n\n    <h1 class=\"text-center \">Utenti</h1>\n    <hr>\n    <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n    <a href=\"#waiterS\" data-toggle=\"collapse\" class=\"btn btn-primary btn-block\">\n        <br>\n        <i class=\"fas fa-utensils fa-4x\"><h3>Camerieri</h3></i>\n    </a>\n    <div class=\"table-responsive \" id=\"waiterS\" class=\"collapse\">\n            <!--Table-->\n            <table class=\"table text-center table-bordered\">  \n              <!--Table head-->\n              <thead class=\"head\">\n                <tr>\n                  <th class=\"td-center th-sm\" >Username</th>\n                  <th class=\"td-center th-sm\">Dati</th>\n                  <th class=\"td-center th-sm\">Elimina</th>\n                </tr>\n              </thead>\n              <!--Table [ngClass]=\"{'free': free(table.clientsNumber),'busy': free(table.clientsNumber)}\" head-->\n              <tbody>           \n                <tr *ngFor=\"let user of waiters; let i=index\">\n                    <td class=\"td-center text-capitalize font-weight-bold\">{{user.username}}</td>\n    \n                    <td class=\"td-center p-0\"><a  type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\"(click)=\"initChart(user.username,user.role,user.jobs)\" href=\"#stats-{{user.username}}\"\n                        style=\"width:100%;\"><i class=\"fas fa-chart-pie fa-2x\"><h5 class=\"mb-0\"></h5></i></a>\n                        </td>   \n                    <td class=\"td-center p-0\"><button  type=\"button\" class=\"btn btn-danger btn-lg\" (click)=\"deleteUser(user)\"\n                        style=\"width:100%;\"><i class=\"fas fa-user-slash fa-2x\"><h5 class=\"mb-0\"></h5></i></button>\n                    </td> \n                    \n                    <!-- modal for statistics of user-->\n                    <div class=\"modal fade\" id=\"stats-{{user.username}}\">\n                            <div class=\"modal-dialog modal-dialog-centered \">\n                              <div class=\" modal-content modal-content-size \">\n                                \n                                <!-- Modal Header -->\n                                <div class=\"modal-header\">\n                                  <h3 class=\"modal-title\">Statistiche Utente</h3>\n                                 \n                                </div>\n                                <!-- Modal body -->\n                                <div class=\" modal-body modal-body-size\" >\n                                    <article  class=\"card-body\">\n                                            <canvas [id]=\"user.username\" width=\"70vw\" height=\"70vh\"></canvas>      \n                                    </article>\n                                    <h4>Ruolo : {{user.role}}</h4>\n                                    <h4>Username : {{user.username}}</h4>\n                                </div>    \n                                <!-- Modal footer -->\n                                <div class=\"modal-footer\">\n                                  <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n                                </div>\n                                \n                              </div>\n                            </div>\n                    </div>\n                    \n                </tr>\n              </tbody>\n          \n            </table>\n            <!--Table-->\n    </div>\n  \n    <br>\n    <a href=\"#barmans\" data-toggle=\"collapse\" class=\"btn btn-outline-primary btn-block\">\n        <br>\n        <i class=\"fas fa-cocktail fa-4x\"><h3>Baristi</h3></i>\n    </a>\n    <div class=\"table-responsive \" id=\"barmans\" class=\"collapse\">\n        <!--Table-->\n        <table class=\"table text-center table-bordered\">\n      \n          <!--Table head-->\n          <thead class=\"head\">\n            <tr>\n              <th class=\"td-center th-sm\" >Username</th>\n              <th class=\"td-center th-sm\">Dati</th>\n              <th class=\"td-center th-sm\">Elimina</th>\n            </tr>\n          </thead>\n          <!--Table [ngClass]=\"{'free': free(table.clientsNumber),'busy': free(table.clientsNumber)}\" head-->\n          <tbody>           \n            <tr *ngFor=\"let user of barMans; let i=index\">\n                <td class=\"td-center text-capitalize font-weight-bold\">{{user.username}}</td>\n  \n                <td class=\"td-center p-0\"><a  type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\"(click)=\"initChart(user.username,user.role,user.jobs)\" href=\"#stats-{{user.username}}\"\n                    style=\"width:100%;\"><i class=\"fas fa-chart-pie fa-2x\"><h5 class=\"mb-0\"></h5></i></a>\n                    </td>   \n                <td class=\"td-center p-0\"><button  type=\"button\" class=\"btn btn-danger btn-lg\" (click)=\"deleteUser(user)\"\n                    style=\"width:100%;\"><i class=\"fas fa-user-slash fa-2x\"><h5 class=\"mb-0\"></h5></i></button>\n                </td> \n                \n                <!-- modal for statistics of user-->\n                <div class=\"modal fade\" id=\"stats-{{user.username}}\">\n                        <div class=\"modal-dialog modal-dialog-centered \">\n                          <div class=\" modal-content modal-content-size \">\n                            \n                            <!-- Modal Header -->\n                            <div class=\"modal-header\">\n                              <h3 class=\"modal-title\">Statistiche Utente</h3>\n                             \n                            </div>\n                            <!-- Modal body -->\n                            <div class=\" modal-body modal-body-size\" >\n                                <article  class=\"card-body\">\n                                        <canvas [id]=\"user.username\" width=\"70vw\" height=\"70vh\"></canvas>      \n                                </article>\n                                <h4>Ruolo : {{user.role}}</h4>\n                                <h4>Username : {{user.username}}</h4>\n                            </div>    \n                            <!-- Modal footer -->\n                            <div class=\"modal-footer\">\n                              <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n                            </div>\n                            \n                          </div>\n                        </div>\n                </div>\n                \n            </tr>\n          </tbody>\n      \n        </table>\n        <!--Table-->\n  </div>\n    <br>\n    <a href=\"#chefs\" data-toggle=\"collapse\" class=\"btn btn-primary btn-block\">\n        <br>\n        <i class=\"fas fa-fire fa-4x\"><h3>Cuochi</h3></i>\n    </a>\n    <div class=\"table-responsive \" id=\"chefs\" class=\"collapse\">\n        <!--Table-->\n        <table class=\"table text-center table-bordered\">\n      \n          <!--Table head-->\n          <thead class=\"head\">\n            <tr>\n              <th class=\"td-center th-sm\" >Username</th>\n              <th class=\"td-center th-sm\">Dati</th>\n              <th class=\"td-center th-sm\">Elimina</th>\n            </tr>\n          </thead>\n          <!--Table [ngClass]=\"{'free': free(table.clientsNumber),'busy': free(table.clientsNumber)}\" head-->\n          <tbody>           \n            <tr *ngFor=\"let user of chefs; let i=index\">\n                <td class=\"td-center text-capitalize font-weight-bold\">{{user.username}}</td>\n  \n                <td class=\"td-center p-0\"><a  type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" (click)=\"initChart(user.username,user.role,user.jobs)\" href=\"#stats-{{user.username}}\"\n                    style=\"width:100%;\"><i class=\"fas fa-chart-pie fa-2x\"><h5 class=\"mb-0\"></h5></i></a>\n                    </td>   \n                <td class=\"td-center p-0\"><button  type=\"button\" class=\"btn btn-danger btn-lg\" (click)=\"deleteUser(user)\"\n                    style=\"width:100%;\"><i class=\"fas fa-user-slash fa-2x\"><h5 class=\"mb-0\"></h5></i></button>\n                </td> \n                \n                <!-- modal for statistics of user-->\n                <div class=\"modal fade\" id=\"stats-{{user.username}}\">\n                        <div class=\"modal-dialog modal-dialog-centered \">\n                          <div class=\" modal-content modal-content-size \">\n                            \n                            <!-- Modal Header -->\n                            <div class=\"modal-header\">\n                              <h3 class=\"modal-title\">Statistiche Utente</h3>\n                             \n                            </div>\n                            <!-- Modal body -->\n                            <div class=\" modal-body modal-body-size\" >\n                                <article  class=\"card-body\">\n                                        <canvas [id]=\"user.username\" width=\"70vw\" height=\"70vh\"></canvas>      \n                                </article>\n                                <h4>Ruolo : {{user.role}}</h4>\n                                <h4>Username : {{user.username}}</h4>\n                            </div>    \n                            <!-- Modal footer -->\n                            <div class=\"modal-footer\">\n                              <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n                            </div>\n                            \n                          </div>\n                        </div>\n                </div>\n                \n            </tr>\n          </tbody>\n      \n        </table>\n        <!--Table-->\n  </div>\n    <br>\n    <a href=\"#desks\" data-toggle=\"collapse\" class=\"btn btn-outline-primary btn-block\">\n        <br>\n        <i class=\"fas fa-cash-register fa-4x\"><h3>Cassieri</h3></i>\n    </a>\n    <div class=\"table-responsive \" id=\"desks\" class=\"collapse\">\n        <!--Table-->\n        <table class=\"table text-center table-bordered\">\n      \n          <!--Table head-->\n          <thead class=\"head\">\n            <tr>\n              <th class=\"td-center th-sm\" >Username</th>\n              <th class=\"td-center th-sm\">Dati</th>\n              <th class=\"td-center th-sm\">Elimina</th>\n            </tr>\n          </thead>\n        \n          <tbody>           \n            <tr *ngFor=\"let user of desks; let i=index\">\n                <td class=\"td-center text-capitalize font-weight-bold\">{{user.username}}</td>\n  \n                <td class=\"td-center p-0\"><a  type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\"(click)=\"initChart(user.username,user.role,user.jobs)\" href=\"#stats-{{user.username}}\"\n                    style=\"width:100%;\"><i class=\"fas fa-chart-pie fa-2x\"><h5 class=\"mb-0\"></h5></i></a>\n                    </td>   \n                <td class=\"td-center p-0\"><button  type=\"button\" class=\"btn btn-danger btn-lg\" (click)=\"deleteUser(user)\"\n                    style=\"width:100%;\"><i class=\"fas fa-user-slash fa-2x\"><h5 class=\"mb-0\"></h5></i></button>\n                </td> \n                \n                <!-- modal for statistics of user-->\n                <div class=\"modal fade\" id=\"stats-{{user.username}}\">\n                        <div class=\"modal-dialog modal-dialog-centered \">\n                          <div class=\" modal-content modal-content-size \">\n                            \n                            <!-- Modal Header -->\n                            <div class=\"modal-header\">\n                              <h3 class=\"modal-title\">Statistiche Utente</h3>\n                             \n                            </div>\n                            <!-- Modal body -->\n                            <div class=\" modal-body modal-body-size\" >\n                                <article  class=\"card-body\">\n                                        <canvas [id]=\"user.username\" width=\"70vw\" height=\"70vh\"></canvas>      \n                                </article>\n                                <h4>Ruolo : {{user.role}}</h4>\n                                <h4>Username : {{user.username}}</h4>\n                            </div>    \n                            <!-- Modal footer -->\n                            <div class=\"modal-footer\">\n                              <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n                            </div>\n                            \n                          </div>\n                        </div>\n                </div>\n                \n            </tr>\n          </tbody>\n      \n        </table>\n        <!--Table-->\n  </div>\n    <br>\n  \n    <button routerLink=\"/sign-up\" type=\"button\" class=\"btn btn-primary btn-block\">\n      <br>\n      <i class=\"fas fa-user-plus fa-4x\"><h3> Crea Nuovo Utente</h3></i>\n  </button>\n  <br>\n  </div>\n  \n  "
 
 /***/ }),
 
@@ -426,7 +426,18 @@ module.exports = "<div class=\"container\">\n    <br>\n    <h1 class=\"text-cent
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container \">\n    <br>\n    <h1 class=\"text-center\">Statistiche giornaliere</h1>\n    <hr>\n    <div class=\"row\">\n            <div class=\"col-md-12\">\n               \n                <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n                <div class=\"row d-flex flex-wrap\">\n                    <div class=\"col-md-6 mx-auto\">\n                        <br>\n\n                        <div class=\"card border-0\">\n                            \n                            <article  class=\"card-body\">\n                                <canvas id=\"statsOrders\" width=\"70vw\" height=\"70vh\"></canvas>       \n                            </article>                             \n                        </div> \n                    </div>\n                    <div class=\"col-md-6 mx-auto\">\n                        <br>\n                        \n                        <div class=\"card border-0\">\n                            <article  class=\"card-body\">\n                                <canvas id=\"statsRecipts\" width=\"70vw\" height=\"70vh\"></canvas>       \n                            </article>                             \n                        </div> \n                    </div>\n                </div> \n            </div>           \n    </div>\n</div>"
+module.exports = "<div class=\"container \">\n    <br>\n    <h1 class=\"text-center\">Statistiche giornaliere</h1>\n    <hr>\n    <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n    <div class=\"row\">\n            <div class=\"col-md-12\">\n            \n                <div class=\"row d-flex flex-wrap\">\n                    <div class=\"col-md-6 mx-auto\">\n                        <br>\n\n                        <div class=\"card border-0\">\n                            \n                            <article  class=\"card-body\">\n                                <canvas id=\"statsOrders\" width=\"70vw\" height=\"70vh\"></canvas>       \n                            </article>                             \n                        </div> \n                    </div>\n                    <div class=\"col-md-6 mx-auto\">\n                        <br>\n                        \n                        <div class=\"card border-0\">\n                            <article  class=\"card-body\">\n                                <canvas id=\"statsRecipts\" width=\"70vw\" height=\"70vh\"></canvas>       \n                            </article>                             \n                        </div> \n                    </div>\n                </div> \n            </div>           \n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/components/table-orders/table-orders.component.html":
+/*!***********************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/components/table-orders/table-orders.component.html ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<br>\n<div class=\"container\" >\n  <h1 class=\"text-center font-weight-bold\">Ordini tavolo {{this.tableCode}}</h1>\n  <hr>\n\n  <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n  <ng-container *ngFor=\"let order of kitchenOrders; let i = index\" >\n\n\n  <div  class=\"bg-white rounded-lg p-1 shadow row \" id=\"{{order._id}}\" >\n\n    <div class=\"col-6 border-right \">\n        <br>\n        <h1 class=\"text-center font-weight-bold\"> Tavolo {{order.tableCode}}</h1>\n        <hr>\n        <h4 class=\"text-center font-weight-bold mt-4\" > Cameriere {{order.waiter}}</h4>\n        \n        <a  href=\"#ordersK-{{i}}\" class=\"btn btn-primary btn-block mt-4 mb-1\" data-toggle=\"collapse\" ><h2>Ordini</h2></a>\n    </div>\n    <div class=\"col-6\">\n      <br>\n      <h2 class=\"h4 font-weight-bold text-center mb-2\">Preparazione</h2>\n      <!-- Progress bar 3 -->\n      <div class=\"progress mx-auto\" data-value='order.status'  >\n        <span class=\"progress-left\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <span class=\"progress-right\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <div class=\"progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center\">\n          <div class=\"h2 font-weight-bold\">{{order.progress | number:'1.0-0'}}<sup class=\"small\">%</sup></div>\n        </div>\n      </div>\n      <h3 class=\"text-center font-weight-bold mt-2\" >Stato : {{order.status}}</h3>\n    </div>\n    <div id=\"ordersK-{{i}}\" class=\"collapse col-12 border-top text-center font-weight-bold\">\n      <div class=\"row align-items-center border-bottom\">\n          <div class=\"col-7\">\n              <h2 class=\"h4 font-weight-bold text-center m-2\">Portata</h2>\n          </div>\n          <div class=\"col-5\">\n            <h2 class=\"h4 font-weight-bold text-center m-2\">Status</h2>\n          </div>\n      </div>\n      \n      <div  class=\"row align-items-center border-bottom \" *ngFor=\"let item of order.items\">\n        <div class=\"col-7 \">\n          <div class=\"row align-items-center \">\n            <div class=\"col-4 p-0 \">\n              <h5 class=\"font-weight-bold\">Nome:</h5>\n            </div>\n            <div class=\"col-8\">\n                <h5 class=\"font-weight-bold\" >{{item.name}}</h5>\n            </div>\n          </div>\n          <div class=\"row align-items-center\">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\">Quantità:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\" >{{item.amount}}</h5>\n              </div>\n          </div>\n          <div class=\"row align-items-center \">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\" >Tempo:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\">{{item.time}}m</h5>\n              </div>\n          </div>  \n        </div>\n        <div class=\"col-5 p-0\">\n            <h4 *ngIf=\"statusCheck(item)=='3'\" class=\"completed font-weight-bold\">Pronto</h4>\n            <h4 *ngIf=\"statusCheck(item)=='2'\" class=\"ongoing font-weight-bold\">In preparazione</h4>\n            <h4 *ngIf=\"statusCheck(item)=='1'\" class=\"starting font-weight-bold\">Da iniziare</h4>\n        </div>\n      <hr>\n      </div>\n\n      \n    </div>\n    <br>\n    \n  </div>\n  <br>\n  <br *ngIf=\"order.status!= 'checked-out'\">\n</ng-container>\n\n\n<ng-container *ngFor=\"let order of barOrders; let i = index\" >\n\n\n  <div  class=\"bg-white rounded-lg p-1 shadow row \" id=\"{{order._id}}\" >\n\n    <div class=\"col-6 border-right \">\n        <br>\n        <h1 class=\"text-center font-weight-bold\"> Tavolo {{order.tableCode}}</h1>\n        <hr>\n        <h4 class=\"text-center font-weight-bold mt-4\" > Cameriere {{order.waiter}}</h4>\n        <a  href=\"#ordersB-{{i}}\" class=\"btn btn-primary btn-block mt-4 mb-1\" data-toggle=\"collapse\" ><h2>Ordini</h2></a>\n    </div>\n    <div class=\"col-6\">\n      <br>\n      <h2 class=\"h4 font-weight-bold text-center mb-2\">Preparazione</h2>\n      <!-- Progress bar 3 -->\n      <div class=\"progress mx-auto\" data-value='order.status'  >\n        <span class=\"progress-left\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <span class=\"progress-right\">\n          <span class=\"progress-bar border-success\"></span>\n        </span>\n        <div class=\"progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center\">\n          <div class=\"h2 font-weight-bold\">{{order.progress | number:'1.0-0'}}<sup class=\"small\">%</sup></div>\n        </div>\n      </div>\n      <h3 class=\"text-center font-weight-bold mt-3\" >Stato : {{order.status}}</h3>\n    </div>\n    <div id=\"ordersB-{{i}}\" class=\"collapse col-12 border-top text-center font-weight-bold \">\n      <div class=\"row align-items-center border-bottom\">\n          <div class=\"col-7\">\n              <h2 class=\"h4 font-weight-bold text-center m-2\">Portata</h2>\n          </div>\n          <div class=\"col-5\">\n            <h2 class=\"h4 font-weight-bold text-center m-2\">Status</h2>\n          </div>\n      </div>\n      \n      <div  class=\"row align-items-center border-bottom \" *ngFor=\"let item of order.items\">\n        <div class=\"col-7 \">\n          <div class=\"row align-items-center \">\n            <div class=\"col-4 p-0 \">\n              <h5 class=\"font-weight-bold\">Nome:</h5>\n            </div>\n            <div class=\"col-8\">\n                <h5 class=\"font-weight-bold\" >{{item.name}}</h5>\n            </div>\n          </div>\n          <div class=\"row align-items-center\">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\">Quantità:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\" >{{item.amount}}</h5>\n              </div>\n          </div>\n          <div class=\"row align-items-center \">\n              <div class=\"col-4 p-0 \">\n                <h5 class=\"font-weight-bold\" >Tempo:</h5>\n              </div>\n              <div class=\"col-8\">\n                  <h5 class=\"font-weight-bold\">{{item.time}}m</h5>\n              </div>\n          </div>  \n        </div>\n        <div class=\"col-5 p-0\">\n          <h3 *ngIf=\"statusCheck(item)=='3'\" class=\"completed font-weight-bold\">Pronto</h3>\n          <h4 *ngIf=\"statusCheck(item)=='2'\" class=\"ongoing font-weight-bold\">In preparazione</h4>\n          <h3 *ngIf=\"statusCheck(item)=='1'\" class=\"starting font-weight-bold\">Da iniziare</h3>\n        </div>\n      <hr>\n      </div>\n\n      \n    </div>\n    <br>\n    \n  </div>\n  <br>\n  <br *ngIf=\"order.status!= 'checked-out'\">\n</ng-container>\n</div>"
 
 /***/ }),
 
@@ -437,7 +448,7 @@ module.exports = "<div class=\"container \">\n    <br>\n    <h1 class=\"text-cen
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container  p-0 m-auto\" >\n    <br>\n    <h1 class=\"text-center font-weight-bold\">Tavoli</h1>\n    <hr>\n  \n    <div class=\"d-flex flex-wrap justify-content-center p-0 m-0\" id=\"list-of-ttables\">\n      <ng-container *ngFor=\"let table of tables; let i=index\">\n          <div class=\"m-2 shadow ttable  border border-success\"  *ngIf=\"free(table.clients); else busy\">\n              <a data-toggle=\"modal\" href=\"#ttable-{{i}}\" class=\"p-0\" >\n                  <div class=\"pl-3 pr-3 pt-3 text-center\">\n                    <h3 class=\"text-center font-weight-bold code\">{{table.tableCode}}</h3>\n                    <hr class=\"m-0\">\n                    <i class=\"far fa-check-circle fa-4x pl-4 pt-3 pr-4 pb-0\" style=\"color:green\">\n                      <h5 class=\"text-center font-weight-bold \"> Libero </h5>\n                    </i>\n                  </div>\n              </a>\n          </div>\n        <ng-template #busy>\n            <div class=\"m-2 shadow ttable border border-danger \" >\n              <a data-toggle=\"modal\" href=\"#ttable-{{i}}\" class=\"p-0\" >\n                <div class=\" pl-3 pr-3 pt-3 text-center  \">\n                  <h3 class=\"text-center font-weight-bold code\">{{table.tableCode}}</h3>\n                  <hr class=\"m-0\">\n                    <i class=\"fas fa-ban fa-4x pl-3 pt-3 pr-3 pb-0\" style=\"color:red\">\n                      <h5 class=\"text-center font-weight-bold \">Occupato</h5>\n                    </i>\n                </div>\n              </a>\n            </div>\n        </ng-template>\n        <div class=\"modal fade\" id=\"ttable-{{i}}\">\n          <div class=\"modal-dialog modal-dialog-centered \">\n            <div class=\" modal-content modal-content-size \">\n              \n              <!-- Modal Header -->\n              <div class=\"modal-header\">\n                <h3 class=\"modal-title font-weight-bold\">Tavolo {{table.tableCode}}</h3>\n              </div>\n              <!-- Modal body -->\n              <div class=\" modal-body modal-body-size\" >\n                <div class=\"row align-items-center\">\n                    <div class=\"col-6 \">\n                      <h4 class=\"font-weight-bold \">Coperti</h4>\n                    </div>\n                    <div class=\"col-6 \" *ngIf=\"free(table.clients); else options\" >\n                        <select [disabled]=\"isDesk()\" (change)=\"book(table)\" class=\" form-control\" #clientsNumber=\"ngModel\" name=\"clientsNumber\" [(ngModel)]=\"table.clients\" >\n                          <option class=\"sp\" *ngFor=\"let seat of table.seats\">{{seat}}</option>\n                        </select>\n                    </div>\n                    <ng-template #options>\n                        <div class=\"col-6  \">\n                          <h4 class=\"text-center\">{{table.clients}}</h4>\n                        </div>\n                    </ng-template>\n                </div>\n                <hr class=\"mt-1\">\n                <h4 class=\"text-center font-weight-bold\">Ordini</h4>\n                <div class=\"row align-items-center\">\n                  \n                  <div class=\"col-6\">\n                      <button  type=\"button\"  data-dismiss=\"modal\" class=\"btn btn-primary\" \n                      [disabled]=\"!table.clients\" style=\"width:100%;height:100%;\" (click)=\"previous($event,table)\"><i class=\"fas fa-list fa-2x\"><h5 class=\"mb-0\">Precedenti</h5></i>\n                      </button>\n                  </div>\n                  <div class=\"col-6\">\n                      <button *ngIf=\"!isDesk()\" type=\"button\"   data-dismiss=\"modal\" class=\"btn btn-primary\" \n                      [disabled]=\"!table.clients\" style=\"width:100%;height:100%;\" (click)=\"ordine($event,table)\"><i class=\"fas fa-arrow-right fa-2x\"><h5 class=\"mb-0\">Nuovo</h5></i>\n                      </button>\n                      <button  *ngIf=\"isDesk()\" type=\"button\"   data-dismiss=\"modal\" class=\"btn btn-primary\" \n                      [disabled]=\"!table.clients\" style=\"width:100%;height:100%;\" (click)=\"checkOut($event,table)\"><i class=\"fas fa-arrow-right fa-2x\"><h5 class=\"mb-0\">Check-out</h5></i>\n                      </button>\n                  </div>\n                </div>\n              </div>    \n              <!-- Modal footer -->\n              <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n              </div>\n              \n            </div>\n          </div>\n        </div> \n      </ng-container>\n    </div>\n    <div class=\"fixed-bottom  d-flex justify-content-between\" style=\"background-color:black\">\n          <input type=\"text\" class=\"form-control\" id=\"searchTables\" (keyup)=\"search()\" placeholder=\"cerca il tavolo\">\n          <button class=\"btn btn-primary btn-circle\" (click)=\"search()\"><h5 class=\"mb-0\">Cerca</h5></button>\n    </div>\n  \n</div>"
+module.exports = "<div class=\"container  p-0 m-auto\" >\n    <br>\n    <h1 class=\"text-center font-weight-bold\">Tavoli</h1>\n    <hr>\n    <div class=\"alert alert-danger text-center\" *ngIf=\"errorMessage\">Something bad happened error : {{errorMessage}}</div>\n  \n    <div class=\"d-flex flex-wrap justify-content-center p-0 m-0\" id=\"list-of-ttables\">\n      <ng-container *ngFor=\"let table of tables; let i=index\">\n          <div class=\"m-2 shadow ttable  border border-success\"  *ngIf=\"free(table.clients); else busy\">\n              <a data-toggle=\"modal\" href=\"#ttable-{{i}}\" class=\"p-0\" >\n                  <div class=\"pl-3 pr-3 pt-3 text-center\">\n                    <h3 class=\"text-center font-weight-bold code\">{{table.tableCode}}</h3>\n                    <hr class=\"m-0\">\n                    <i class=\"far fa-check-circle fa-4x pl-4 pt-3 pr-4 pb-0\" style=\"color:green\">\n                      <h5 class=\"text-center font-weight-bold \"> Libero </h5>\n                    </i>\n                  </div>\n              </a>\n          </div>\n        <ng-template #busy>\n            <div class=\"m-2 shadow ttable border border-danger \" >\n              <a data-toggle=\"modal\" href=\"#ttable-{{i}}\" class=\"p-0\" >\n                <div class=\" pl-3 pr-3 pt-3 text-center  \">\n                  <h3 class=\"text-center font-weight-bold code\">{{table.tableCode}}</h3>\n                  <hr class=\"m-0\">\n                    <i class=\"fas fa-ban fa-4x spazio pr-3 pl-3 pt-3  fix pb-0\" style=\"color:red\">\n                      <h5 class=\"text-center  font-weight-bold \">Occupato</h5>\n                    </i>\n                </div>\n              </a>\n            </div>\n        </ng-template>\n        <div class=\"modal fade\" id=\"ttable-{{i}}\">\n          <div class=\"modal-dialog modal-dialog-centered \">\n            <div class=\" modal-content modal-content-size \">\n              \n              <!-- Modal Header -->\n              <div class=\"modal-header\">\n                <h3 class=\"modal-title font-weight-bold\">Tavolo {{table.tableCode}}</h3>\n              </div>\n              <!-- Modal body -->\n              <div class=\" modal-body modal-body-size\" >\n                <div class=\"row align-items-center\">\n                    <div class=\"col-6 \">\n                      <h4 class=\"font-weight-bold \">Coperti</h4>\n                    </div>\n                    <div class=\"col-6 \" *ngIf=\"free(table.clients); else options\" >\n                        <select [disabled]=\"isDesk()\" (change)=\"book(table)\" class=\" form-control\" #clientsNumber=\"ngModel\" name=\"clientsNumber\" [(ngModel)]=\"table.clients\" >\n                          <option class=\"sp\" *ngFor=\"let seat of table.seats\">{{seat}}</option>\n                        </select>\n                    </div>\n                    <ng-template #options>\n                        <div class=\"col-6  \">\n                          <h4 class=\"text-center\">{{table.clients}}</h4>\n                        </div>\n                    </ng-template>\n                </div>\n                <hr class=\"mt-1\">\n                <h4 class=\"text-center font-weight-bold\">Ordini</h4>\n                <div class=\"row align-items-center\">\n                  \n                  <div class=\"col-6\">\n                      <button  type=\"button\"  data-dismiss=\"modal\" class=\"btn btn-primary\" \n                      [disabled]=\"!table.clients\" style=\"width:100%;height:100%;\" (click)=\"previous($event,table)\"><i class=\"fas fa-list fa-2x\"><h5 class=\"mb-0\">Precedenti</h5></i>\n                      </button>\n                  </div>\n                  <div class=\"col-6\">\n                      <button *ngIf=\"!isDesk()\" type=\"button\"   data-dismiss=\"modal\" class=\"btn btn-primary\" \n                      [disabled]=\"!table.clients\" style=\"width:100%;height:100%;\" (click)=\"ordine($event,table)\"><i class=\"fas fa-arrow-right fa-2x\"><h5 class=\"mb-0\">Nuovo</h5></i>\n                      </button>\n                      <button  *ngIf=\"isDesk()\" type=\"button\"   data-dismiss=\"modal\" class=\"btn btn-primary\" \n                      [disabled]=\"!table.clients\" style=\"width:100%;height:100%;\" (click)=\"checkOut($event,table)\"><i class=\"fas fa-arrow-right fa-2x\"><h5 class=\"mb-0\">Check-out</h5></i>\n                      </button>\n                  </div>\n                </div>\n              </div>    \n              <!-- Modal footer -->\n              <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n              </div>\n              \n            </div>\n          </div>\n        </div> \n      </ng-container>\n    </div>\n    <div class=\"fixed-bottom  d-flex justify-content-between\" style=\"background-color:black\">\n          <input type=\"text\" class=\"form-control\" id=\"searchTables\" (keyup)=\"search()\" placeholder=\"cerca il tavolo\">\n          <button class=\"btn btn-primary btn-circle\" (click)=\"search()\"><h5 class=\"mb-0\">Cerca</h5></button>\n    </div>\n  \n</div>"
 
 /***/ }),
 
@@ -448,7 +459,7 @@ module.exports = "<div class=\"container  p-0 m-auto\" >\n    <br>\n    <h1 clas
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>toasts works!</p>\n"
+module.exports = ""
 
 /***/ }),
 
@@ -477,6 +488,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_staff_staff_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/staff/staff.component */ "./src/app/components/staff/staff.component.ts");
 /* harmony import */ var _components_check_out_check_out_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/check-out/check-out.component */ "./src/app/components/check-out/check-out.component.ts");
 /* harmony import */ var _components_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/statistics/statistics.component */ "./src/app/components/statistics/statistics.component.ts");
+/* harmony import */ var _components_table_orders_table_orders_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/table-orders/table-orders.component */ "./src/app/components/table-orders/table-orders.component.ts");
+
 
 
 
@@ -493,6 +506,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var routes = [
     { path: '', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
+    { path: 'table-orders/:tableCode', component: _components_table_orders_table_orders_component__WEBPACK_IMPORTED_MODULE_14__["TableOrdersComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
     { path: 'statistics', component: _components_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_13__["StatisticsComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
     { path: 'check-out/:tableCode/:clients', component: _components_check_out_check_out_component__WEBPACK_IMPORTED_MODULE_12__["CheckOutComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
     { path: 'staff', component: _components_staff_staff_component__WEBPACK_IMPORTED_MODULE_11__["StaffComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
@@ -501,7 +515,7 @@ var routes = [
     { path: 'kitchen', component: _components_orders_orders_component__WEBPACK_IMPORTED_MODULE_9__["OrdersComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
     { path: 'order/:tableCode/:clients', component: _components_order_order_component__WEBPACK_IMPORTED_MODULE_8__["OrderComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
     { path: 'tables', component: _components_tables_tables_component__WEBPACK_IMPORTED_MODULE_7__["TablesComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
-    { path: 'sign-in', component: _components_sign_in_sign_in_component__WEBPACK_IMPORTED_MODULE_6__["SignInComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
+    { path: 'sign-in', component: _components_sign_in_sign_in_component__WEBPACK_IMPORTED_MODULE_6__["SignInComponent"] },
     { path: 'sign-up', component: _components_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_5__["SignUpComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
     { path: '**', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]] },
 ];
@@ -518,6 +532,12 @@ var AppRoutingModule = /** @class */ (function () {
 }());
 
 var RoutingComponents = [
+    _components_table_orders_table_orders_component__WEBPACK_IMPORTED_MODULE_14__["TableOrdersComponent"],
+    _components_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_13__["StatisticsComponent"],
+    _components_check_out_check_out_component__WEBPACK_IMPORTED_MODULE_12__["CheckOutComponent"],
+    _components_staff_staff_component__WEBPACK_IMPORTED_MODULE_11__["StaffComponent"],
+    _components_cash_desk_cash_desk_component__WEBPACK_IMPORTED_MODULE_10__["CashDeskComponent"],
+    _components_orders_orders_component__WEBPACK_IMPORTED_MODULE_9__["OrdersComponent"],
     _components_order_order_component__WEBPACK_IMPORTED_MODULE_8__["OrderComponent"],
     _components_tables_tables_component__WEBPACK_IMPORTED_MODULE_7__["TablesComponent"],
     _components_sign_in_sign_in_component__WEBPACK_IMPORTED_MODULE_6__["SignInComponent"],
@@ -588,27 +608,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/navbar/navbar.component */ "./src/app/components/navbar/navbar.component.ts");
-/* harmony import */ var _components_tables_tables_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/tables/tables.component */ "./src/app/components/tables/tables.component.ts");
-/* harmony import */ var _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/auth-guard.service */ "./src/app/services/auth-guard.service.ts");
-/* harmony import */ var _services_errors_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./services/errors.service */ "./src/app/services/errors.service.ts");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _services_headers_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./services/headers.service */ "./src/app/services/headers.service.ts");
-/* harmony import */ var _components_order_order_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/order/order.component */ "./src/app/components/order/order.component.ts");
-/* harmony import */ var _components_orders_orders_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/orders/orders.component */ "./src/app/components/orders/orders.component.ts");
-/* harmony import */ var _components_cash_desk_cash_desk_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/cash-desk/cash-desk.component */ "./src/app/components/cash-desk/cash-desk.component.ts");
-/* harmony import */ var _components_staff_staff_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/staff/staff.component */ "./src/app/components/staff/staff.component.ts");
-/* harmony import */ var _components_check_out_check_out_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/check-out/check-out.component */ "./src/app/components/check-out/check-out.component.ts");
-/* harmony import */ var _components_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/statistics/statistics.component */ "./src/app/components/statistics/statistics.component.ts");
-/* harmony import */ var _components_toasts_toasts_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/toasts/toasts.component */ "./src/app/components/toasts/toasts.component.ts");
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
-
-
-
-
-
-
-
+/* harmony import */ var _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/auth-guard.service */ "./src/app/services/auth-guard.service.ts");
+/* harmony import */ var _services_errors_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/errors.service */ "./src/app/services/errors.service.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _services_headers_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./services/headers.service */ "./src/app/services/headers.service.ts");
+/* harmony import */ var _components_toasts_toasts_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/toasts/toasts.component */ "./src/app/components/toasts/toasts.component.ts");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 
 
 
@@ -632,33 +638,26 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
                 _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_6__["NavbarComponent"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["RoutingComponents"],
-                _components_tables_tables_component__WEBPACK_IMPORTED_MODULE_7__["TablesComponent"],
-                _components_order_order_component__WEBPACK_IMPORTED_MODULE_13__["OrderComponent"],
-                _components_orders_orders_component__WEBPACK_IMPORTED_MODULE_14__["OrdersComponent"],
-                _components_cash_desk_cash_desk_component__WEBPACK_IMPORTED_MODULE_15__["CashDeskComponent"],
-                _components_staff_staff_component__WEBPACK_IMPORTED_MODULE_16__["StaffComponent"],
-                _components_check_out_check_out_component__WEBPACK_IMPORTED_MODULE_17__["CheckOutComponent"],
-                _components_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_18__["StatisticsComponent"],
-                _components_toasts_toasts_component__WEBPACK_IMPORTED_MODULE_19__["ToastsComponent"]
+                _components_toasts_toasts_component__WEBPACK_IMPORTED_MODULE_12__["ToastsComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_10__["BrowserAnimationsModule"],
-                ngx_toastr__WEBPACK_IMPORTED_MODULE_20__["ToastrModule"].forRoot({ positionClass: 'toast-top-right' })
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__["BrowserAnimationsModule"],
+                ngx_toastr__WEBPACK_IMPORTED_MODULE_13__["ToastrModule"].forRoot({ positionClass: 'toast-top-right' })
             ],
             providers: [
-                _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuardService"],
+                _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_7__["AuthGuardService"],
                 {
                     provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HTTP_INTERCEPTORS"],
-                    useClass: _services_errors_service__WEBPACK_IMPORTED_MODULE_9__["ErrorsService"],
+                    useClass: _services_errors_service__WEBPACK_IMPORTED_MODULE_8__["ErrorsService"],
                     multi: true
                 },
                 {
                     provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HTTP_INTERCEPTORS"],
-                    useClass: _services_headers_service__WEBPACK_IMPORTED_MODULE_12__["HeadersService"],
+                    useClass: _services_headers_service__WEBPACK_IMPORTED_MODULE_11__["HeadersService"],
                     multi: true
                 }
             ],
@@ -750,6 +749,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services_tables_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/tables.service */ "./src/app/services/tables.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_services_recipts_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/recipts.service */ "./src/app/services/recipts.service.ts");
+/* harmony import */ var src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/socket.service */ "./src/app/services/socket.service.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+
+
 
 
 
@@ -759,7 +762,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CheckOutComponent = /** @class */ (function () {
-    function CheckOutComponent(ordersService, usersService, tablesService, reciptsService, route) {
+    function CheckOutComponent(location, socketService, ordersService, usersService, tablesService, reciptsService, route) {
+        this.location = location;
+        this.socketService = socketService;
         this.ordersService = ordersService;
         this.usersService = usersService;
         this.tablesService = tablesService;
@@ -770,18 +775,26 @@ var CheckOutComponent = /** @class */ (function () {
         var _this = this;
         this.clients = +(this.route.snapshot.paramMap.get('clients'));
         this.tableCode = this.route.snapshot.paramMap.get('tableCode');
-        this.recipt = new src_models_recipt__WEBPACK_IMPORTED_MODULE_2__["Recipt"](this.tableCode, this.clients);
-        this.ordersService.getOrders("kitchen", "?tableCode=" + this.tableCode).subscribe(function (res) { return _this.kitchenOrders = res; }, function (err) { return console.log(err); }, function () {
+        this.socketService.socket.on("updateKitchen", function () {
+            _this.getOrders();
+        });
+        this.socketService.socket.on("upateBar", function () {
+            _this.getOrders();
+        });
+        this.getOrders();
+    };
+    CheckOutComponent.prototype.getKitchen = function () {
+        var _this = this;
+        this.ordersService.getOrders("kitchen", "?tableCode=" + this.tableCode).subscribe(function (res) { return _this.kitchenOrders = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () {
             var e_1, _a;
-            _this.kitchenOrders = _this.kitchenOrders.filter(function (order) { return order.status != "checked-out"; });
-            var total = 0;
-            console.log(_this.kitchenOrders);
+            _this.kitchenOrders = _this.kitchenOrders.filter(function (order) { return order.status != "pagato"; });
+            var totalK = 0;
             try {
                 for (var _b = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](_this.kitchenOrders), _c = _b.next(); !_c.done; _c = _b.next()) {
                     var order = _c.value;
                     _this.recipt.kitchenItems = _this.recipt.kitchenItems.concat(order.items);
-                    total = order.items.reduce(function (prev, cur) {
-                        return prev + cur.price;
+                    totalK = order.items.reduce(function (prev, cur) {
+                        return prev + (cur.price * cur.amount);
                     }, 0);
                 }
             }
@@ -792,42 +805,58 @@ var CheckOutComponent = /** @class */ (function () {
                 }
                 finally { if (e_1) throw e_1.error; }
             }
-            _this.recipt.totalKitchen = total;
-            _this.ordersService.getOrders("bar", "?tableCode=" + _this.tableCode).subscribe(function (res) { return _this.barOrders = res; }, function (err) { return console.log(err); }, function () {
-                var e_2, _a;
-                _this.barOrders = _this.barOrders.filter(function (order) { return order.status != "checked-out"; });
-                var total = 0;
-                try {
-                    for (var _b = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](_this.barOrders), _c = _b.next(); !_c.done; _c = _b.next()) {
-                        var order = _c.value;
-                        console.log(order.items);
-                        _this.recipt.barItems = _this.recipt.barItems.concat(order.items);
-                        total = order.items.reduce(function (prev, cur) {
-                            return prev + cur.price;
-                        }, 0);
-                    }
-                }
-                catch (e_2_1) { e_2 = { error: e_2_1 }; }
-                finally {
-                    try {
-                        if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                    }
-                    finally { if (e_2) throw e_2.error; }
-                }
-                _this.recipt.totalBar = total;
-                _this.recipt.total = _this.recipt.totalBar + _this.recipt.totalKitchen;
-            });
+            _this.recipt.totalKitchen = totalK;
+            _this.getBar();
         });
     };
+    CheckOutComponent.prototype.getBar = function () {
+        var _this = this;
+        this.ordersService.getOrders("bar", "?tableCode=" + this.tableCode).subscribe(function (res) { return _this.barOrders = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () {
+            var e_2, _a;
+            _this.barOrders = _this.barOrders.filter(function (order) { return order.status != "pagato"; });
+            var totalB = 0;
+            try {
+                for (var _b = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](_this.barOrders), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var order = _c.value;
+                    _this.recipt.barItems = _this.recipt.barItems.concat(order.items);
+                    totalB = order.items.reduce(function (prev, cur) {
+                        return prev + (cur.price * cur.amount);
+                    }, 0);
+                }
+            }
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_2) throw e_2.error; }
+            }
+            _this.recipt.totalBar = totalB;
+            _this.recipt.total = _this.recipt.totalBar + _this.recipt.totalKitchen;
+        });
+    };
+    CheckOutComponent.prototype.getOrders = function () {
+        this.recipt = new src_models_recipt__WEBPACK_IMPORTED_MODULE_2__["Recipt"](this.tableCode, this.clients);
+        this.getKitchen();
+    };
     CheckOutComponent.prototype.checkOut = function () {
-        this.ordersService.checkOut("bar", this.tableCode).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { return console.log("done"); });
-        this.ordersService.checkOut("kitchen", this.tableCode).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { return console.log("done"); });
-        this.reciptsService.newRecipt(this.recipt).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { return console.log("done"); });
+        var _this = this;
+        this.ordersService.checkOut("bar", this.tableCode).subscribe(function (res) { return console.log(res); }, function (err) { return _this.errorMessage = err.statusText; }, function () { return _this.socketService.socket.emit('updateBar'); });
+        this.ordersService.checkOut("kitchen", this.tableCode).subscribe(function (res) { return console.log(res); }, function (err) { return _this.errorMessage = err.statusText; }, function () { return _this.socketService.socket.emit('updateKitchen'); });
+        this.reciptsService.newRecipt(this.recipt).subscribe(function (res) { return console.log(res); }, function (err) { return _this.errorMessage = err.statusText; }, function () { return _this.socketService.socket.emit('updateRecipts'); });
         this.usersService.user.jobs += 1;
-        this.usersService.updateUser(this.usersService.user.username).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { return console.log("done"); });
-        this.tablesService.updateTable(this.tableCode, { clients: 0 }).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { return console.log("done"); });
+        this.usersService.updateUser(this.usersService.user.username).subscribe(function (res) { return console.log(res); }, function (err) { return _this.errorMessage = err.statusText; }, function () { return _this.socketService.socket.emit('updateUsers'); });
+        this.tablesService.updateTable(this.tableCode, { clients: 0 }).subscribe(function (res) { return console.log(res); }, function (err) { return _this.errorMessage = err.statusText; }, function () {
+            _this.socketService.socket.emit('updateTables');
+            _this.location.back();
+        });
+    };
+    CheckOutComponent.prototype.goBack = function () {
+        this.location.back();
     };
     CheckOutComponent.ctorParameters = function () { return [
+        { type: _angular_common__WEBPACK_IMPORTED_MODULE_9__["Location"] },
+        { type: src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_8__["SocketService"] },
         { type: src_app_services_orders_service__WEBPACK_IMPORTED_MODULE_3__["OrdersService"] },
         { type: src_app_services_users_service__WEBPACK_IMPORTED_MODULE_4__["UsersService"] },
         { type: src_app_services_tables_service__WEBPACK_IMPORTED_MODULE_5__["TablesService"] },
@@ -871,38 +900,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_models_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/models/table */ "./src/models/table.ts");
-/* harmony import */ var src_models_menuItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/models/menuItem */ "./src/models/menuItem.ts");
-/* harmony import */ var src_app_services_menu_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/menu.service */ "./src/app/services/menu.service.ts");
-/* harmony import */ var src_app_services_tables_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/tables.service */ "./src/app/services/tables.service.ts");
-
-
-
-
 
 
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(menuService, tableService) {
-        this.menuService = menuService;
-        this.tableService = tableService;
+    function HomeComponent() {
     }
     HomeComponent.prototype.ngOnInit = function () {
     };
-    HomeComponent.prototype.newTable = function () {
-        var table = new src_models_table__WEBPACK_IMPORTED_MODULE_2__["Table"](this.tableCode, this.seats);
-        this.tableService.newTable(table).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { return console.log("done"); });
-    };
-    HomeComponent.prototype.newMenuItem = function () {
-        var menuItem = new src_models_menuItem__WEBPACK_IMPORTED_MODULE_3__["MenuItem"](this.name, this.type, this.price, this.time);
-        this.menuService.newMenuItem(menuItem).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { return console.log("done"); });
-    };
-    HomeComponent.prototype.getMenu = function () {
-        this.menuService.getMenu().subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { return console.log("done"); });
-    };
-    HomeComponent.ctorParameters = function () { return [
-        { type: src_app_services_menu_service__WEBPACK_IMPORTED_MODULE_4__["MenuService"] },
-        { type: src_app_services_tables_service__WEBPACK_IMPORTED_MODULE_5__["TablesService"] }
-    ]; };
     HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-home',
@@ -924,7 +928,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "nav{\n    background-color:rgb(0, 0, 0);\n    width:100%;\n    min-height: 100px;\n}\n\na{\n    font-size: 18pt\n}\n\n@media (max-width: 768px) {\n    .navbar-collapse {\n        height: 100vh;\n        z-index: 100;\n        background-color:rgb(0, 0, 0);\n        position: absolute;\n        top: 96px;\n        left: 0;\n        padding-left: 15px;\n        padding-right: 15px;\n        padding-bottom: 15px;\n        width: 40%;\n\n    }\n    .navbar-collapse.collapsing {\n        -webkit-transition: left 0.2s ease;\n        transition: left 0.2s ease;\n        left: -100%;\n    }\n    .navbar-collapse.show {\n        left: 0;\n        -webkit-transition: left 0.2s ease-in;\n        transition: left 0.2s ease-in;\n    }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSw2QkFBNkI7SUFDN0IsVUFBVTtJQUNWLGlCQUFpQjtBQUNyQjs7QUFFQTtJQUNJO0FBQ0o7O0FBRUE7SUFDSTtRQUNJLGFBQWE7UUFDYixZQUFZO1FBQ1osNkJBQTZCO1FBQzdCLGtCQUFrQjtRQUNsQixTQUFTO1FBQ1QsT0FBTztRQUNQLGtCQUFrQjtRQUNsQixtQkFBbUI7UUFDbkIsb0JBQW9CO1FBQ3BCLFVBQVU7O0lBRWQ7SUFDQTtRQUNJLGtDQUFrQztRQUdsQywwQkFBMEI7UUFDMUIsV0FBVztJQUNmO0lBQ0E7UUFDSSxPQUFPO1FBQ1AscUNBQXFDO1FBR3JDLDZCQUE2QjtJQUNqQztBQUNKIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJuYXZ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjpyZ2IoMCwgMCwgMCk7XG4gICAgd2lkdGg6MTAwJTtcbiAgICBtaW4taGVpZ2h0OiAxMDBweDtcbn1cblxuYXtcbiAgICBmb250LXNpemU6IDE4cHRcbn1cblxuQG1lZGlhIChtYXgtd2lkdGg6IDc2OHB4KSB7XG4gICAgLm5hdmJhci1jb2xsYXBzZSB7XG4gICAgICAgIGhlaWdodDogMTAwdmg7XG4gICAgICAgIHotaW5kZXg6IDEwMDtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjpyZ2IoMCwgMCwgMCk7XG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgdG9wOiA5NnB4O1xuICAgICAgICBsZWZ0OiAwO1xuICAgICAgICBwYWRkaW5nLWxlZnQ6IDE1cHg7XG4gICAgICAgIHBhZGRpbmctcmlnaHQ6IDE1cHg7XG4gICAgICAgIHBhZGRpbmctYm90dG9tOiAxNXB4O1xuICAgICAgICB3aWR0aDogNDAlO1xuXG4gICAgfVxuICAgIC5uYXZiYXItY29sbGFwc2UuY29sbGFwc2luZyB7XG4gICAgICAgIC13ZWJraXQtdHJhbnNpdGlvbjogbGVmdCAwLjJzIGVhc2U7XG4gICAgICAgIC1vLXRyYW5zaXRpb246IGxlZnQgMC4ycyBlYXNlO1xuICAgICAgICAtbW96LXRyYW5zaXRpb246IGxlZnQgMC4ycyBlYXNlO1xuICAgICAgICB0cmFuc2l0aW9uOiBsZWZ0IDAuMnMgZWFzZTtcbiAgICAgICAgbGVmdDogLTEwMCU7XG4gICAgfVxuICAgIC5uYXZiYXItY29sbGFwc2Uuc2hvdyB7XG4gICAgICAgIGxlZnQ6IDA7XG4gICAgICAgIC13ZWJraXQtdHJhbnNpdGlvbjogbGVmdCAwLjJzIGVhc2UtaW47XG4gICAgICAgIC1vLXRyYW5zaXRpb246IGxlZnQgMC4ycyBlYXNlLWluO1xuICAgICAgICAtbW96LXRyYW5zaXRpb246IGxlZnQgMC4ycyBlYXNlLWluO1xuICAgICAgICB0cmFuc2l0aW9uOiBsZWZ0IDAuMnMgZWFzZS1pbjtcbiAgICB9XG59Il19 */"
+module.exports = "nav{\n    background-color:rgb(0, 0, 0);\n    width:100%;\n    min-height: 100px;\n}\n\na{\n    font-size: 18pt\n}\n\n@media (max-width: 768px) {\n    .navbar-collapse {\n        height: 100vh;\n        z-index: 100;\n        background-color:rgb(0, 0, 0);\n        position: absolute;\n        top: 96px;\n        left: 0;\n        padding-left: 15px;\n        padding-right: 15px;\n        padding-bottom: 15px;\n        width: 40%;\n\n    }\n    .navbar-collapse.collapsing {\n        -webkit-transition: left 0.2s ease;\n        transition: left 0.2s ease;\n        left: -100%;\n    }\n    .navbar-collapse.show {\n        left: 0;\n        -webkit-transition: left 0.2s ease-in;\n        transition: left 0.2s ease-in;\n    }\n}\n\n@media (min-width: 770px) {\n   \n\n    .fix{\n        display: show !important;\n    }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSw2QkFBNkI7SUFDN0IsVUFBVTtJQUNWLGlCQUFpQjtBQUNyQjs7QUFFQTtJQUNJO0FBQ0o7O0FBRUE7SUFDSTtRQUNJLGFBQWE7UUFDYixZQUFZO1FBQ1osNkJBQTZCO1FBQzdCLGtCQUFrQjtRQUNsQixTQUFTO1FBQ1QsT0FBTztRQUNQLGtCQUFrQjtRQUNsQixtQkFBbUI7UUFDbkIsb0JBQW9CO1FBQ3BCLFVBQVU7O0lBRWQ7SUFDQTtRQUNJLGtDQUFrQztRQUdsQywwQkFBMEI7UUFDMUIsV0FBVztJQUNmO0lBQ0E7UUFDSSxPQUFPO1FBQ1AscUNBQXFDO1FBR3JDLDZCQUE2QjtJQUNqQztBQUNKOztBQUVBOzs7SUFHSTtRQUNJLHdCQUF3QjtJQUM1QjtBQUNKIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJuYXZ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjpyZ2IoMCwgMCwgMCk7XG4gICAgd2lkdGg6MTAwJTtcbiAgICBtaW4taGVpZ2h0OiAxMDBweDtcbn1cblxuYXtcbiAgICBmb250LXNpemU6IDE4cHRcbn1cblxuQG1lZGlhIChtYXgtd2lkdGg6IDc2OHB4KSB7XG4gICAgLm5hdmJhci1jb2xsYXBzZSB7XG4gICAgICAgIGhlaWdodDogMTAwdmg7XG4gICAgICAgIHotaW5kZXg6IDEwMDtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjpyZ2IoMCwgMCwgMCk7XG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgdG9wOiA5NnB4O1xuICAgICAgICBsZWZ0OiAwO1xuICAgICAgICBwYWRkaW5nLWxlZnQ6IDE1cHg7XG4gICAgICAgIHBhZGRpbmctcmlnaHQ6IDE1cHg7XG4gICAgICAgIHBhZGRpbmctYm90dG9tOiAxNXB4O1xuICAgICAgICB3aWR0aDogNDAlO1xuXG4gICAgfVxuICAgIC5uYXZiYXItY29sbGFwc2UuY29sbGFwc2luZyB7XG4gICAgICAgIC13ZWJraXQtdHJhbnNpdGlvbjogbGVmdCAwLjJzIGVhc2U7XG4gICAgICAgIC1vLXRyYW5zaXRpb246IGxlZnQgMC4ycyBlYXNlO1xuICAgICAgICAtbW96LXRyYW5zaXRpb246IGxlZnQgMC4ycyBlYXNlO1xuICAgICAgICB0cmFuc2l0aW9uOiBsZWZ0IDAuMnMgZWFzZTtcbiAgICAgICAgbGVmdDogLTEwMCU7XG4gICAgfVxuICAgIC5uYXZiYXItY29sbGFwc2Uuc2hvdyB7XG4gICAgICAgIGxlZnQ6IDA7XG4gICAgICAgIC13ZWJraXQtdHJhbnNpdGlvbjogbGVmdCAwLjJzIGVhc2UtaW47XG4gICAgICAgIC1vLXRyYW5zaXRpb246IGxlZnQgMC4ycyBlYXNlLWluO1xuICAgICAgICAtbW96LXRyYW5zaXRpb246IGxlZnQgMC4ycyBlYXNlLWluO1xuICAgICAgICB0cmFuc2l0aW9uOiBsZWZ0IDAuMnMgZWFzZS1pbjtcbiAgICB9XG59XG5cbkBtZWRpYSAobWluLXdpZHRoOiA3NzBweCkge1xuICAgXG5cbiAgICAuZml4e1xuICAgICAgICBkaXNwbGF5OiBzaG93ICFpbXBvcnRhbnQ7XG4gICAgfVxufSJdfQ== */"
 
 /***/ }),
 
@@ -943,13 +947,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services_users_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/users.service */ "./src/app/services/users.service.ts");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/socket.service */ "./src/app/services/socket.service.ts");
+
 
 
 
 
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent(usersService) {
+    function NavbarComponent(usersService, socketService) {
         this.usersService = usersService;
+        this.socketService = socketService;
         this.open = false;
     }
     NavbarComponent.prototype.ngOnInit = function () {
@@ -960,35 +967,32 @@ var NavbarComponent = /** @class */ (function () {
                 this.usersService.parseToken(token);
             }
         }
-        jquery__WEBPACK_IMPORTED_MODULE_3__('.container').click(function () {
+        jquery__WEBPACK_IMPORTED_MODULE_3__('.OnOff').click(function () {
             if (_this.open) {
-                console.log("hello container");
-                _this.toggle();
+                _this.close();
             }
         });
     };
     NavbarComponent.prototype.toggle = function () {
         if (this.open) {
-            jquery__WEBPACK_IMPORTED_MODULE_3__(".dual-nav").removeClass('show').addClass('collapsing');
+            jquery__WEBPACK_IMPORTED_MODULE_3__(".dual-nav").removeClass('show').addClass('hide');
             this.open = false;
         }
         else {
-            jquery__WEBPACK_IMPORTED_MODULE_3__(".dual-nav").removeClass('collapsing').addClass('show');
+            jquery__WEBPACK_IMPORTED_MODULE_3__(".dual-nav").removeClass('hide').addClass('show');
             this.open = true;
         }
     };
     NavbarComponent.prototype.close = function () {
-        jquery__WEBPACK_IMPORTED_MODULE_3__(".dual-nav").removeClass('show').addClass('collapsing');
+        jquery__WEBPACK_IMPORTED_MODULE_3__(".dual-nav").removeClass('show').addClass('hide');
         this.open = false;
     };
     NavbarComponent.prototype.exit = function () {
         this.usersService.user = null;
         localStorage.removeItem('user_token');
+        this.socketService.socket.emit('disconnect');
     };
     NavbarComponent.prototype.isChef = function () {
-        if (this.usersService.user && this.usersService.user.username == "cane") {
-            return true;
-        }
         if (this.usersService.user && this.usersService.user.role == "Cuoco") {
             return true;
         }
@@ -997,9 +1001,6 @@ var NavbarComponent = /** @class */ (function () {
         }
     };
     NavbarComponent.prototype.isBarman = function () {
-        if (this.usersService.user && this.usersService.user.username == "cane") {
-            return true;
-        }
         if (this.usersService.user && this.usersService.user.role == "Barista") {
             return true;
         }
@@ -1008,9 +1009,6 @@ var NavbarComponent = /** @class */ (function () {
         }
     };
     NavbarComponent.prototype.isDesk = function () {
-        if (this.usersService.user && this.usersService.user.username == "cane") {
-            return true;
-        }
         if (this.usersService.user && this.usersService.user.role == "Cassa") {
             return true;
         }
@@ -1019,9 +1017,6 @@ var NavbarComponent = /** @class */ (function () {
         }
     };
     NavbarComponent.prototype.isWaiter = function () {
-        if (this.usersService.user && this.usersService.user.username == "cane") {
-            return true;
-        }
         if (this.usersService.user && this.usersService.user.role == "Cameriere") {
             return true;
         }
@@ -1030,7 +1025,8 @@ var NavbarComponent = /** @class */ (function () {
         }
     };
     NavbarComponent.ctorParameters = function () { return [
-        { type: src_app_services_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"] }
+        { type: src_app_services_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"] },
+        { type: src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_4__["SocketService"] }
     ]; };
     NavbarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1075,6 +1071,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services_users_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/users.service */ "./src/app/services/users.service.ts");
 /* harmony import */ var src_app_services_orders_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/orders.service */ "./src/app/services/orders.service.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/socket.service */ "./src/app/services/socket.service.ts");
+
 
 
 
@@ -1084,8 +1082,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var OrderComponent = /** @class */ (function () {
-    function OrderComponent(location, route, menuService, usersService, ordersService) {
+    function OrderComponent(location, socketService, route, menuService, usersService, ordersService) {
         this.location = location;
+        this.socketService = socketService;
         this.route = route;
         this.menuService = menuService;
         this.usersService = usersService;
@@ -1093,14 +1092,13 @@ var OrderComponent = /** @class */ (function () {
     }
     OrderComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log(location.pathname);
         this.clients = +(this.route.snapshot.paramMap.get('clients'));
         this.tableCode = this.route.snapshot.paramMap.get('tableCode');
-        this.menuService.getMenu('?type=first-dish').subscribe(function (res) { _this.firstDishes = res; }, function (err) { return console.log(err); }, function () { console.log("done"); });
-        this.menuService.getMenu('?type=second-dish').subscribe(function (res) { _this.secondDishes = res; }, function (err) { return console.log(err); }, function () { return console.log("done"); });
+        this.menuService.getMenu('?type=first-dish').subscribe(function (res) { _this.firstDishes = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () { });
+        this.menuService.getMenu('?type=second-dish').subscribe(function (res) { _this.secondDishes = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () { });
         this.menuService.getMenu('?type=drink').subscribe(function (res) {
             _this.drinks = res;
-        }, function (err) { return console.log(err); }, function () { return console.log("done"); });
+        }, function (err) { return _this.errorMessage = err.statusText; }, function () { });
     };
     OrderComponent.prototype.add = function (item) {
         if (item.amount) {
@@ -1115,22 +1113,36 @@ var OrderComponent = /** @class */ (function () {
         if (item.amount > 0)
             item.amount -= 1;
     };
+    OrderComponent.prototype.itemSort = function (a, b) {
+        if (a.time > b.time) {
+            return -1;
+        }
+        else if (a.time == b.time) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
+    };
     OrderComponent.prototype.sendOrder = function () {
+        var _this = this;
         var kitchenItems = this.firstDishes.concat(this.secondDishes).filter(function (item) { return item.amount > 0; });
         kitchenItems.map(function (item) {
-            item.status = "start";
+            item.status = "da_iniziare";
         });
+        kitchenItems.sort(this.itemSort);
         var barItems = this.drinks.filter(function (item) { return item.amount > 0; });
         barItems.map(function (item) {
-            item.status = "start";
+            item.status = "da_iniziare";
         });
+        barItems.sort(this.itemSort);
         if (kitchenItems.length > 0) {
             var kitchenOrder = new src_models_order__WEBPACK_IMPORTED_MODULE_4__["Order"](this.tableCode, this.usersService.user.username, this.clients, kitchenItems);
-            this.ordersService.sendOrder("kitchen", kitchenOrder).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { return console.log("done"); });
+            this.ordersService.sendOrder("kitchen", kitchenOrder).subscribe(function (res) { }, function (err) { return _this.errorMessage = err.statusText; }, function () { return _this.socketService.socket.emit('updateKitchen'); });
         }
         if (barItems.length > 0) {
             var barOrder = new src_models_order__WEBPACK_IMPORTED_MODULE_4__["Order"](this.tableCode, this.usersService.user.username, this.clients, barItems);
-            this.ordersService.sendOrder("bar", barOrder).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { return console.log("done"); });
+            this.ordersService.sendOrder("bar", barOrder).subscribe(function (res) { }, function (err) { return _this.errorMessage = err.statusText; }, function () { return _this.socketService.socket.emit('updateBar'); });
         }
         this.location.back();
     };
@@ -1139,6 +1151,7 @@ var OrderComponent = /** @class */ (function () {
     };
     OrderComponent.ctorParameters = function () { return [
         { type: _angular_common__WEBPACK_IMPORTED_MODULE_7__["Location"] },
+        { type: src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_8__["SocketService"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
         { type: src_app_services_menu_service__WEBPACK_IMPORTED_MODULE_3__["MenuService"] },
         { type: src_app_services_users_service__WEBPACK_IMPORTED_MODULE_5__["UsersService"] },
@@ -1165,7 +1178,7 @@ var OrderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".progress {\n  width: 150px;\n  height: 150px;\n  background: none;\n  position: relative;\n}\n\n.progress::after {\n  content: \"\";\n  width: 100%;\n  height: 100%;\n  border-radius: 50%;\n  border: 15px solid #eee;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n.progress>span {\n  width: 50%;\n  height: 100%;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  z-index: 1;\n}\n\n.progress .progress-left {\n  left: 0;\n}\n\n.progress .progress-bar {\n  width: 100%;\n  height: 100%;\n  background: none;\n  border-width: 15px;\n  border-style: solid;\n  position: absolute;\n  top: 0;\n}\n\n.progress .progress-left .progress-bar {\n  left: 100%;\n  border-top-right-radius: 80px;\n  border-bottom-right-radius: 80px;\n  border-left: 0;\n  -webkit-transform-origin: center left;\n  transform-origin: center left;\n}\n\n.progress .progress-right {\n  right: 0;\n}\n\n.progress .progress-right .progress-bar {\n  left: -100%;\n  border-top-left-radius: 80px;\n  border-bottom-left-radius: 80px;\n  border-right: 0;\n  -webkit-transform-origin: center right;\n  transform-origin: center right;\n}\n\n.progress .progress-value {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n/*\n*\n* ==========================================\n* FOR DEMO PURPOSE\n* ==========================================\n*\n*/\n\n.flex{\ndisplay: -webkit-box;\ndisplay: flex;\n}\n\n.words{\nword-wrap: break-word;\n}\n\n.completed{\ncolor: rgb(30, 202, 30);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9vcmRlcnMvb3JkZXJzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFZO0VBQ1osYUFBYTtFQUNiLGdCQUFnQjtFQUNoQixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsV0FBVztFQUNYLFlBQVk7RUFDWixrQkFBa0I7RUFDbEIsdUJBQXVCO0VBQ3ZCLGtCQUFrQjtFQUNsQixNQUFNO0VBQ04sT0FBTztBQUNUOztBQUVBO0VBQ0UsVUFBVTtFQUNWLFlBQVk7RUFDWixnQkFBZ0I7RUFDaEIsa0JBQWtCO0VBQ2xCLE1BQU07RUFDTixVQUFVO0FBQ1o7O0FBRUE7RUFDRSxPQUFPO0FBQ1Q7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLGtCQUFrQjtFQUNsQixNQUFNO0FBQ1I7O0FBRUE7RUFDRSxVQUFVO0VBQ1YsNkJBQTZCO0VBQzdCLGdDQUFnQztFQUNoQyxjQUFjO0VBQ2QscUNBQXFDO0VBQ3JDLDZCQUE2QjtBQUMvQjs7QUFFQTtFQUNFLFFBQVE7QUFDVjs7QUFFQTtFQUNFLFdBQVc7RUFDWCw0QkFBNEI7RUFDNUIsK0JBQStCO0VBQy9CLGVBQWU7RUFDZixzQ0FBc0M7RUFDdEMsOEJBQThCO0FBQ2hDOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLE1BQU07RUFDTixPQUFPO0FBQ1Q7O0FBRUE7Ozs7OztDQU1DOztBQUdEO0FBQ0Esb0JBQWE7QUFBYixhQUFhO0FBQ2I7O0FBRUE7QUFDQSxxQkFBcUI7QUFDckI7O0FBRUE7QUFDQSx1QkFBdUI7QUFDdkIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL29yZGVycy9vcmRlcnMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wcm9ncmVzcyB7XG4gIHdpZHRoOiAxNTBweDtcbiAgaGVpZ2h0OiAxNTBweDtcbiAgYmFja2dyb3VuZDogbm9uZTtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4ucHJvZ3Jlc3M6OmFmdGVyIHtcbiAgY29udGVudDogXCJcIjtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgYm9yZGVyLXJhZGl1czogNTAlO1xuICBib3JkZXI6IDE1cHggc29saWQgI2VlZTtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG59XG5cbi5wcm9ncmVzcz5zcGFuIHtcbiAgd2lkdGg6IDUwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgei1pbmRleDogMTtcbn1cblxuLnByb2dyZXNzIC5wcm9ncmVzcy1sZWZ0IHtcbiAgbGVmdDogMDtcbn1cblxuLnByb2dyZXNzIC5wcm9ncmVzcy1iYXIge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBiYWNrZ3JvdW5kOiBub25lO1xuICBib3JkZXItd2lkdGg6IDE1cHg7XG4gIGJvcmRlci1zdHlsZTogc29saWQ7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xufVxuXG4ucHJvZ3Jlc3MgLnByb2dyZXNzLWxlZnQgLnByb2dyZXNzLWJhciB7XG4gIGxlZnQ6IDEwMCU7XG4gIGJvcmRlci10b3AtcmlnaHQtcmFkaXVzOiA4MHB4O1xuICBib3JkZXItYm90dG9tLXJpZ2h0LXJhZGl1czogODBweDtcbiAgYm9yZGVyLWxlZnQ6IDA7XG4gIC13ZWJraXQtdHJhbnNmb3JtLW9yaWdpbjogY2VudGVyIGxlZnQ7XG4gIHRyYW5zZm9ybS1vcmlnaW46IGNlbnRlciBsZWZ0O1xufVxuXG4ucHJvZ3Jlc3MgLnByb2dyZXNzLXJpZ2h0IHtcbiAgcmlnaHQ6IDA7XG59XG5cbi5wcm9ncmVzcyAucHJvZ3Jlc3MtcmlnaHQgLnByb2dyZXNzLWJhciB7XG4gIGxlZnQ6IC0xMDAlO1xuICBib3JkZXItdG9wLWxlZnQtcmFkaXVzOiA4MHB4O1xuICBib3JkZXItYm90dG9tLWxlZnQtcmFkaXVzOiA4MHB4O1xuICBib3JkZXItcmlnaHQ6IDA7XG4gIC13ZWJraXQtdHJhbnNmb3JtLW9yaWdpbjogY2VudGVyIHJpZ2h0O1xuICB0cmFuc2Zvcm0tb3JpZ2luOiBjZW50ZXIgcmlnaHQ7XG59XG5cbi5wcm9ncmVzcyAucHJvZ3Jlc3MtdmFsdWUge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbn1cblxuLypcbipcbiogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4qIEZPUiBERU1PIFBVUlBPU0VcbiogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4qXG4qL1xuXG5cbi5mbGV4e1xuZGlzcGxheTogZmxleDtcbn1cblxuLndvcmRze1xud29yZC13cmFwOiBicmVhay13b3JkO1xufVxuXG4uY29tcGxldGVke1xuY29sb3I6IHJnYigzMCwgMjAyLCAzMCk7XG59Il19 */"
+module.exports = ".progress {\n  width: 150px;\n  height: 150px;\n  background: none;\n  position: relative;\n}\n\n.progress::after {\n  content: \"\";\n  width: 100%;\n  height: 100%;\n  border-radius: 50%;\n  border: 15px solid #eee;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n.progress>span {\n  width: 50%;\n  height: 100%;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  z-index: 1;\n}\n\n.progress .progress-left {\n  left: 0;\n}\n\n.progress .progress-bar {\n  width: 100%;\n  height: 100%;\n  background: none;\n  border-width: 15px;\n  border-style: solid;\n  position: absolute;\n  top: 0;\n}\n\n.progress .progress-left .progress-bar {\n  left: 100%;\n  border-top-right-radius: 80px;\n  border-bottom-right-radius: 80px;\n  border-left: 0;\n  -webkit-transform-origin: center left;\n  transform-origin: center left;\n}\n\n.progress .progress-right {\n  right: 0;\n}\n\n.progress .progress-right .progress-bar {\n  left: -100%;\n  border-top-left-radius: 80px;\n  border-bottom-left-radius: 80px;\n  border-right: 0;\n  -webkit-transform-origin: center right;\n  transform-origin: center right;\n}\n\n.progress .progress-value {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n/*\n*\n* ==========================================\n* FOR DEMO PURPOSE\n* ==========================================\n*\n*/\n\n.flex{\ndisplay: -webkit-box;\ndisplay: flex;\n}\n\n.words{\nword-wrap: break-word;\n}\n\n.completed{\ncolor: rgb(30, 202, 30);\n}\n\n@media screen and (-webkit-min-device-pixel-ratio:0) { \n  .fix{\n    padding-left: 12.5px !important;\n    padding-right: 12.5px !important;\n  }\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9vcmRlcnMvb3JkZXJzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFZO0VBQ1osYUFBYTtFQUNiLGdCQUFnQjtFQUNoQixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsV0FBVztFQUNYLFlBQVk7RUFDWixrQkFBa0I7RUFDbEIsdUJBQXVCO0VBQ3ZCLGtCQUFrQjtFQUNsQixNQUFNO0VBQ04sT0FBTztBQUNUOztBQUVBO0VBQ0UsVUFBVTtFQUNWLFlBQVk7RUFDWixnQkFBZ0I7RUFDaEIsa0JBQWtCO0VBQ2xCLE1BQU07RUFDTixVQUFVO0FBQ1o7O0FBRUE7RUFDRSxPQUFPO0FBQ1Q7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLGtCQUFrQjtFQUNsQixNQUFNO0FBQ1I7O0FBRUE7RUFDRSxVQUFVO0VBQ1YsNkJBQTZCO0VBQzdCLGdDQUFnQztFQUNoQyxjQUFjO0VBQ2QscUNBQXFDO0VBQ3JDLDZCQUE2QjtBQUMvQjs7QUFFQTtFQUNFLFFBQVE7QUFDVjs7QUFFQTtFQUNFLFdBQVc7RUFDWCw0QkFBNEI7RUFDNUIsK0JBQStCO0VBQy9CLGVBQWU7RUFDZixzQ0FBc0M7RUFDdEMsOEJBQThCO0FBQ2hDOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLE1BQU07RUFDTixPQUFPO0FBQ1Q7O0FBRUE7Ozs7OztDQU1DOztBQUdEO0FBQ0Esb0JBQWE7QUFBYixhQUFhO0FBQ2I7O0FBRUE7QUFDQSxxQkFBcUI7QUFDckI7O0FBRUE7QUFDQSx1QkFBdUI7QUFDdkI7O0FBR0E7RUFDRTtJQUNFLCtCQUErQjtJQUMvQixnQ0FBZ0M7RUFDbEM7QUFDRiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvb3JkZXJzL29yZGVycy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByb2dyZXNzIHtcbiAgd2lkdGg6IDE1MHB4O1xuICBoZWlnaHQ6IDE1MHB4O1xuICBiYWNrZ3JvdW5kOiBub25lO1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5cbi5wcm9ncmVzczo6YWZ0ZXIge1xuICBjb250ZW50OiBcIlwiO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBib3JkZXItcmFkaXVzOiA1MCU7XG4gIGJvcmRlcjogMTVweCBzb2xpZCAjZWVlO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbn1cblxuLnByb2dyZXNzPnNwYW4ge1xuICB3aWR0aDogNTAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xuICB6LWluZGV4OiAxO1xufVxuXG4ucHJvZ3Jlc3MgLnByb2dyZXNzLWxlZnQge1xuICBsZWZ0OiAwO1xufVxuXG4ucHJvZ3Jlc3MgLnByb2dyZXNzLWJhciB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGJhY2tncm91bmQ6IG5vbmU7XG4gIGJvcmRlci13aWR0aDogMTVweDtcbiAgYm9yZGVyLXN0eWxlOiBzb2xpZDtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDA7XG59XG5cbi5wcm9ncmVzcyAucHJvZ3Jlc3MtbGVmdCAucHJvZ3Jlc3MtYmFyIHtcbiAgbGVmdDogMTAwJTtcbiAgYm9yZGVyLXRvcC1yaWdodC1yYWRpdXM6IDgwcHg7XG4gIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiA4MHB4O1xuICBib3JkZXItbGVmdDogMDtcbiAgLXdlYmtpdC10cmFuc2Zvcm0tb3JpZ2luOiBjZW50ZXIgbGVmdDtcbiAgdHJhbnNmb3JtLW9yaWdpbjogY2VudGVyIGxlZnQ7XG59XG5cbi5wcm9ncmVzcyAucHJvZ3Jlc3MtcmlnaHQge1xuICByaWdodDogMDtcbn1cblxuLnByb2dyZXNzIC5wcm9ncmVzcy1yaWdodCAucHJvZ3Jlc3MtYmFyIHtcbiAgbGVmdDogLTEwMCU7XG4gIGJvcmRlci10b3AtbGVmdC1yYWRpdXM6IDgwcHg7XG4gIGJvcmRlci1ib3R0b20tbGVmdC1yYWRpdXM6IDgwcHg7XG4gIGJvcmRlci1yaWdodDogMDtcbiAgLXdlYmtpdC10cmFuc2Zvcm0tb3JpZ2luOiBjZW50ZXIgcmlnaHQ7XG4gIHRyYW5zZm9ybS1vcmlnaW46IGNlbnRlciByaWdodDtcbn1cblxuLnByb2dyZXNzIC5wcm9ncmVzcy12YWx1ZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xuICBsZWZ0OiAwO1xufVxuXG4vKlxuKlxuKiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cbiogRk9SIERFTU8gUFVSUE9TRVxuKiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cbipcbiovXG5cblxuLmZsZXh7XG5kaXNwbGF5OiBmbGV4O1xufVxuXG4ud29yZHN7XG53b3JkLXdyYXA6IGJyZWFrLXdvcmQ7XG59XG5cbi5jb21wbGV0ZWR7XG5jb2xvcjogcmdiKDMwLCAyMDIsIDMwKTtcbn1cblxuXG5AbWVkaWEgc2NyZWVuIGFuZCAoLXdlYmtpdC1taW4tZGV2aWNlLXBpeGVsLXJhdGlvOjApIHsgXG4gIC5maXh7XG4gICAgcGFkZGluZy1sZWZ0OiAxMi41cHggIWltcG9ydGFudDtcbiAgICBwYWRkaW5nLXJpZ2h0OiAxMi41cHggIWltcG9ydGFudDtcbiAgfVxufVxuIl19 */"
 
 /***/ }),
 
@@ -1203,44 +1216,35 @@ var OrdersComponent = /** @class */ (function () {
     }
     OrdersComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log(location.pathname);
         if (location.pathname.includes("kitchen")) {
+            this.socketService.socket.on('updateKitchen', function () {
+                _this.getOrders();
+            });
             this.where = "kitchen";
         }
         else if (location.pathname.includes("bar")) {
+            this.socketService.socket.on('updateBar', function () {
+                _this.getOrders();
+            });
             this.where = "bar";
         }
         else {
-            this.where = "desk";
+            console.log("error");
         }
-        this.socketService.socket.on('updateOrders', function () {
+        this.socketService.socket.on('updateKitchen', function () {
             _this.getOrders();
         });
         this.getOrders();
     };
     OrdersComponent.prototype.getOrders = function () {
         var _this = this;
-        this.ordersService.getOrders(this.where, "?status=ongoing").subscribe(function (res) { return _this.orders = res; }, function (err) {
-            console.log(err);
-            _this.errorMessage = err.statusText;
-        }, function () { });
-    };
-    OrdersComponent.prototype.ngAfterViewChecked = function () {
-        if (this.orders)
-            for (var i = 0; i < this.orders.length; i++) {
-                this.update(this.orders[i]);
-                this.orders[i].items.sort(function (a, b) {
-                    if (a.time > b.time) {
-                        return -1;
-                    }
-                    else if (a.time == b.time) {
-                        return 0;
-                    }
-                    else {
-                        return 1;
-                    }
-                });
-            }
+        this.ordersService.getOrders(this.where, "?status=in_corso").subscribe(function (res) { return _this.orders = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () {
+            jquery__WEBPACK_IMPORTED_MODULE_4__(document).ready(function () {
+                for (var i = 0; i < _this.orders.length; i++) {
+                    _this.update(_this.orders[i]);
+                }
+            });
+        });
     };
     OrdersComponent.prototype.update = function (order) {
         var progressBar = '#' + order._id;
@@ -1258,10 +1262,10 @@ var OrdersComponent = /** @class */ (function () {
         });
     };
     OrdersComponent.prototype.statusCheck = function (item) {
-        if (item.status == "start") {
+        if (item.status == "da_iniziare") {
             return 1;
         }
-        else if (item.status == "cooking") {
+        else if (item.status == "in_preparazione") {
             return 2;
         }
         else {
@@ -1270,21 +1274,41 @@ var OrdersComponent = /** @class */ (function () {
     };
     OrdersComponent.prototype.start = function (dish, order) {
         var _this = this;
-        dish.status = "cooking";
-        this.ordersService.updateOrder(this.where, order).subscribe(function (res) { }, function (err) { return _this.errorMessage = err.statusText; }, function () { _this.socketService.socket.emit('updateOrders'); });
+        dish.status = "in_preparazione";
+        this.ordersService.updateOrder(this.where, order).subscribe(function (res) { }, function (err) { return _this.errorMessage = err.statusText; }, function () {
+            if (_this.where == "kitchen") {
+                _this.socketService.socket.emit('updateKitchen');
+            }
+            else if (_this.where == "bar") {
+                _this.socketService.socket.emit('updateBar');
+            }
+            else {
+                _this.socketService.socket.emit('updateOrders');
+            }
+        });
     };
     OrdersComponent.prototype.finish = function (dish, order) {
         var _this = this;
-        dish.status = "finish";
+        dish.status = "pronto";
         var prop = 100 / order.items.length;
         order.progress += prop;
         this.update(order);
         this.usersService.user.jobs += 1;
-        this.usersService.updateUser(this.usersService.user.username).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { _this.socketService.socket.emit('updateUsers'); });
+        this.usersService.updateUser(this.usersService.user.username).subscribe(function (res) { }, function (err) { return _this.errorMessage = err.statusText; }, function () { _this.socketService.socket.emit('updateUsers'); });
         if (order.progress > 99.98) {
-            order.status = "completed";
+            order.status = "completato";
         }
-        this.ordersService.updateOrder(this.where, order).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () { _this.socketService.socket.emit('updateOrders'); });
+        this.ordersService.updateOrder(this.where, order).subscribe(function (res) { }, function (err) { return _this.errorMessage = err.statusText; }, function () {
+            if (_this.where == "kitchen") {
+                _this.socketService.socket.emit('updateKitchen');
+            }
+            else if (_this.where == "bar") {
+                _this.socketService.socket.emit('updateBar');
+            }
+            else {
+                _this.socketService.socket.emit('updateOrders');
+            }
+        });
     };
     OrdersComponent.ctorParameters = function () { return [
         { type: _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"] },
@@ -1332,14 +1356,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_models_user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/models/user */ "./src/models/user.ts");
 /* harmony import */ var src_app_services_users_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/users.service */ "./src/app/services/users.service.ts");
 /* harmony import */ var src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/socket.service */ "./src/app/services/socket.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
 
 
 
 
 
 var SignInComponent = /** @class */ (function () {
-    function SignInComponent(usersService, socketService) {
+    function SignInComponent(usersService, router, socketService) {
         this.usersService = usersService;
+        this.router = router;
         this.socketService = socketService;
     }
     SignInComponent.prototype.ngOnInit = function () {
@@ -1354,11 +1381,27 @@ var SignInComponent = /** @class */ (function () {
             _this.socketService.connect();
         }, function (error) {
             _this.errorMessage = error.statusText;
-            console.log(_this.errorMessage);
+        }, function () {
+            _this.usersService.userOb.next(_this.usersService.user);
+            if (_this.usersService.user.role == "Cameriere") {
+                _this.router.navigate(['/tables']);
+            }
+            else if (_this.usersService.user.role == "Barista") {
+                _this.router.navigate(['/bar']);
+            }
+            else if (_this.usersService.user.role == "Cuoco") {
+                _this.router.navigate(['/kitchen']);
+            }
+            else if (_this.usersService.user.role == "Cassa") {
+                _this.router.navigate(['/cash-desk']);
+            }
+            else
+                _this.router.navigate(['/home']);
         });
     };
     SignInComponent.ctorParameters = function () { return [
         { type: src_app_services_users_service__WEBPACK_IMPORTED_MODULE_3__["UsersService"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
         { type: src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_4__["SocketService"] }
     ]; };
     SignInComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1400,13 +1443,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_models_user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/models/user */ "./src/models/user.ts");
 /* harmony import */ var src_app_services_users_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/users.service */ "./src/app/services/users.service.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/socket.service */ "./src/app/services/socket.service.ts");
+
+
 
 
 
 
 var SignUpComponent = /** @class */ (function () {
-    function SignUpComponent(usersService) {
+    function SignUpComponent(usersService, socketService, location) {
         this.usersService = usersService;
+        this.socketService = socketService;
+        this.location = location;
     }
     SignUpComponent.prototype.ngOnInit = function () {
         this.user = new src_models_user__WEBPACK_IMPORTED_MODULE_2__["User"](null, null, null);
@@ -1414,18 +1463,20 @@ var SignUpComponent = /** @class */ (function () {
     };
     SignUpComponent.prototype.submit = function () {
         var _this = this;
-        this.usersService.signUp(this.user).subscribe(function (res) {
-            console.log("success registrato");
-        }, function (error) {
-            _this.errorMessage = error.statusText;
-            console.log(_this.errorMessage);
+        this.usersService.signUp(this.user).subscribe(function (res) { }, function (err) {
+            _this.errorMessage = err.statusText;
+        }, function () {
+            _this.socketService.socket.emit('updateUsers');
+            _this.location.back();
         });
     };
     SignUpComponent.prototype.passwordMatching = function () {
         return this.user.password === this.passwordConfirmation;
     };
     SignUpComponent.ctorParameters = function () { return [
-        { type: src_app_services_users_service__WEBPACK_IMPORTED_MODULE_3__["UsersService"] }
+        { type: src_app_services_users_service__WEBPACK_IMPORTED_MODULE_3__["UsersService"] },
+        { type: src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_5__["SocketService"] },
+        { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"] }
     ]; };
     SignUpComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1467,35 +1518,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services_users_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/users.service */ "./src/app/services/users.service.ts");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/socket.service */ "./src/app/services/socket.service.ts");
+
 
 
 
 
 var StaffComponent = /** @class */ (function () {
-    function StaffComponent(usersService) {
+    function StaffComponent(usersService, socketService) {
         this.usersService = usersService;
+        this.socketService = socketService;
         this.stats = [];
     }
     StaffComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.getWaiters();
         this.getBarMans();
         this.getChefs();
         this.getDesks();
-        /*
-        this.socketService.socket.on('update_users',()=>{
-          this.totalServices=0;
-          this.totalDishes=0;
-          this.totalDrinks=0;
-          this.totalCashed=0;
-          this.getWaiters();
-          this.getBarMans();
-          this.getChefs();
-          this.getDesks();
-        });*/
+        this.socketService.socket.on('updateUsers', function () {
+            _this.totalServices = 0;
+            _this.totalDishes = 0;
+            _this.totalDrinks = 0;
+            _this.totalCashed = 0;
+            _this.stats = [];
+            _this.getWaiters();
+            _this.getBarMans();
+            _this.getChefs();
+            _this.getDesks();
+        });
     };
     StaffComponent.prototype.getWaiters = function () {
         var _this = this;
-        this.usersService.getUsers('?role=Cameriere').subscribe(function (res) { return _this.waiters = res; }, function (err) { return console.log(err); }, function () {
+        this.usersService.getUsers('?role=Cameriere').subscribe(function (res) { return _this.waiters = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () {
             _this.totalServices = _this.waiters.reduce(function (prev, cur) {
                 return prev + cur.jobs;
             }, 0);
@@ -1503,7 +1558,7 @@ var StaffComponent = /** @class */ (function () {
     };
     StaffComponent.prototype.getChefs = function () {
         var _this = this;
-        this.usersService.getUsers('?role=Cuoco').subscribe(function (res) { return _this.chefs = res; }, function (err) { return console.log(err); }, function () {
+        this.usersService.getUsers('?role=Cuoco').subscribe(function (res) { return _this.chefs = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () {
             _this.totalDishes = _this.chefs.reduce(function (prev, cur) {
                 return prev + cur.jobs;
             }, 0);
@@ -1511,7 +1566,7 @@ var StaffComponent = /** @class */ (function () {
     };
     StaffComponent.prototype.getBarMans = function () {
         var _this = this;
-        this.usersService.getUsers('?role=Barista').subscribe(function (res) { return _this.barMans = res; }, function (err) { return console.log(err); }, function () {
+        this.usersService.getUsers('?role=Barista').subscribe(function (res) { return _this.barMans = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () {
             _this.totalDrinks = _this.barMans.reduce(function (prev, cur) {
                 return prev + cur.jobs;
             }, 0);
@@ -1519,7 +1574,7 @@ var StaffComponent = /** @class */ (function () {
     };
     StaffComponent.prototype.getDesks = function () {
         var _this = this;
-        this.usersService.getUsers('?role=Cassa').subscribe(function (res) { return _this.desks = res; }, function (err) { return console.log(err); }, function () {
+        this.usersService.getUsers('?role=Cassa').subscribe(function (res) { return _this.desks = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () {
             _this.totalCashed = _this.desks.reduce(function (prev, cur) {
                 return prev + cur.jobs;
             }, 0);
@@ -1527,7 +1582,6 @@ var StaffComponent = /** @class */ (function () {
     };
     StaffComponent.prototype.set = function (role) {
         if (role == "Cameriere") {
-            console.log(this.totalServices);
             return this.totalServices;
         }
         else if (role == "Cuoco") {
@@ -1541,14 +1595,13 @@ var StaffComponent = /** @class */ (function () {
         }
     };
     StaffComponent.prototype.initChart = function (id, role, jobs) {
-        console.log(id + " " + jobs);
         this.stats = [];
         this.stats[0] = jobs;
         this.stats[1] = (this.set(role) - jobs);
         this.chart = new chart_js__WEBPACK_IMPORTED_MODULE_3__["Chart"](document.getElementById(id), {
             type: 'doughnut',
             data: {
-                labels: ["User", "Others"],
+                labels: ["Utente", "Rimanenti"],
                 datasets: [
                     {
                         backgroundColor: ["#3e95cd", "#8e5ea2"],
@@ -1559,7 +1612,7 @@ var StaffComponent = /** @class */ (function () {
             options: {
                 title: {
                     display: true,
-                    text: 'job completati ',
+                    text: 'completati',
                     fontSize: 20
                 },
                 scales: {
@@ -1571,12 +1624,30 @@ var StaffComponent = /** @class */ (function () {
         });
     };
     StaffComponent.prototype.deleteUser = function (user) {
-        this.usersService.deleteUser(user).subscribe(function (res) { return console.log(res); }, function (err) { return console.log(err); }, function () {
+        var _this = this;
+        this.usersService.deleteUser(user.username).subscribe(function (res) { }, function (err) { return _this.errorMessage = err.statusText; }, function () {
+            if (user.role == "Cameriere") {
+                _this.getWaiters();
+            }
+            else if (user.role == "Cuoco") {
+                _this.getChefs();
+            }
+            else if (user.role == "Barista") {
+                _this.getBarMans();
+            }
+            else if (user.role == "Cassa") {
+                _this.getDesks();
+            }
+            else {
+                console.log("error");
+            }
+            _this.socketService.socket.emit('updateUsers');
             ;
         });
     };
     StaffComponent.ctorParameters = function () { return [
-        { type: src_app_services_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"] }
+        { type: src_app_services_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"] },
+        { type: src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_4__["SocketService"] }
     ]; };
     StaffComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1619,64 +1690,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var src_app_services_recipts_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/recipts.service */ "./src/app/services/recipts.service.ts");
 /* harmony import */ var src_app_services_orders_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/orders.service */ "./src/app/services/orders.service.ts");
+/* harmony import */ var src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/socket.service */ "./src/app/services/socket.service.ts");
+
 
 
 
 
 
 var StatisticsComponent = /** @class */ (function () {
-    function StatisticsComponent(reciptsService, ordersService) {
+    function StatisticsComponent(reciptsService, socketService, ordersService) {
         this.reciptsService = reciptsService;
+        this.socketService = socketService;
         this.ordersService = ordersService;
         this.stats = [];
         this.statsRecipts = [];
     }
     StatisticsComponent.prototype.ngOnInit = function () {
+        var _this = this;
         var dateS = new Date();
         this.date = dateS.getDate() + '/' + dateS.getMonth() + '/' + dateS.getFullYear();
         this.stats = [0, 0];
-        console.log("staats", this.stats);
+        this.statsRecipts = [0, 0];
         this.initChartOrders();
         this.initChartRecipts();
         this.getKitchenOrders(this.date);
         this.getBarOrders(this.date);
         this.getRecipts(this.date);
-        /* this.socketService.socket.on('update_kitchenOrders',()=>{
-           this.getKitchenOrders(this.date);
-         })
-   
-         this.socketService.socket.on('update_barOrders',()=>{
-           this.getBarOrders(this.date);
-         })*/
+        this.socketService.socket.on('updateRecipts', function () {
+            _this.getRecipts(_this.date);
+        });
+        this.socketService.socket.on('updateBar', function () {
+            _this.getBarOrders(_this.date);
+        });
+        this.socketService.socket.on('updateKitchen', function () {
+            _this.getKitchenOrders(_this.date);
+        });
     };
     StatisticsComponent.prototype.getKitchenOrders = function (date) {
         var _this = this;
-        this.ordersService.getOrders("kitchen", '?date=' + date).subscribe(function (res) { return _this.ordersKitchen = res; }, function (err) { return console.log(err); }, function () {
-            _this.stats[0] = _this.ordersKitchen.length;
-            console.log(_this.ordersKitchen);
-            console.log("done");
-            console.log(_this.stats);
+        this.ordersService.getOrders("kitchen", '?date=' + date).subscribe(function (res) { return _this.ordersKitchen = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () {
+            _this.stats[0] = _this.ordersKitchen.length - 1;
             _this.chartOrders.update();
             _this.chartRecipts.update();
         });
     };
     StatisticsComponent.prototype.getBarOrders = function (date) {
         var _this = this;
-        this.ordersService.getOrders("bar", '?date=' + date).subscribe(function (res) { return _this.ordersBar = res; }, function (err) { return console.log(err); }, function () {
-            console.log(_this.ordersBar);
-            _this.stats[1] = _this.ordersBar.length;
-            console.log("done");
-            console.log(_this.stats);
+        this.ordersService.getOrders("bar", '?date=' + date).subscribe(function (res) { return _this.ordersBar = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () {
+            _this.stats[1] = _this.ordersBar.length - 1;
             _this.chartOrders.update();
             _this.chartRecipts.update();
         });
     };
     StatisticsComponent.prototype.getRecipts = function (date) {
         var _this = this;
-        this.reciptsService.getRecipts("?").subscribe(function (res) { return _this.recipts = res; }, function (err) { return console.log(err); }, function () {
-            console.log("wqwqq");
-            console.log(_this.recipts);
-            _this.statsRecipts = [0, 0];
+        this.reciptsService.getRecipts('?date=' + date).subscribe(function (res) { return _this.recipts = res; }, function (err) { return _this.errorMessage = err.statusText; }, function () {
             for (var i = 0; i < _this.recipts.length; i++) {
                 _this.statsRecipts[0] += _this.recipts[i].totalKitchen;
                 _this.statsRecipts[1] += _this.recipts[i].totalBar;
@@ -1739,6 +1807,7 @@ var StatisticsComponent = /** @class */ (function () {
     };
     StatisticsComponent.ctorParameters = function () { return [
         { type: src_app_services_recipts_service__WEBPACK_IMPORTED_MODULE_3__["ReciptsService"] },
+        { type: src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_5__["SocketService"] },
         { type: src_app_services_orders_service__WEBPACK_IMPORTED_MODULE_4__["OrdersService"] }
     ]; };
     StatisticsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1755,6 +1824,126 @@ var StatisticsComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/table-orders/table-orders.component.css":
+/*!********************************************************************!*\
+  !*** ./src/app/components/table-orders/table-orders.component.css ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".progress {\n    width: 150px;\n    height: 150px;\n    background: none;\n    position: relative;\n  }\n  \n  .progress::after {\n    content: \"\";\n    width: 100%;\n    height: 100%;\n    border-radius: 50%;\n    border: 15px solid #eee;\n    position: absolute;\n    top: 0;\n    left: 0;\n  }\n  \n  .progress>span {\n    width: 50%;\n    height: 100%;\n    overflow: hidden;\n    position: absolute;\n    top: 0;\n    z-index: 1;\n  }\n  \n  .progress .progress-left {\n    left: 0;\n  }\n  \n  .progress .progress-bar {\n    width: 100%;\n    height: 100%;\n    background: none;\n    border-width: 15px;\n    border-style: solid;\n    position: absolute;\n    top: 0;\n  }\n  \n  .progress .progress-left .progress-bar {\n    left: 100%;\n    border-top-right-radius: 80px;\n    border-bottom-right-radius: 80px;\n    border-left: 0;\n    -webkit-transform-origin: center left;\n    transform-origin: center left;\n  }\n  \n  .progress .progress-right {\n    right: 0;\n  }\n  \n  .progress .progress-right .progress-bar {\n    left: -100%;\n    border-top-left-radius: 80px;\n    border-bottom-left-radius: 80px;\n    border-right: 0;\n    -webkit-transform-origin: center right;\n    transform-origin: center right;\n  }\n  \n  .progress .progress-value {\n    position: absolute;\n    top: 0;\n    left: 0;\n  }\n  \n  /*\n  *\n  * ==========================================\n  * FOR DEMO PURPOSE\n  * ==========================================\n  *\n  */\n  \n  .flex{\n  display: -webkit-box;\n  display: flex;\n  }\n  \n  .words{\n  word-wrap: break-word;\n  }\n  \n  .completed{\n  color: rgb(30, 202, 30);\n  }\n  \n  .ongoing{\n    color:rgb(255, 166, 0)\n  }\n  \n  .starting{\n    color:rgb(7, 38, 214)\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90YWJsZS1vcmRlcnMvdGFibGUtb3JkZXJzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxZQUFZO0lBQ1osYUFBYTtJQUNiLGdCQUFnQjtJQUNoQixrQkFBa0I7RUFDcEI7O0VBRUE7SUFDRSxXQUFXO0lBQ1gsV0FBVztJQUNYLFlBQVk7SUFDWixrQkFBa0I7SUFDbEIsdUJBQXVCO0lBQ3ZCLGtCQUFrQjtJQUNsQixNQUFNO0lBQ04sT0FBTztFQUNUOztFQUVBO0lBQ0UsVUFBVTtJQUNWLFlBQVk7SUFDWixnQkFBZ0I7SUFDaEIsa0JBQWtCO0lBQ2xCLE1BQU07SUFDTixVQUFVO0VBQ1o7O0VBRUE7SUFDRSxPQUFPO0VBQ1Q7O0VBRUE7SUFDRSxXQUFXO0lBQ1gsWUFBWTtJQUNaLGdCQUFnQjtJQUNoQixrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLGtCQUFrQjtJQUNsQixNQUFNO0VBQ1I7O0VBRUE7SUFDRSxVQUFVO0lBQ1YsNkJBQTZCO0lBQzdCLGdDQUFnQztJQUNoQyxjQUFjO0lBQ2QscUNBQXFDO0lBQ3JDLDZCQUE2QjtFQUMvQjs7RUFFQTtJQUNFLFFBQVE7RUFDVjs7RUFFQTtJQUNFLFdBQVc7SUFDWCw0QkFBNEI7SUFDNUIsK0JBQStCO0lBQy9CLGVBQWU7SUFDZixzQ0FBc0M7SUFDdEMsOEJBQThCO0VBQ2hDOztFQUVBO0lBQ0Usa0JBQWtCO0lBQ2xCLE1BQU07SUFDTixPQUFPO0VBQ1Q7O0VBRUE7Ozs7OztHQU1DOztFQUdEO0VBQ0Esb0JBQWE7RUFBYixhQUFhO0VBQ2I7O0VBRUE7RUFDQSxxQkFBcUI7RUFDckI7O0VBRUE7RUFDQSx1QkFBdUI7RUFDdkI7O0VBRUE7SUFDRTtFQUNGOztFQUVBO0lBQ0U7RUFDRiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGFibGUtb3JkZXJzL3RhYmxlLW9yZGVycy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByb2dyZXNzIHtcbiAgICB3aWR0aDogMTUwcHg7XG4gICAgaGVpZ2h0OiAxNTBweDtcbiAgICBiYWNrZ3JvdW5kOiBub25lO1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgfVxuICBcbiAgLnByb2dyZXNzOjphZnRlciB7XG4gICAgY29udGVudDogXCJcIjtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgIGJvcmRlcjogMTVweCBzb2xpZCAjZWVlO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgfVxuICBcbiAgLnByb2dyZXNzPnNwYW4ge1xuICAgIHdpZHRoOiA1MCU7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMDtcbiAgICB6LWluZGV4OiAxO1xuICB9XG4gIFxuICAucHJvZ3Jlc3MgLnByb2dyZXNzLWxlZnQge1xuICAgIGxlZnQ6IDA7XG4gIH1cbiAgXG4gIC5wcm9ncmVzcyAucHJvZ3Jlc3MtYmFyIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgYmFja2dyb3VuZDogbm9uZTtcbiAgICBib3JkZXItd2lkdGg6IDE1cHg7XG4gICAgYm9yZGVyLXN0eWxlOiBzb2xpZDtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICB9XG4gIFxuICAucHJvZ3Jlc3MgLnByb2dyZXNzLWxlZnQgLnByb2dyZXNzLWJhciB7XG4gICAgbGVmdDogMTAwJTtcbiAgICBib3JkZXItdG9wLXJpZ2h0LXJhZGl1czogODBweDtcbiAgICBib3JkZXItYm90dG9tLXJpZ2h0LXJhZGl1czogODBweDtcbiAgICBib3JkZXItbGVmdDogMDtcbiAgICAtd2Via2l0LXRyYW5zZm9ybS1vcmlnaW46IGNlbnRlciBsZWZ0O1xuICAgIHRyYW5zZm9ybS1vcmlnaW46IGNlbnRlciBsZWZ0O1xuICB9XG4gIFxuICAucHJvZ3Jlc3MgLnByb2dyZXNzLXJpZ2h0IHtcbiAgICByaWdodDogMDtcbiAgfVxuICBcbiAgLnByb2dyZXNzIC5wcm9ncmVzcy1yaWdodCAucHJvZ3Jlc3MtYmFyIHtcbiAgICBsZWZ0OiAtMTAwJTtcbiAgICBib3JkZXItdG9wLWxlZnQtcmFkaXVzOiA4MHB4O1xuICAgIGJvcmRlci1ib3R0b20tbGVmdC1yYWRpdXM6IDgwcHg7XG4gICAgYm9yZGVyLXJpZ2h0OiAwO1xuICAgIC13ZWJraXQtdHJhbnNmb3JtLW9yaWdpbjogY2VudGVyIHJpZ2h0O1xuICAgIHRyYW5zZm9ybS1vcmlnaW46IGNlbnRlciByaWdodDtcbiAgfVxuICBcbiAgLnByb2dyZXNzIC5wcm9ncmVzcy12YWx1ZSB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMDtcbiAgICBsZWZ0OiAwO1xuICB9XG4gIFxuICAvKlxuICAqXG4gICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4gICogRk9SIERFTU8gUFVSUE9TRVxuICAqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuICAqXG4gICovXG4gIFxuICBcbiAgLmZsZXh7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIH1cbiAgXG4gIC53b3Jkc3tcbiAgd29yZC13cmFwOiBicmVhay13b3JkO1xuICB9XG4gIFxuICAuY29tcGxldGVke1xuICBjb2xvcjogcmdiKDMwLCAyMDIsIDMwKTtcbiAgfVxuXG4gIC5vbmdvaW5ne1xuICAgIGNvbG9yOnJnYigyNTUsIDE2NiwgMClcbiAgfVxuXG4gIC5zdGFydGluZ3tcbiAgICBjb2xvcjpyZ2IoNywgMzgsIDIxNClcbiAgfSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/components/table-orders/table-orders.component.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/table-orders/table-orders.component.ts ***!
+  \*******************************************************************/
+/*! exports provided: TableOrdersComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TableOrdersComponent", function() { return TableOrdersComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/socket.service */ "./src/app/services/socket.service.ts");
+/* harmony import */ var src_app_services_orders_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/orders.service */ "./src/app/services/orders.service.ts");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
+
+
+
+var TableOrdersComponent = /** @class */ (function () {
+    function TableOrdersComponent(socketService, ordersService, route) {
+        this.socketService = socketService;
+        this.ordersService = ordersService;
+        this.route = route;
+    }
+    TableOrdersComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.tableCode = this.route.snapshot.paramMap.get('tableCode');
+        this.socketService.socket.on('updateKitchen', function () {
+            _this.getOrders("kitchen");
+        });
+        this.socketService.socket.on('updateBar', function () {
+            _this.getOrders("bar");
+        });
+        this.getOrders("kitchen");
+        this.getOrders("bar");
+    };
+    TableOrdersComponent.prototype.getOrders = function (where) {
+        var _this = this;
+        this.ordersService.getOrders(where, "?tableCode=" + this.tableCode).subscribe(function (res) {
+            res = res.filter(function (order) {
+                if (order.status != "pagato") {
+                    return true;
+                }
+                else
+                    return false;
+            });
+            if (where == "kitchen") {
+                _this.kitchenOrders = res;
+            }
+            else {
+                _this.barOrders = res;
+            }
+            jquery__WEBPACK_IMPORTED_MODULE_4__(document).ready(function () {
+                for (var i = 0; i < res.length; i++) {
+                    _this.update(res[i]);
+                }
+            });
+        }, function (err) { return _this.errorMessage = err.statusText; }, function () { });
+    };
+    TableOrdersComponent.prototype.update = function (order) {
+        var progressBar = '#' + order._id;
+        jquery__WEBPACK_IMPORTED_MODULE_4__(progressBar).find(".progress").each(function () {
+            var value = order.progress;
+            var left = jquery__WEBPACK_IMPORTED_MODULE_4__(this).find('.progress-left .progress-bar');
+            var right = jquery__WEBPACK_IMPORTED_MODULE_4__(this).find('.progress-right .progress-bar');
+            if (value <= 50) {
+                right.css('transform', 'rotate(' + (value / 100 * 360) + 'deg)');
+            }
+            else {
+                right.css('transform', 'rotate(180deg)');
+                left.css('transform', 'rotate(' + ((value - 50) / 100 * 360) + 'deg)');
+            }
+        });
+    };
+    TableOrdersComponent.prototype.statusCheck = function (item) {
+        if (item.status == "da_iniziare") {
+            return 1;
+        }
+        else if (item.status == "in_preparazione") {
+            return 2;
+        }
+        else {
+            return 3;
+        }
+    };
+    TableOrdersComponent.ctorParameters = function () { return [
+        { type: src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_2__["SocketService"] },
+        { type: src_app_services_orders_service__WEBPACK_IMPORTED_MODULE_3__["OrdersService"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] }
+    ]; };
+    TableOrdersComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-table-orders',
+            template: __webpack_require__(/*! raw-loader!./table-orders.component.html */ "./node_modules/raw-loader/index.js!./src/app/components/table-orders/table-orders.component.html"),
+            styles: [__webpack_require__(/*! ./table-orders.component.css */ "./src/app/components/table-orders/table-orders.component.css")]
+        })
+    ], TableOrdersComponent);
+    return TableOrdersComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/tables/tables.component.css":
 /*!********************************************************!*\
   !*** ./src/app/components/tables/tables.component.css ***!
@@ -1762,7 +1951,7 @@ var StatisticsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGFibGVzL3RhYmxlcy5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "@-moz-document url-prefix() { \n\n    .spazio{\n        padding-right: 7px !important;\n        padding-left: 7px !important;\n    }\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90YWJsZXMvdGFibGVzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0lBRUk7UUFDSSw2QkFBNkI7UUFDN0IsNEJBQTRCO0lBQ2hDO0FBQ0oiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3RhYmxlcy90YWJsZXMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIkAtbW96LWRvY3VtZW50IHVybC1wcmVmaXgoKSB7IFxuXG4gICAgLnNwYXppb3tcbiAgICAgICAgcGFkZGluZy1yaWdodDogN3B4ICFpbXBvcnRhbnQ7XG4gICAgICAgIHBhZGRpbmctbGVmdDogN3B4ICFpbXBvcnRhbnQ7XG4gICAgfVxufVxuIl19 */"
 
 /***/ }),
 
@@ -1813,11 +2002,11 @@ var TablesComponent = /** @class */ (function () {
         return seats == 0;
     };
     TablesComponent.prototype.previous = function (event, table) {
-        this.router.navigate(['/orders-desk', table.tableCode]);
+        this.router.navigate(['/table-orders', table.tableCode]);
     };
     TablesComponent.prototype.book = function (table) {
         var _this = this;
-        this.tablesService.updateTable(table.tableCode, table).subscribe(function (res) { }, function (err) { return console.log(err); }, function () { _this.socketService.socket.emit('updateTables'); });
+        this.tablesService.updateTable(table.tableCode, table).subscribe(function (res) { }, function (err) { return _this.errorMessage = err.statusText; }, function () { _this.socketService.socket.emit('updateTables'); });
     };
     TablesComponent.prototype.ordine = function (event, table) {
         this.router.navigate(['/order', table.tableCode, table.clients]);
@@ -1825,18 +2014,13 @@ var TablesComponent = /** @class */ (function () {
     TablesComponent.prototype.search = function () {
         var input = document.getElementById("searchTables").value;
         var filter = input.toLowerCase();
-        console.log(filter);
         var listOfUsers = document.getElementById("list-of-ttables");
-        console.log(listOfUsers);
         var ttables = listOfUsers.getElementsByClassName("ttable");
-        console.log(ttables);
         var ttable;
         var ttablename;
         for (var i = 0; i < ttables.length; i++) {
             ttable = ttables[i].getElementsByClassName('code')[0];
-            console.log(ttable);
             ttablename = ttable.textContent.toLowerCase();
-            console.log(ttablename);
             if (ttablename.indexOf(filter) > -1) {
                 jquery__WEBPACK_IMPORTED_MODULE_2__(ttables[i]).css('display', "");
             }
@@ -1894,13 +2078,101 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToastsComponent", function() { return ToastsComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/socket.service */ "./src/app/services/socket.service.ts");
+/* harmony import */ var src_app_services_orders_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/orders.service */ "./src/app/services/orders.service.ts");
+/* harmony import */ var src_app_services_users_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/users.service */ "./src/app/services/users.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
+
+
 
 
 var ToastsComponent = /** @class */ (function () {
-    function ToastsComponent() {
+    function ToastsComponent(router, toastr, socketService, usersService, ordersService) {
+        this.router = router;
+        this.toastr = toastr;
+        this.socketService = socketService;
+        this.usersService = usersService;
+        this.ordersService = ordersService;
     }
     ToastsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.messages = null;
+        this.usersService.userOb.subscribe(function (user) {
+            if (_this.usersService.user && _this.usersService.user.role == "Cameriere") {
+                _this.getKitchenMessages();
+                _this.getBarMessages();
+                _this.socketService.socket.on('updateKitchen', function () {
+                    _this.getKitchenMessages();
+                });
+                _this.socketService.socket.on('updateBar', function () {
+                    _this.getBarMessages();
+                });
+            }
+        });
+        if (this.usersService.user && this.usersService.user.role == "Cameriere") {
+            this.getKitchenMessages();
+            this.getBarMessages();
+            this.socketService.socket.on('updateKitchen', function () {
+                _this.getKitchenMessages();
+            });
+            this.socketService.socket.on('updateBar', function () {
+                _this.getBarMessages();
+            });
+        }
     };
+    ToastsComponent.prototype.getKitchenMessages = function () {
+        var _this = this;
+        this.ordersService.getOrders("kitchen", "?waiter=" + this.usersService.user.username + "&status=completato").subscribe(function (res) { return _this.messages = res; }, function (err) { return console.log(err); }, function () {
+            for (var i = 0; i < _this.messages.length; i++) {
+                _this.pop(_this.messages[i], "kitchen");
+            }
+        });
+    };
+    ToastsComponent.prototype.getBarMessages = function () {
+        var _this = this;
+        this.ordersService.getOrders("bar", "?waiter=" + this.usersService.user.username + "&status=completato").subscribe(function (res) { return _this.messages = res; }, function (err) { return console.log(err); }, function () {
+            for (var i = 0; i < _this.messages.length; i++) {
+                _this.pop(_this.messages[i], "bar");
+            }
+        });
+    };
+    ToastsComponent.prototype.pop = function (order, type) {
+        var _this = this;
+        var orderNumber;
+        if (type == "kitchen") {
+            orderNumber = order.kitchenNumber;
+        }
+        else {
+            orderNumber = order.barNumber;
+        }
+        this.toastr.success('Tavolo : ' + order.tableCode, 'Ordine ' + orderNumber + ' ' + 'da servire', {
+            disableTimeOut: true
+        }).onTap.subscribe(function () {
+            order.status = "servito";
+            _this.ordersService.updateOrder(type, order).subscribe(function (res) { }, function (err) { return console.log(err); }, function () {
+                if (type == "kitchen") {
+                    _this.socketService.socket.emit('updateKitchen');
+                }
+                else if (type == "bar") {
+                    _this.socketService.socket.emit('updateBar');
+                }
+            });
+            _this.usersService.user.jobs += 1;
+            _this.usersService.updateUser(_this.usersService.user.username).subscribe(function (res) { }, function (err) { return console.log(err); }, function () { return _this.socketService.socket.emit('updateUsers'); });
+            _this.router.navigate(['/tables']);
+        });
+    };
+    ToastsComponent.ctorParameters = function () { return [
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] },
+        { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_2__["ToastrService"] },
+        { type: src_app_services_socket_service__WEBPACK_IMPORTED_MODULE_3__["SocketService"] },
+        { type: src_app_services_users_service__WEBPACK_IMPORTED_MODULE_5__["UsersService"] },
+        { type: src_app_services_orders_service__WEBPACK_IMPORTED_MODULE_4__["OrdersService"] }
+    ]; };
     ToastsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-toasts',
@@ -1939,32 +2211,51 @@ var AuthGuardService = /** @class */ (function () {
         this.userService = userService;
     }
     AuthGuardService.prototype.canActivate = function (route, state) {
-        return true;
-        console.log(route.routeConfig.path);
         if (this.userService.user) {
             if (this.userService.user.role == "Barista" && route.routeConfig.path == "bar") {
-                return true;
-            }
-            if (this.userService.user.role == "Cameriere" && (route.routeConfig.path == "tables" || route.routeConfig.path == "orders/:id" || route.routeConfig.path == "orders-desk/:id")) {
                 return true;
             }
             if (this.userService.user.role == "Cuoco" && route.routeConfig.path == "kitchen") {
                 return true;
             }
+            if (this.userService.user.role == "Cameriere" && (route.routeConfig.path == "tables" || route.routeConfig.path == "table-orders/:tableCode" || route.routeConfig.path == 'order/:tableCode/:clients')) {
+                return true;
+            }
             if (this.userService.user.role == "Cassa" && (route.routeConfig.path == "sign-up" ||
-                route.routeConfig.path == "check-out/:id" ||
-                route.routeConfig.path == "desk" ||
-                route.routeConfig.path == "tables-desk" ||
-                route.routeConfig.path == "orders-desk" ||
-                route.routeConfig.path == "users" ||
-                route.routeConfig.path == "statistics" ||
-                route.routeConfig.path == "orders-desk/:id")) {
+                route.routeConfig.path == 'check-out/:tableCode/:clients' ||
+                route.routeConfig.path == "cash-desk" ||
+                route.routeConfig.path == "tables" ||
+                route.routeConfig.path == "table-orders/:tableCode" ||
+                route.routeConfig.path == "bar" ||
+                route.routeConfig.path == "kitchen" ||
+                route.routeConfig.path == "staff" ||
+                route.routeConfig.path == "statistics")) {
                 return true;
             }
-            if (this.userService.user.username == "cane") {
+            if (this.userService.user && route.routeConfig.path == '') {
+                if (this.userService.user.role == "Cassa") {
+                    this.router.navigate(['cash-desk']);
+                    return false;
+                }
+                else if (this.userService.user.role == "Barista") {
+                    this.router.navigate(['bar']);
+                    return false;
+                }
+                else if (this.userService.user.role == "Cuoco") {
+                    this.router.navigate(['kitchen']);
+                    return false;
+                }
+                else if (this.userService.user.role == "Cameriere") {
+                    this.router.navigate(['tables']);
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            if (route.routeConfig.path == "**") {
                 return true;
             }
-            this.router.navigate(['unauthorized']);
             return false;
         }
         else {
@@ -2007,23 +2298,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ErrorsService = /** @class */ (function () {
-    function ErrorsService( /* all services ?*/) {
+    function ErrorsService() {
     }
     ErrorsService.prototype.intercept = function (req, next) {
         return next.handle(req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) {
             if (err.error instanceof ErrorEvent) {
-                // A client-side or network error occurred. Handle it accordingly.
                 console.error('An error occurred:', err.error.message);
             }
             else {
-                if (err.status === 401) {
-                }
-                // The backend returned an unsuccessful response code.
-                // The response body may contain clues as to what went wrong,
                 console.error("Backend returned code " + err.status + ", " +
                     ("body was: " + err.message));
             }
-            // return an observable with a user-facing error message
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(err);
         }));
     };
@@ -2102,14 +2387,14 @@ var MenuService = /** @class */ (function () {
         this.http = http;
     }
     MenuService.prototype.newMenuItem = function (item) {
-        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/menu", item);
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/menu", item);
     };
     MenuService.prototype.getMenu = function (query) {
         if (query) {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/menu" + query);
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/menu" + query);
         }
         else
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/menu");
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/menu");
     };
     MenuService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -2149,19 +2434,20 @@ var OrdersService = /** @class */ (function () {
         this.http = http;
     }
     OrdersService.prototype.sendOrder = function (where, order) {
-        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/" + where, order);
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/" + where, order);
     };
     OrdersService.prototype.getOrders = function (where, query) {
         if (query)
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/" + where + query);
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/" + where + query);
         else
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/" + where);
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/" + where);
     };
     OrdersService.prototype.updateOrder = function (where, order) {
-        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/" + where + "/" + order._id, order);
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/" + where + "/" + order._id, order);
     };
     OrdersService.prototype.checkOut = function (where, tableCode) {
-        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/" + where + "?tableCode=" + tableCode, null);
+        var order = { status: "pagato" };
+        return this.http.patch(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/" + where + "?tableCode=" + tableCode, order);
     };
     OrdersService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -2201,10 +2487,13 @@ var ReciptsService = /** @class */ (function () {
         this.http = http;
     }
     ReciptsService.prototype.getRecipts = function (query) {
-        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/recipts" + query);
+        if (query)
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/recipts" + query);
+        else
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/recipts");
     };
     ReciptsService.prototype.newRecipt = function (recipt) {
-        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/recipts", recipt);
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/recipts", recipt);
     };
     ReciptsService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -2295,14 +2584,13 @@ var TablesService = /** @class */ (function () {
         this.http = http;
     }
     TablesService.prototype.newTable = function (table) {
-        console.log(table);
-        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/tables", table);
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/tables", table);
     };
     TablesService.prototype.updateTable = function (tableCode, table) {
-        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/tables/" + tableCode, table);
+        return this.http.patch(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/tables/" + tableCode, table);
     };
     TablesService.prototype.getTables = function () {
-        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/tables");
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "/API/sm/tables");
     };
     TablesService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -2337,6 +2625,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jwt-decode */ "./node_modules/jwt-decode/lib/index.js");
 /* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jwt_decode__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
 
 
 
@@ -2349,30 +2639,34 @@ var UsersService = /** @class */ (function () {
         this.http = http;
         this.router = router;
         this.user = null;
+        this.userOb = new rxjs__WEBPACK_IMPORTED_MODULE_7__["BehaviorSubject"](this.user);
         var token = localStorage.getItem('user_token');
         if (token) {
-            var decoded = jwt_decode__WEBPACK_IMPORTED_MODULE_5__(token);
-            this.user = new src_models_user__WEBPACK_IMPORTED_MODULE_2__["User"](decoded.username, null, decoded.role);
+            this.parseToken(token);
         }
     }
     UsersService.prototype.signUp = function (user) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL + "/users", user);
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL + "/API/sm/users", user);
     };
     UsersService.prototype.signIn = function (user) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL + "/users/login", user);
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL + "/API/sm/users/login", user);
     };
     UsersService.prototype.parseToken = function (token) {
         var decoded = jwt_decode__WEBPACK_IMPORTED_MODULE_5__(token);
         this.user = new src_models_user__WEBPACK_IMPORTED_MODULE_2__["User"](decoded.username, null, decoded.role);
+        this.user.jobs = decoded.jobs;
     };
     UsersService.prototype.updateUser = function (username) {
-        return this.http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL + "/users/" + username, this.user);
+        return this.http.patch(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL + "/API/sm/users/" + username, this.user);
     };
     UsersService.prototype.getUsers = function (query) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL + "/users" + query);
+        if (query)
+            return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL + "/API/sm/users" + query);
+        else
+            return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL + "/API/sm/users");
     };
     UsersService.prototype.deleteUser = function (username) {
-        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL + "/users/" + username);
+        return this.http.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL + "/API/sm/users/" + username);
     };
     UsersService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
@@ -2445,38 +2739,6 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 
 /***/ }),
 
-/***/ "./src/models/menuItem.ts":
-/*!********************************!*\
-  !*** ./src/models/menuItem.ts ***!
-  \********************************/
-/*! exports provided: MenuItem */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MenuItem", function() { return MenuItem; });
-var MenuItem = /** @class */ (function () {
-    function MenuItem(name, type, price, time) {
-        this.name = name;
-        this.type = type;
-        this.price = price;
-        this.time = time;
-        this.amount = 0;
-        this.status = "start";
-    }
-    MenuItem.ctorParameters = function () { return [
-        { type: String },
-        { type: String },
-        { type: Number },
-        { type: Number }
-    ]; };
-    return MenuItem;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/models/order.ts":
 /*!*****************************!*\
   !*** ./src/models/order.ts ***!
@@ -2493,7 +2755,7 @@ var Order = /** @class */ (function () {
         this.tableCode = tableCode;
         this.waiter = waiter;
         this.clients = clients;
-        this.status = "ongoing";
+        this.status = "in_corso";
         this.progress = 0;
         this.kitchenNumber = null;
         this.barNumber = null;
@@ -2542,36 +2804,6 @@ var Recipt = /** @class */ (function () {
         { type: Number }
     ]; };
     return Recipt;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/models/table.ts":
-/*!*****************************!*\
-  !*** ./src/models/table.ts ***!
-  \*****************************/
-/*! exports provided: Table */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Table", function() { return Table; });
-var Table = /** @class */ (function () {
-    function Table(tableCode, seats) {
-        this.seats = new Array();
-        for (var i = 1; i <= seats; i++) {
-            this.seats.push(i);
-        }
-        this.tableCode = tableCode;
-        this.clients = 0;
-    }
-    Table.ctorParameters = function () { return [
-        { type: String },
-        { type: Number }
-    ]; };
-    return Table;
 }());
 
 

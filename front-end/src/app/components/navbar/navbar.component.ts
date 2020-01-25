@@ -25,30 +25,25 @@ export class NavbarComponent implements OnInit {
       
       $('.OnOff').click(()=>{
         if(this.open){
-          this.toggle();
+          this.close();
         } 
       })
   
     }
   
     toggle(){
-      $('.container').click(()=>{
-        if(this.open){
-          this.toggle();
-        } 
-      })
  
       if(this.open){
-        $(".dual-nav").removeClass('show').addClass('collapsing');
+        $(".dual-nav").removeClass('show').addClass('hide');
         this.open=false;
       }else{
-        $(".dual-nav").removeClass('collapsing').addClass('show');
+        $(".dual-nav").removeClass('hide').addClass('show');
         this.open=true;
       }
     }
 
     close(){
-      $(".dual-nav").removeClass('show').addClass('collapsing');
+      $(".dual-nav").removeClass('show').addClass('hide');
       this.open=false;
     }
   

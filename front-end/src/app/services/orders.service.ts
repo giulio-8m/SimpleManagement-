@@ -28,7 +28,8 @@ export class OrdersService {
   }
 
   checkOut(where:string,tableCode:string){
-    return this.http.patch(`${environment.URL}/API/sm/${where}?tableCode=${tableCode}`,{status:'pagato'});
+    let order={status:"pagato"};
+    return this.http.patch(`${environment.URL}/API/sm/${where}?tableCode=${tableCode}`,order);
   }
 
 
